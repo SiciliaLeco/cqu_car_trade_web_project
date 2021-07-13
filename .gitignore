@@ -4,6 +4,23 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+.DS_Store
+car_trade_ui/node_modules/
+car_trade_ui/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+car_trade_ui/test/unit/coverage/
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+
 ### STS ###
 .apt_generated
 .classpath
