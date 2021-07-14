@@ -51,8 +51,8 @@
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
     <!--    必须放在head中而不能放在body，不然无法使用    -->
-    <script src="assets/js/vue.global.js"></script>
-    <script src="assets/js/axios.min.js"></script>
+	<script src="assets/js/vue.global.js"></script>
+	<script src="assets/js/axios.min.js"></script>
 
 	<!--[if lt IE 9]>
 	<script src="assets/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -148,7 +148,7 @@
 									<span>$259.00</span>
 								</div>
 								<div class="cart-botton">
-									<a href="cart.html" class="btn">view cart</a>
+									<a href="buyer_cart.html" class="btn">view cart</a>
 								</div>
 							</div>
 						</li>
@@ -192,12 +192,16 @@
 									const app = {
 										data() {
 											return {
-												message: "./assets/images/rin.jpg"
+												message: ""
 											}
 										},
                                         mounted() {
-										    axios:
-                                                .get("http://127.0.0.1:8999//fastapi_test")
+										    axios
+                                                .get("http://127.0.0.1:8999")
+												.then(response => (this.message = response))
+												.catch(function (error) {
+										    		console.log(error);
+											});
                                         }
 									}
 									Vue.createApp(app).mount("#single_car_1")
