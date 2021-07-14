@@ -50,10 +50,13 @@
 	<!-- Responsive CSS -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
+    <!--    必须放在head中而不能放在body，不然无法使用    -->
+    <script src="assets/js/vue.global.js"></script>
+    <script src="assets/js/axios.min.js"></script>
 
 	<!--[if lt IE 9]>
 	<script src="assets/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<script src="assets/libs/respond.js/1.3.0/respond.min.js"></script>
+	<script src="assets/libs/respond.js/1.3.0/respond.min.js"></script
 	<![endif]-->
 
 </head>
@@ -181,9 +184,25 @@
 						<div id="single-car" class="slider-pro">
 							<div class="sp-slides">
 
-								<div class="sp-slide">
-									<img class="sp-image" src="assets/images/car_slide_1.jpg" alt="" />
+								<div class="sp-slide" id="single_car_1">
+									<img class="sp-image" v-bind:src="message" alt="" />
 								</div>
+								<h5>haha</h5>
+								<script>
+									const app = {
+										data() {
+											return {
+												message: "./assets/images/rin.jpg"
+											}
+										},
+                                        mounted() {
+										    axios:
+                                                .get("http://127.0.0.1:8999//fastapi_test")
+                                        }
+									}
+									Vue.createApp(app).mount("#single_car_1")
+								</script>
+
 
 						        <div class="sp-slide">
 						        	<img class="sp-image" src="assets/images/car_slide_2.jpg" alt="" />
@@ -561,7 +580,9 @@
 	<!-- Custom Js -->
     <script src="assets/js/custom.js"></script>
 
-	<script src="assets/js/vue.global.js"></script>
+
+
+<!--	<script src="assets/js/require.js"></script>-->
 
 </body>
 </html>
