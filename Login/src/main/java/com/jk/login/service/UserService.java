@@ -61,6 +61,14 @@ public class UserService {
         return result;
     }
 
+    public ResultInfo<User> updateUserInfo(User user){
+        userMapper.updateUserInfo(user);
+        result.setMsg("信息修改成功！");
+        result.setSuccess(true);
+        return result;
+    }
+
+
     public ResultInfo<User> updateUserPassword(User user){
         result.setToken("null");
         userMapper.updateUserPassword(user);

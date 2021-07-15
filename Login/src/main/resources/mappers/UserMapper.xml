@@ -24,6 +24,10 @@
     <update id="updateUserPassword" parameterType="User">
         update Buyer set BPassword=#{bpassword} where BTel=#{BTel}
     </update>
+
+    <update id="updateUserInfo" parameterType="User">
+        update Buyer set BName=#{BName}, BAddress=#{BAddress}, BGender=1 where BTel=#{BTel}
+    </update>
     <!--开通VIP，即把数据库中该用户的BVIP 设置成1-->
     <update id="becomeVIP" parameterType="User">
         update Buyer set BVIP=1 where BTel=#{BTel}

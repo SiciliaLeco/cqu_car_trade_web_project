@@ -31,6 +31,9 @@ public class UserController {
         return userService.updateUserPassword(user);
     }
 
-    @PostMapping(value = "/becomevip")
-    public ResultInfo<User> becomevip(User user){return userService.becomeVIP(user);}
+    @PostMapping(value = "/updateUserInfo")
+    public ResultInfo<User> updateUserInfO(User user) {return userService.updateUserInfo(user);}
+
+    @PostMapping(value = "/becomeVIP")
+    public ResultInfo<User> becomeVIP(User user){return userService.becomeVIP(user);}
 }
