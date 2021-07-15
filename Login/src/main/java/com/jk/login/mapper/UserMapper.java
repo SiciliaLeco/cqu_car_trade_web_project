@@ -19,4 +19,6 @@ public interface UserMapper {
     void registUser(User user);
     //修改用户密码
     void updateUserPassword(User user);
+    // 开通VIP
+    void becomeVIP(User user);
 }

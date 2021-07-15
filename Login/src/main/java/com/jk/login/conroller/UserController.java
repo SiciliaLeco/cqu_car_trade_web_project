@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @ResponseBody
-//@RequestMapping("/user")
 @RequestMapping(value = "/user")
 public class UserController {
     @Autowired
@@ -31,4 +30,7 @@ public class UserController {
     public ResultInfo<User> updateUserPassword(User user){
         return userService.updateUserPassword(user);
     }
+
+    @PostMapping(value = "/becomevip")
+    public ResultInfo<User> becomevip(User user){return userService.becomeVIP(user);}
 }

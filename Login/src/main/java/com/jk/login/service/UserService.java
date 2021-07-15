@@ -15,6 +15,7 @@ public class UserService {
     private ResultInfo<User> result = new ResultInfo<>();
 
     public ResultInfo<User> registUser(User user) {
+        result.setToken("null");
         try {
             /**
              * 手机号码作为登录的方式。如果手机号码已经被使用则注册失败：
@@ -61,9 +62,24 @@ public class UserService {
     }
 
     public ResultInfo<User> updateUserPassword(User user){
+        result.setToken("null");
         userMapper.updateUserPassword(user);
         result.setMsg("修改成功");
         result.setSuccess(true);
+        return result;
+    }
+
+    public ResultInfo<User> becomeVIP(User user) {
+        result.setToken("null");
+        Integer is_vip = user.getBVIP();
+        if (is_vip == 1) {
+            result.setMsg("已经是VIP会员，无需再次开通！");
+            result.setSuccess(false);
+        } else {
+            userMapper.becomeVIP(user);
+            result.setMsg("开通成功！欢迎加入会员大家庭！");
+            result.setSuccess(true);
+        }
         return result;
     }
 }
