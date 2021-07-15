@@ -37,19 +37,24 @@ public class UserService {
 
 
     public ResultInfo<User> loginUser(User user) {
+        String token = "";
         try {
             User userExist = userMapper.loginUser(user);
             if (userExist == null) {
                 result.setMsg("Phone number is wrong. Please retry!");
                 result.setSuccess(false);
+                result.setToken(token);
             } else {
                 result.setMsg("Log in succeed!");
                 user.setBTel(user.getBTel());
                 result.setSuccess(true);
-                user = userMapper.findByUserTel(user.getBTel());
+                token = result.generate_token(user.getBTel()); // 登录成功，生成token并添加到result
+                result.setToken(token);
             }
         } catch (Exception e) {
             result.setMsg(e.getMessage());
+            result.setSuccess(false);
+            result.setToken(token);
             e.printStackTrace();
         }
         return result;

@@ -1,14 +1,20 @@
 package com.jk.login.info;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.auth0.jwt.interfaces.JWTVerifier;
+
+import java.util.Date;
 
 public class ResultInfo<T> {
     private String msg;
     private Boolean success = false;
     private T detail = null;
-    private static final long EXPIRE_DATE=30*60*100000;
+    private String token = "";
+    private static final long EXPIRE_DATE=30*60*100000; // 3000分钟以后过期
     private static final String TOKEN_SECRET = "tanghuoguo";
 
     @Override
@@ -20,10 +26,22 @@ public class ResultInfo<T> {
     }
 
     //todo: implement token function
-    public String generate_token(){
-
-        return "";
+    public String generate_token(String user_tel){
+        Date date = new Date(System.currentTimeMillis() + EXPIRE_DATE); // set expire date
+        Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
+        Map<String, Object> header = new HashMap<>(2);
+        header.put("Type", "Jwt");
+        header.put("alg", "HS256");
+        return  JWT.create()
+                .withHeader(header)
+                .withClaim("user_tel", user_tel)
+                .withExpiresAt(date)
+                .sign(algorithm);
     }
+
+    public String getToken(){return token;}
+
+    public void setToken(String token){this.token = token;}
 
     public String getMsg() {
         return msg;
