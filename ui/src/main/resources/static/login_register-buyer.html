@@ -268,7 +268,26 @@
 								<img class="login-upload-icon-img" src="./assets/images/user_male.jpg">
 								<div class="col-lg-1">
 									<br></br>
-									<button class="btn login-upload-btn">Upload Icon</button>
+<!--									<button class="btn login-upload-btn">Upload Icon</button>-->
+									<input id="input" type="file" @change="fileUpload()">
+									<script>
+										export default {
+											methods: {
+												fileUpload () {
+													var files = document.getElementById("input").files;
+													var params = new FormData();
+													params.append('file', files[0])
+													console.log(params.get("file"));
+													this.$axios({
+														url: "http://localhost:8000/pic",
+														method: "post",
+														data: params,
+														headers: { 'Content-Type': 'multipart/form-data' }
+													})
+												}
+											},
+										}
+									</script>
 								</div>
 
 							</div>
