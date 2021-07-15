@@ -660,12 +660,13 @@
 									})
 							.then(function (res) {
 								if (res.data.status === true) {
-									window.location.href='/about_us';
+									window.location.href='/index';
 								} else {
+									//errMsg后端返回
 									alert(res.data.errMsg);
 								}
 							}
-									.catch(function (error) { // 请求失败处理
+									.catch(function (error) { // 请求失败处理,error后端返回
 										console.log(error);
 									}));
 				}
