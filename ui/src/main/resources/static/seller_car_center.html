@@ -180,12 +180,13 @@
 			<div class="recent-car-content">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-4">
+						<!--	id只能放在外层div	-->
+						<div class="row" id="single_car_app">
+							<div class="col-md-4" v-for="price in prices">
 								<div class="car-item">
 									<div class="thumb-content">
 										<div class="car-banner">
-											<a href="single_car.html">$36.000</a>
+											<a href="single_car.html">{{ price.text }}</a>
 										</div>
 										<div class="thumb-inner">
 											<a href="single_car.html"><img src="assets/images/car_item_1.jpg" alt=""></a>
@@ -205,121 +206,135 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
-								<div class="car-item">
-									<div class="thumb-content">
-										<div class="car-banner">
-											<a href="single_car.html">$49.000</a>
-										</div>
-										<div class="thumb-inner">
-											<a href="single_car.html"><img src="assets/images/car_item_2.jpg" alt=""></a>
-										</div>
-									</div>
-									<div class="down-content">
-										<a href="single_car.html"><h4>Perfect Sport Car</h4></a>
-										<div class="line-dec"></div>
+							<script>
+								const single_car_app = {
+									data() {
+										return {
+											prices: [
+												{text: "36000$"},
+												{text: "54600$"},
+												{text: "45100$"},
+												{text: "47800$"}
+											]
+										}
+									}
+								}
+								Vue.createApp(single_car_app).mount("#single_car_app")
+							</script>
+								<!--	null	-->
+								<div class="col-md-12"></div>
 
-										<ul class="car-info">
-											<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>2013</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-speed"></i><p>160p/h</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-road"></i><p>26.00km</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>Petrol</p></div></li>
-										</ul>
-									</div>
+								<div class="col-md-12">
+									<h5><em>UPLOAD YOUR CAR</em></h5>
 								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="car-item">
-									<div class="thumb-content">
-										<div class="car-banner">
-											<a href="single_car.html">$42.000</a>
-										</div>
-										<div class="thumb-inner">
-											<a href="single_car.html"><img src="assets/images/car_item_3.jpg" alt=""></a>
-										</div>
-									</div>
-									<div class="down-content">
-										<a href="single_car.html"><h4>Perfect Sport Car</h4></a>
-										<div class="line-dec"></div>
 
-										<ul class="car-info">
-											<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>2013</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-speed"></i><p>160p/h</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-road"></i><p>26.00km</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>Petrol</p></div></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="car-item">
-									<div class="thumb-content">
-										<div class="car-banner">
-											<a href="single_car.html">$54.000</a>
-										</div>
-										<div class="thumb-inner">
-											<a href="single_car.html"><img src="assets/images/car_item_4.jpg" alt=""></a>
-										</div>
-									</div>
-									<div class="down-content">
-										<a href="single_car.html"><h4>Perfect Sport Car</h4></a>
-										<div class="line-dec"></div>
 
-										<ul class="car-info">
-											<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>2013</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-speed"></i><p>160p/h</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-road"></i><p>26.00km</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>Petrol</p></div></li>
-										</ul>
-									</div>
+								<div class="col-md-4">
+									<img src="assets/images/car_item_1.jpg">
 								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="car-item">
-									<div class="thumb-content">
-										<div class="car-banner">
-											<a href="single_car.html">$23.000</a>
-										</div>
-										<div class="thumb-inner">
-											<a href="single_car.html"><img src="assets/images/car_item_5.jpg" alt=""></a>
-										</div>
-									</div>
-									<div class="down-content">
-										<a href="single_car.html"><h4>Perfect Sport Car</h4></a>
-										<div class="line-dec"></div>
+								<div class="col-md-4">
+									<img src="assets/images/car_item_1.jpg">
+								</div>
+								<div class="col-md-4">
+									<img src="assets/images/car_item_1.jpg">
+								</div>
+								<div class="col-md-4">
+									<img src="assets/images/car_item_1.jpg">
+								</div>
+								<div class="col-md-4">
+									<img src="assets/images/car_item_1.jpg">
+								</div>
 
-										<ul class="car-info">
-											<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>2013</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-speed"></i><p>160p/h</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-road"></i><p>26.00km</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>Petrol</p></div></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="car-item">
-									<div class="thumb-content">
-										<div class="car-banner">
-											<a href="single_car.html">$68.000</a>
-										</div>
-										<div class="thumb-inner">
-											<a href="single_car.html"><img src="assets/images/car_item_6.jpg" alt=""></a>
-										</div>
-									</div>
-									<div class="down-content">
-										<a href="single_car.html"><h4>Perfect Sport Car</h4></a>
-										<div class="line-dec"></div>
+								<!--	null	-->
+								<div class="col-md-12"><br></br></div>
 
-										<ul class="car-info">
-											<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>2013</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-speed"></i><p>160p/h</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-road"></i><p>26.00km</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>Petrol</p></div></li>
-										</ul>
-									</div>
+
+<!--								<div class="car-item col-md-4">-->
+<!--									<form>-->
+<!--										<div class="form-group">-->
+<!--											<label>Carname</label>-->
+<!--											<input class="form-control" v-model="">-->
+<!--										</div>-->
+<!--										<div class="form-group">-->
+<!--											<label>Price</label>-->
+<!--											<input class="form-control" v-model="">-->
+<!--										</div>-->
+<!--										<div class="form-group">-->
+<!--											<label>Speed</label>-->
+<!--											<input class="form-control" v-model="">-->
+<!--										</div>-->
+<!--									</form>-->
+<!--								</div>-->
+<!--								<div class="car-item col-md-4">-->
+<!--									<form>-->
+<!--										<div class="form-group">-->
+<!--											<label>Fuel</label>-->
+<!--											<input class="form-control" v-model="">-->
+<!--										</div>-->
+<!--										<div class="form-group">-->
+<!--											<label>Type</label>-->
+<!--											<input class="form-control" v-model="">-->
+<!--										</div>-->
+<!--										<div class="form-group">-->
+<!--											<label>Gear</label>-->
+<!--											<input class="form-control" v-model="">-->
+<!--										</div>-->
+<!--									</form>-->
+<!--								</div>-->
+<!--								<div class="car-item col-md-4">-->
+<!--									<form>-->
+<!--										<div class="form-group">-->
+<!--											<label>Warranty</label>-->
+<!--											<input class="form-control" v-model="">-->
+<!--										</div>-->
+<!--										<div class="form-group">-->
+<!--											<label>Tank_capacity</label>-->
+<!--											<input class="form-control" v-model="">-->
+<!--										</div>-->
+<!--										<div class="form-group">-->
+<!--											<label>Acceleration</label>-->
+<!--											<input class="form-control" v-model="">-->
+<!--										</div>-->
+<!--									</form>-->
+<!--								</div>-->
+							<form class="col-md-12 car-item" style="width:100%;">
+								<div class="form-group col-md-4" style="width:33%;float:left;">
+									<label>Carname</label>
+									<input class="form-control" v-model="">
 								</div>
-							</div>
+								<div class="form-group col-md-4" style="width:33%;float:left;">
+									<label>Price</label>
+									<input class="form-control" v-model="">
+								</div>
+								<div class="form-group col-md-4" style="width:33%;float:left;">
+									<label>Speed</label>
+									<input class="form-control" v-model="">
+								</div>
+								<div class="form-group col-md-4" style="width:33%;float:left;">
+									<label>Fuel</label>
+									<input class="form-control" v-model="">
+								</div>
+								<div class="form-group col-md-4" style="width:33%;float:left;">
+									<label>Type</label>
+									<input class="form-control" v-model="">
+								</div>
+								<div class="form-group col-md-4" style="width:33%;float:left;">
+									<label>Gear</label>
+									<input class="form-control" v-model="">
+								</div>
+								<div class="form-group col-md-4" style="width:33%;float:left;">
+									<label>Warranty</label>
+									<input class="form-control" v-model="">
+								</div>
+								<div class="form-group col-md-4" style="width:33%;float:left;">
+									<label>Tank Capacity</label>
+									<input class="form-control" v-model="">
+								</div>
+								<div class="form-group col-md-4" style="width:33%;float:left;">
+									<label>Acceleration</label>
+									<input class="form-control" v-model="">
+								</div>
+							</form>
 							<div class="col-md-12">
 								<button class="btn">Upload Car</button>
 							</div>
