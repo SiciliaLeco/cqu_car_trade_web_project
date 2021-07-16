@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.BuyerMapper" >
+  <resultMap id="BaseResultMap" type="com.example.pojo.Buyer" >
+    <id column="BTel" property="btel" jdbcType="VARCHAR" />
+    <result column="BID" property="bid" jdbcType="INTEGER" />
+    <result column="BName" property="bname" jdbcType="VARCHAR" />
+    <result column="BGender" property="bgender" jdbcType="INTEGER" />
+    <result column="BAddress" property="baddress" jdbcType="VARCHAR" />
+    <result column="BVIP" property="bvip" jdbcType="INTEGER" />
+    <result column="BPassword" property="bpassword" jdbcType="VARCHAR" />
+    <result column="BIcon" property="bicon" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BTel, BID, BName, BGender, BAddress, BVIP, BPassword, BIcon
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.pojo.BuyerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Buyer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from Buyer
+    where BTel = #{btel,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from Buyer
+    where BTel = #{btel,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.pojo.BuyerExample" >
+    delete from Buyer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.pojo.Buyer" >
+    insert into Buyer (BTel, BID, BName, 
+      BGender, BAddress, BVIP, 
+      BPassword, BIcon)
+    values (#{btel,jdbcType=VARCHAR}, #{bid,jdbcType=INTEGER}, #{bname,jdbcType=VARCHAR}, 
+      #{bgender,jdbcType=INTEGER}, #{baddress,jdbcType=VARCHAR}, #{bvip,jdbcType=INTEGER}, 
+      #{bpassword,jdbcType=VARCHAR}, #{bicon,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pojo.Buyer" >
+    insert into Buyer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="btel != null" >
+        BTel,
+      </if>
+      <if test="bid != null" >
+        BID,
+      </if>
+      <if test="bname != null" >
+        BName,
+      </if>
+      <if test="bgender != null" >
+        BGender,
+      </if>
+      <if test="baddress != null" >
+        BAddress,
+      </if>
+      <if test="bvip != null" >
+        BVIP,
+      </if>
+      <if test="bpassword != null" >
+        BPassword,
+      </if>
+      <if test="bicon != null" >
+        BIcon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="btel != null" >
+        #{btel,jdbcType=VARCHAR},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="bname != null" >
+        #{bname,jdbcType=VARCHAR},
+      </if>
+      <if test="bgender != null" >
+        #{bgender,jdbcType=INTEGER},
+      </if>
+      <if test="baddress != null" >
+        #{baddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bvip != null" >
+        #{bvip,jdbcType=INTEGER},
+      </if>
+      <if test="bpassword != null" >
+        #{bpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="bicon != null" >
+        #{bicon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.pojo.BuyerExample" resultType="java.lang.Integer" >
+    select count(*) from Buyer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Buyer
+    <set >
+      <if test="record.btel != null" >
+        BTel = #{record.btel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bid != null" >
+        BID = #{record.bid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bname != null" >
+        BName = #{record.bname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bgender != null" >
+        BGender = #{record.bgender,jdbcType=INTEGER},
+      </if>
+      <if test="record.baddress != null" >
+        BAddress = #{record.baddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bvip != null" >
+        BVIP = #{record.bvip,jdbcType=INTEGER},
+      </if>
+      <if test="record.bpassword != null" >
+        BPassword = #{record.bpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bicon != null" >
+        BIcon = #{record.bicon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Buyer
+    set BTel = #{record.btel,jdbcType=VARCHAR},
+      BID = #{record.bid,jdbcType=INTEGER},
+      BName = #{record.bname,jdbcType=VARCHAR},
+      BGender = #{record.bgender,jdbcType=INTEGER},
+      BAddress = #{record.baddress,jdbcType=VARCHAR},
+      BVIP = #{record.bvip,jdbcType=INTEGER},
+      BPassword = #{record.bpassword,jdbcType=VARCHAR},
+      BIcon = #{record.bicon,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pojo.Buyer" >
+    update Buyer
+    <set >
+      <if test="bid != null" >
+        BID = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="bname != null" >
+        BName = #{bname,jdbcType=VARCHAR},
+      </if>
+      <if test="bgender != null" >
+        BGender = #{bgender,jdbcType=INTEGER},
+      </if>
+      <if test="baddress != null" >
+        BAddress = #{baddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bvip != null" >
+        BVIP = #{bvip,jdbcType=INTEGER},
+      </if>
+      <if test="bpassword != null" >
+        BPassword = #{bpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="bicon != null" >
+        BIcon = #{bicon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BTel = #{btel,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.pojo.Buyer" >
+    update Buyer
+    set BID = #{bid,jdbcType=INTEGER},
+      BName = #{bname,jdbcType=VARCHAR},
+      BGender = #{bgender,jdbcType=INTEGER},
+      BAddress = #{baddress,jdbcType=VARCHAR},
+      BVIP = #{bvip,jdbcType=INTEGER},
+      BPassword = #{bpassword,jdbcType=VARCHAR},
+      BIcon = #{bicon,jdbcType=VARCHAR}
+    where BTel = #{btel,jdbcType=VARCHAR}
+  </update>
+</mapper>
