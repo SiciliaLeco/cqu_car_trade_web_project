@@ -8,3 +8,18 @@ spring:
       additional-paths: src/main/java
   thymeleaf:
     cache: false
+  datasource:
+    name: car_manage_system
+    url: jdbc:mysql://116.63.170.243:3306/car_manage_system #url
+    username: root  #用户名
+    password: TangHuoGuo1@3  #密码
+    driver-class-name: com.mysql.jdbc.Driver  #数据库链接驱动
+
+dubbo:
+  application:
+    name: test-service-consumer
+  registry:
+    address: zookeeper://192.168.2.31:2181?backup=192.168.2.32:2181,192.168.2.33:2181
+    timeout: 5000
+  consumer:
+    timeout: 50000

@@ -7,9 +7,9 @@ Spring:
         password: TangHuoGuo1@3  #密码
         driver-class-name: com.mysql.jdbc.Driver  #数据库链接驱动
 
-mybatis:
-    mapper-locations: classpath:mapper/*.xml  #配置映射文件
-    type-aliases-package: com.example.bean #配置实体类
+#mybatis:
+#    mapper-locations: classpath:mapper/*.xml  #配置映射文件
+#    type-aliases-package: com.example.bean #配置实体类
 
 fdfs:
     pool:
@@ -49,7 +49,7 @@ dubbo:
         port: 20881
     #制定扫描的基础包
     scan:
-        base-packages: com.example.serviceImpl
+        base-packages: com.example.picture_service.serviceImpl
     provider:
         timeout: 50000
 

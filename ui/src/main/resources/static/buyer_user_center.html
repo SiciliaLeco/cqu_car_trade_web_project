@@ -185,9 +185,34 @@
 							<div class="container">
 								<div class="row">
 									<ul class="car-info col-md-5">
-										<img class="car-info col-md-7" src="assets/images/user_male.jpg"/>
+										<img id="tar_img" class="car-info col-md-7" src="assets/images/user_male.jpg"/>
 										<br></br>
-										<button class="col-md-7 btn">Upload Icon</button>
+										<form id="uploadForm" method="post" enctype="multipart/form-data">
+											<input type="file" id="local_img" name="local_img" multiple class="attachment-upload">
+											<button class="col-md-7 btn" onclick="uploadfile()">Upload Icon</button>
+										</form>
+										<script>
+											function uploadfile() {
+												let file = document.getElementById('local_img').files[0];
+
+												let formData = new FormData();
+												formData.append("local_img",file,file.name);
+
+												const config = {
+													headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
+												};
+
+												axios
+														.post("http://116.63.170.243:8000/picupload/buyer",formData,config)
+														.then(function (response) {
+															console.log(response);
+															document.getElementById("tar_img").setAttribute("src",response['data']);
+														})
+														.catch(function (error) {
+															console.log(error);
+														});
+											}
+										</script>
 									</ul>
 									<ul class="car-info col-md-7">
 										<li><b>BID </b><p>2016/2017</p></li>

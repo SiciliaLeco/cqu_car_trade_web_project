@@ -182,14 +182,14 @@
 	            <div class="col-xl-12">
 	                <div class="login-register">
 	                    <div class="row">
-	                        <div class="col-xl-5">
+	                        <div class="col-xl-6">
 	                            <div class="loginform">
 	                                <div class="checkout-login-form login-form">
 	                                     <h4>login</h4>
-	                                     <form>
+	                                     <form id="login_app">
 	                                       <div class="form-group">
-	                                         <label for="exampleInputEmail12">Username</label>
-	                                         <input type="email" class="form-control" id="exampleInputEmail12" aria-describedby="emailHelp" v-model="Log_username">
+	                                         <label>Username</label>
+	                                         <input class="form-control" v-model="Log_username">
 	                                       </div>
 	                                       <div class="form-group">
 	                                         <label for="exampleInputPassword13">Password</label>
@@ -197,20 +197,62 @@
 	                                       </div>
 	                                         <div class="form-group less-mt">
 	                                             <div class="checkbox">
-	                                                 <button type="submit" class="btn login-btn" @click="buyer_login_submit">login</button>
-
+	                                                 <button type="submit" class="btn login-btn" @click="buyer_login_submit()">login</button>
 	                                             </div>
+												 <script>
+													 const login_app = {
+														 data(){
+														 	return{
+														 		Log_username: "?",
+																Log_password: "?"
+															}
+														 },
+														 methods:{
+															 buyer_login_submit(){
+															 	 data = new FormData();
+															 	 data.append("Username", this.Log_username);
+															 	 data.append("Password", this.Log_password);
+																 axios
+																	 // .post('http:116.63.170.243:9090/buyer_login??',
+																	 // 		{
+																	 // 			Username:this.Log_username,
+																	 // 			Password:this.Log_password
+																	 // 		})
+																	 // .then(function (res) {
+																	 // 	if (res.data.status === true) {
+																	 // 		window.location.href='/index';
+																	 // 	} else {
+																	 // 		//errMsg后端返回
+																	 // 		alert(res.data.errMsg);
+																	 // 	}
+																	 // }
+																	 // 		.catch(function (error) { // 请求失败处理,error后端返回
+																	 // 			console.log(error);
+																	 // 		}));
+																	 .post('/login_register-buyer/login',
+																			 data,
+																			 {headers: { 'Content-Type': "multipart/form-data"  }})
+																	 .then(response => (alert(response.data)))
+																	 .catch(function (error) { // 请求失败处理,error后端返回
+																		 console.log(error);
+																		 alert(error);
+																	 });
+															 }
+														 }
+													 }
+													 Vue.createApp(login_app).mount("#login_app")
+												 </script>
 	                                         </div>
 <!-- 	                                       <a href="#" class="lost-pass">Lost your password? </a> -->
 	                                     </form>
 	                                 </div>
 	                            </div>
 	                        </div>
-	                        <div class="col-xl-5">
+	                        <div class="col-xl-6">
 	                            <div class="loginform">
 	                                <div class="checkout-login-form login-form">
 										<h4>Register</h4>
-										 <form>
+										 <form id="register_app">
 <!-- 											 <label>What do you want to be </label>
 											 <div class="checkbox">
 											   <input id="checkbox16" type="checkbox">
@@ -224,23 +266,23 @@
 											 </div> -->
 										   <div class="form-group">
 										     <label>Username</label>
-										     <input class="form-control" v-model="Reg_username">
+										     <input class="form-control" v-model="Username">
 										   </div>
 										   <div class="form-group">
 										     <label>Gender</label>
 											 <div class="checkbox">
-											   <input id="checkbox18" type="checkbox" value="Male" v-model="Gender">
+											   <input id="checkbox18" type="checkbox" value="Male" v-model="Gender_male">
 											   <label for="checkbox18" class="choice">
 												  Male
 											   </label>
-											   <input id="checkbox19" type="checkbox" value="Female" v-model="Gender">
+											   <input id="checkbox19" type="checkbox" value="Female" v-model="Gender_female">
 											   <label for="checkbox19" class="choice">
 												  Female
 											   </label>
 											   </div>
 										   </div>
 										   <div class="form-group">
-										     <label for="exampleInputEmail12">Address</label>
+										     <label> Address</label>
 										     <input class="form-control" v-model="Address">
 										   </div>
 	                                       <div class="form-group">
@@ -249,46 +291,86 @@
 	                                       </div>
 	                                       <div class="form-group">
 	                                         <label for="exampleInputPassword15">Password</label>
-	                                         <input type="password" class="form-control" id="exampleInputPassword15" v-model="Reg_password">
+	                                         <input type="password" class="form-control" id="exampleInputPassword15" v-model="Password">
 	                                       </div>
 										   
 	                                       <div class="form-group less-mt">
 	                                             <div class="checkbox">
-	                                                 <button type="submit" class="btn login-btn" @click="buyer_register_submit">register</button>
+	                                                 <button type="submit" class="btn login-btn" @click="buyer_register_submit()">register</button>
+													 <script>
+														 const register_app = {
+														 	 data(){
+														 	 	return {
+																	Username:"?",
+																	Gender_male:"?",
+																	Address:"?",
+																	Tel:"?",
+																	Password:"?"
+																}
+															 },
+															 methods:{
+																 buyer_register_submit(){
+																 	alert(this.Username);
+																 	let data = new FormData();
+																 	data.append("Username", this.Username);
+																 	data.append("Gender", this.Gender_male ? "Male" : "Female");
+																 	data.append("Address", this.Address);
+																 	data.append("Tel", this.Tel);
+																 	data.append("Password", this.Password);
+																	 axios
+																		 .post('/login_register-buyer/register',
+																				 data,
+																				 {
+																					 headers: { 'Content-Type': "multipart/form-data"  }
+																				 }
+																		 )
+																		 .then(response => (alert(response.data)))
+																		 .catch(function (error) { // 请求失败处理
+																			 console.log(error);
+																			 alert("error")
+																		 });
+																 }
+															 }
+														 }
+														 Vue.createApp(register_app).mount("#register_app")
+													 </script>
 	                                             </div>
-	                                         </div>
+										   </div>
 											 
 	                                     </form>
 	                                 </div>
 	                            </div>
 	                        </div>
-							<div class="col-xl-2 login-upload-icon">
-								<img class="login-upload-icon-img" src="./assets/images/user_male.jpg">
-								<div class="col-lg-1">
-									<br></br>
+<!--							<div class="col-xl-2 login-upload-icon">-->
+<!--								<img class="login-upload-icon-img" src="./assets/images/user_male.jpg">-->
+<!--								<div class="col-lg-1" id="upload_icon">-->
+<!--									<br></br>-->
 <!--									<button class="btn login-upload-btn">Upload Icon</button>-->
-									<input id="input" type="file" @change="fileUpload()">
-									<script>
-										export default {
-											methods: {
-												fileUpload () {
-													var files = document.getElementById("input").files;
-													var params = new FormData();
-													params.append('file', files[0])
-													console.log(params.get("file"));
-													this.$axios({
-														url: "http://localhost:8000/pic",
-														method: "post",
-														data: params,
-														headers: { 'Content-Type': 'multipart/form-data' }
-													})
-												}
-											},
-										}
-									</script>
-								</div>
+<!--									<input id="input" type="file" @change="fileUpload()">-->
+<!--									<script>-->
+<!--										const app = {-->
+<!--											methods: {-->
+<!--												fileUpload () {-->
+<!--													var files = document.getElementById("input").files;-->
+<!--													var params = new FormData();-->
+<!--													params.append('file', files[0])-->
+<!--													console.log(params.get("file"));-->
+<!--													this.$axios({-->
+<!--														url: "http://localhost:8000/picupload/buyer",-->
+<!--														method: "post",-->
+<!--														data: params,-->
+<!--														headers: { 'Content-Type': 'multipart/form-data' }-->
+<!--													})-->
+<!--												}-->
+<!--											}-->
+<!--										}-->
+<!--										Vue.createApp(app).mount("#upload_icon")-->
 
-							</div>
+
+<!--									</script>-->
+<!--								</div>-->
+
+<!--							</div>-->
 						</div>
 	                </div>
 	            </div>
@@ -614,65 +696,5 @@
     <script src="assets/js/custom.js"></script>
 
 
-	<script>
-
-		export default {
-			data() {
-				return {
-					Reg_username:" ",
-					Gender:" ",
-					Address:" ",
-					Tel:" ",
-					Reg_password:" ",
-					Log_username:" ",
-					Log_password:" "
-				};
-			},
-			methods: {
-				buyer_register_submit() {
-					axios
-							.post('http:116.63.170.243:9090/buyer_register??',
-									{
-										Username:this.Reg_username,
-										Gender:this.Gender,
-										Address:this.Address,
-										Tel:this.Tel,
-										Password:this.Reg_password
-									})
-							.then(function (res) {
-								if (res.data.status !== true) {
-									alert(res.data.errMsg);
-								} else {
-									alert('注册成功，请登录!');
-								}
-							}
-									.catch(function (error) { // 请求失败处理
-										console.log(error);
-									}));
-
-				},
-				buyer_login_submit(){
-					axios
-							.post('http:116.63.170.243:9090/buyer_login??',
-									{
-										Username:this.Log_username,
-										Password:this.Log_password
-									})
-							.then(function (res) {
-								if (res.data.status === true) {
-									window.location.href='/index';
-								} else {
-									//errMsg后端返回
-									alert(res.data.errMsg);
-								}
-							}
-									.catch(function (error) { // 请求失败处理,error后端返回
-										console.log(error);
-									}));
-				}
-			}
-		};
-
-	</script>
 </body>
 </html>
