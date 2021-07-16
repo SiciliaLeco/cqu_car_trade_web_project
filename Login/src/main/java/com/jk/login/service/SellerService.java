@@ -62,6 +62,12 @@ public class SellerService {
         return result;
     }
 
+    public ResultInfo<Seller> update_seller_info(Seller user) {
+        sellerMapper.update_seller_info(user);
+        result.setMsg("修改成功！");
+        result.setSuccess(true);
+        return result;
+    }
     public ResultInfo<Seller> update_seller_password(Seller user){
         sellerMapper.update_seller_password(user);
         result.setMsg("修改成功");

@@ -24,4 +24,8 @@
     <update id="update_seller_password" parameterType="Seller">
         update Seller set SPassword=#{SPassword} where STel=#{STel}
     </update>
+    <update id="update_seller_info" parameterType="Seller">
+        update Seller set SName=#{SName}, SAddress=#{SAddress} where STel=#{STel}
+    </update>
+
 </mapper>
