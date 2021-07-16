@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    username: root
+    password: Aa123456_
+    url: jdbc:mysql://192.168.2.39:3306/vspace?useUnicode=true&amp;characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:com/cestc/vspace/mapper/*.xml
+logging:
+  level:
+    com:
+      cestc:
+        vspace:
+          mapper: debug
+
