@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.example.pojo.Menu" >
+    <id column="OID" property="oid" jdbcType="INTEGER" />
+    <result column="STel" property="stel" jdbcType="VARCHAR" />
+    <result column="BTel" property="btel" jdbcType="VARCHAR" />
+    <result column="ODate" property="odate" jdbcType="TIMESTAMP" />
+    <result column="Oprice" property="oprice" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    OID, STel, BTel, ODate, Oprice
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.pojo.MenuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Menu
+    where OID = #{oid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Menu
+    where OID = #{oid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.pojo.MenuExample" >
+    delete from Menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.pojo.Menu" >
+    insert into Menu (OID, STel, BTel, 
+      ODate, Oprice)
+    values (#{oid,jdbcType=INTEGER}, #{stel,jdbcType=VARCHAR}, #{btel,jdbcType=VARCHAR}, 
+      #{odate,jdbcType=TIMESTAMP}, #{oprice,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pojo.Menu" >
+    insert into Menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        OID,
+      </if>
+      <if test="stel != null" >
+        STel,
+      </if>
+      <if test="btel != null" >
+        BTel,
+      </if>
+      <if test="odate != null" >
+        ODate,
+      </if>
+      <if test="oprice != null" >
+        Oprice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="stel != null" >
+        #{stel,jdbcType=VARCHAR},
+      </if>
+      <if test="btel != null" >
+        #{btel,jdbcType=VARCHAR},
+      </if>
+      <if test="odate != null" >
+        #{odate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oprice != null" >
+        #{oprice,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.pojo.MenuExample" resultType="java.lang.Integer" >
+    select count(*) from Menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Menu
+    <set >
+      <if test="record.oid != null" >
+        OID = #{record.oid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stel != null" >
+        STel = #{record.stel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.btel != null" >
+        BTel = #{record.btel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.odate != null" >
+        ODate = #{record.odate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.oprice != null" >
+        Oprice = #{record.oprice,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Menu
+    set OID = #{record.oid,jdbcType=INTEGER},
+      STel = #{record.stel,jdbcType=VARCHAR},
+      BTel = #{record.btel,jdbcType=VARCHAR},
+      ODate = #{record.odate,jdbcType=TIMESTAMP},
+      Oprice = #{record.oprice,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pojo.Menu" >
+    update Menu
+    <set >
+      <if test="stel != null" >
+        STel = #{stel,jdbcType=VARCHAR},
+      </if>
+      <if test="btel != null" >
+        BTel = #{btel,jdbcType=VARCHAR},
+      </if>
+      <if test="odate != null" >
+        ODate = #{odate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oprice != null" >
+        Oprice = #{oprice,jdbcType=INTEGER},
+      </if>
+    </set>
+    where OID = #{oid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.pojo.Menu" >
+    update Menu
+    set STel = #{stel,jdbcType=VARCHAR},
+      BTel = #{btel,jdbcType=VARCHAR},
+      ODate = #{odate,jdbcType=TIMESTAMP},
+      Oprice = #{oprice,jdbcType=INTEGER}
+    where OID = #{oid,jdbcType=INTEGER}
+  </update>
+</mapper>

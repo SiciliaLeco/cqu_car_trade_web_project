@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.SellerMapper" >
+  <resultMap id="BaseResultMap" type="com.example.pojo.Seller" >
+    <id column="STel" property="stel" jdbcType="VARCHAR" />
+    <result column="SID" property="sid" jdbcType="INTEGER" />
+    <result column="SName" property="sname" jdbcType="VARCHAR" />
+    <result column="SAddress" property="saddress" jdbcType="VARCHAR" />
+    <result column="SPassword" property="spassword" jdbcType="VARCHAR" />
+    <result column="SGrade" property="sgrade" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    STel, SID, SName, SAddress, SPassword, SGrade
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.pojo.SellerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Seller
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from Seller
+    where STel = #{stel,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from Seller
+    where STel = #{stel,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.pojo.SellerExample" >
+    delete from Seller
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.pojo.Seller" >
+    insert into Seller (STel, SID, SName, 
+      SAddress, SPassword, SGrade
+      )
+    values (#{stel,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, 
+      #{saddress,jdbcType=VARCHAR}, #{spassword,jdbcType=VARCHAR}, #{sgrade,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pojo.Seller" >
+    insert into Seller
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stel != null" >
+        STel,
+      </if>
+      <if test="sid != null" >
+        SID,
+      </if>
+      <if test="sname != null" >
+        SName,
+      </if>
+      <if test="saddress != null" >
+        SAddress,
+      </if>
+      <if test="spassword != null" >
+        SPassword,
+      </if>
+      <if test="sgrade != null" >
+        SGrade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stel != null" >
+        #{stel,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="saddress != null" >
+        #{saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="spassword != null" >
+        #{spassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sgrade != null" >
+        #{sgrade,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.pojo.SellerExample" resultType="java.lang.Integer" >
+    select count(*) from Seller
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Seller
+    <set >
+      <if test="record.stel != null" >
+        STel = #{record.stel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sid != null" >
+        SID = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sname != null" >
+        SName = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saddress != null" >
+        SAddress = #{record.saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spassword != null" >
+        SPassword = #{record.spassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sgrade != null" >
+        SGrade = #{record.sgrade,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Seller
+    set STel = #{record.stel,jdbcType=VARCHAR},
+      SID = #{record.sid,jdbcType=INTEGER},
+      SName = #{record.sname,jdbcType=VARCHAR},
+      SAddress = #{record.saddress,jdbcType=VARCHAR},
+      SPassword = #{record.spassword,jdbcType=VARCHAR},
+      SGrade = #{record.sgrade,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pojo.Seller" >
+    update Seller
+    <set >
+      <if test="sid != null" >
+        SID = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null" >
+        SName = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="saddress != null" >
+        SAddress = #{saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="spassword != null" >
+        SPassword = #{spassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sgrade != null" >
+        SGrade = #{sgrade,jdbcType=REAL},
+      </if>
+    </set>
+    where STel = #{stel,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.pojo.Seller" >
+    update Seller
+    set SID = #{sid,jdbcType=INTEGER},
+      SName = #{sname,jdbcType=VARCHAR},
+      SAddress = #{saddress,jdbcType=VARCHAR},
+      SPassword = #{spassword,jdbcType=VARCHAR},
+      SGrade = #{sgrade,jdbcType=REAL}
+    where STel = #{stel,jdbcType=VARCHAR}
+  </update>
+</mapper>

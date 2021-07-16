@@ -52,4 +52,9 @@ public class SellerController {
         return sellerService.update_seller_password(seller);
     }
 
+    @PostMapping(value = "/updateSellerInfo")
+    public ResultInfo<Seller> updateSellerInfo(Seller seller) {
+        return sellerService.update_seller_info(seller);
+    }
+
 }

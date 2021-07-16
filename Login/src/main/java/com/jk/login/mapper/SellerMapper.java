@@ -14,4 +14,5 @@ public interface SellerMapper {
     Seller seller_login(Seller seller);
     void seller_register(Seller seller);
     void update_seller_password(Seller seller);
+    void update_seller_info(Seller seller);
 }
