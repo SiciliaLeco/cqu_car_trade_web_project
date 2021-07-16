@@ -182,7 +182,7 @@
 	            <div class="col-xl-12">
 	                <div class="login-register">
 	                    <div class="row">
-	                        <div class="col-xl-5">
+	                        <div class="col-xl-6">
 	                            <div class="loginform">
 	                                <div class="checkout-login-form login-form">
 	                                     <h4>login</h4>
@@ -248,7 +248,7 @@
 	                                 </div>
 	                            </div>
 	                        </div>
-	                        <div class="col-xl-5">
+	                        <div class="col-xl-6">
 	                            <div class="loginform">
 	                                <div class="checkout-login-form login-form">
 										<h4>Register</h4>
@@ -341,36 +341,36 @@
 	                                 </div>
 	                            </div>
 	                        </div>
-							<div class="col-xl-2 login-upload-icon">
-								<img class="login-upload-icon-img" src="./assets/images/user_male.jpg">
-								<div class="col-lg-1" id="upload_icon">
-									<br></br>
+<!--							<div class="col-xl-2 login-upload-icon">-->
+<!--								<img class="login-upload-icon-img" src="./assets/images/user_male.jpg">-->
+<!--								<div class="col-lg-1" id="upload_icon">-->
+<!--									<br></br>-->
 <!--									<button class="btn login-upload-btn">Upload Icon</button>-->
-									<input id="input" type="file" @change="fileUpload()">
-									<script>
-										const app = {
-											methods: {
-												fileUpload () {
-													var files = document.getElementById("input").files;
-													var params = new FormData();
-													params.append('file', files[0])
-													console.log(params.get("file"));
-													this.$axios({
-														url: "http://localhost:8000/picupload/buyer",
-														method: "post",
-														data: params,
-														headers: { 'Content-Type': 'multipart/form-data' }
-													})
-												}
-											}
-										}
-										Vue.createApp(app).mount("#upload_icon")
+<!--									<input id="input" type="file" @change="fileUpload()">-->
+<!--									<script>-->
+<!--										const app = {-->
+<!--											methods: {-->
+<!--												fileUpload () {-->
+<!--													var files = document.getElementById("input").files;-->
+<!--													var params = new FormData();-->
+<!--													params.append('file', files[0])-->
+<!--													console.log(params.get("file"));-->
+<!--													this.$axios({-->
+<!--														url: "http://localhost:8000/picupload/buyer",-->
+<!--														method: "post",-->
+<!--														data: params,-->
+<!--														headers: { 'Content-Type': 'multipart/form-data' }-->
+<!--													})-->
+<!--												}-->
+<!--											}-->
+<!--										}-->
+<!--										Vue.createApp(app).mount("#upload_icon")-->
 
 
-									</script>
-								</div>
+<!--									</script>-->
+<!--								</div>-->
 
-							</div>
+<!--							</div>-->
 						</div>
 	                </div>
 	            </div>
