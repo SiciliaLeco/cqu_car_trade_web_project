@@ -343,12 +343,12 @@
 	                        </div>
 							<div class="col-xl-2 login-upload-icon">
 								<img class="login-upload-icon-img" src="./assets/images/user_male.jpg">
-								<div class="col-lg-1">
+								<div class="col-lg-1" id="upload_icon">
 									<br></br>
 <!--									<button class="btn login-upload-btn">Upload Icon</button>-->
 									<input id="input" type="file" @change="fileUpload()">
 									<script>
-										export default {
+										const app = {
 											methods: {
 												fileUpload () {
 													var files = document.getElementById("input").files;
@@ -356,14 +356,17 @@
 													params.append('file', files[0])
 													console.log(params.get("file"));
 													this.$axios({
-														url: "http://localhost:8000/pic",
+														url: "http://localhost:8000/picupload/buyer",
 														method: "post",
 														data: params,
 														headers: { 'Content-Type': 'multipart/form-data' }
 													})
 												}
-											},
+											}
 										}
+										Vue.createApp(app).mount("#upload_icon")
+
+
 									</script>
 								</div>
 
