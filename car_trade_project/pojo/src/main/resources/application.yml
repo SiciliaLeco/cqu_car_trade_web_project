@@ -1,0 +1,21 @@
+
+server:
+  port: 9099
+
+mybatis:
+  mapper-locations: classpath:org/cqu/cartrade/mapper/*.xml  #配置映射文件
+  type-aliases-package: com.example.car.pojo #配置实体类
+
+spring:
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+  thymeleaf:
+    cache: false
+  datasource:
+    name: car_manage_system
+    url: jdbc:mysql://116.63.170.243:3306/car_manage_system #url
+    username: root  #用户名
+    password: TangHuoGuo1@3  #密码
+    driver-class-name: com.mysql.jdbc.Driver  #数据库链接驱动

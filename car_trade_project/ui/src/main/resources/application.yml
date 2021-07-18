@@ -1,0 +1,25 @@
+server:
+  port: 8000
+
+spring:
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+  thymeleaf:
+    cache: false
+  datasource:
+    name: car_manage_system
+    url: jdbc:mysql://116.63.170.243:3306/car_manage_system #url
+    username: root  #用户名
+    password: TangHuoGuo1@3  #密码
+    driver-class-name: com.mysql.cj.jdbc.Driver  #数据库链接驱动
+
+dubbo:
+  application:
+    name: test-service-consumer
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    timeout: 5000
+  consumer:
+    timeout: 50000
