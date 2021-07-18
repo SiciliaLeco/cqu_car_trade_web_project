@@ -16,6 +16,12 @@ maven可以相互依赖,环境整理完毕,务必看完本文档
 - 解压dubbo-admin-develop, 在根目录下运行`mvn clean package -Dmaven.test.skip=true`进行编译
 - 运行`mvn --projects dubbo-admin-server spring-boot:run`启动dubbo-admin
 
+## 关于dubbo配置
+- 配置文件在resources/application.yml
+- 直接参照buyer_service的pom就可以自行配置
+- 如果本地没有zookeeper, 将这里的address: zookeeper://127.0.0.1:2181 修改成zookeeper://192.168.2.31:2181?backup=192.168.2.32:2181,192.168.2.33:2181,然后在云端运行
+- 不同应用的dubbo端口不同
+
 ## 项目结构
 - car_trade_project: 父目录, 请在父pom中配置共有依赖
 - pojo: java对象, 包含数据库对象, 后端返回对象等
