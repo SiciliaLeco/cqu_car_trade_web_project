@@ -1,10 +1,11 @@
 package org.cqu.pojo;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuyerExample {
+public class BuyerExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;

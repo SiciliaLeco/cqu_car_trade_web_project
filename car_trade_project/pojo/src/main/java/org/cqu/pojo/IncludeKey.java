@@ -1,6 +1,8 @@
 package org.cqu.pojo;
 
-public class IncludeKey {
+import java.io.Serializable;
+
+public class IncludeKey implements Serializable {
     private Integer cid;
 
     private Integer oid;

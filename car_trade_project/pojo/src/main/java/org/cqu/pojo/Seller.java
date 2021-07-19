@@ -1,6 +1,8 @@
 package org.cqu.pojo;
 
-public class Seller {
+import java.io.Serializable;
+
+public class Seller implements Serializable {
     private String stel;
 
     private Integer sid;
