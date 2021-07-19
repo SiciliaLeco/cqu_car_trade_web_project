@@ -115,4 +115,11 @@ public class BuyerServiceImpl implements BuyerService {
 
 
 
+    @Override
+    public void updateIcon(String btel, String pic_url) {
+        Buyer userExist = buyerMapper.selectByPrimaryKey(btel);
+        userExist.setBicon(pic_url);
+        buyerMapper.updateByPrimaryKey(userExist);
+    }
+
 }

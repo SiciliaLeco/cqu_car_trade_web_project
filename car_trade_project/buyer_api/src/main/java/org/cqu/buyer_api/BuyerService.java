@@ -13,4 +13,5 @@ public interface BuyerService {
     ResultInfo<Buyer> register(Buyer buyer);
     ResultInfo<Buyer> update(String btel, String baddress, String bname);
     Map<String, String> getInfo(String btel);
+    void updateIcon(String btel, String pic_url);
 }
