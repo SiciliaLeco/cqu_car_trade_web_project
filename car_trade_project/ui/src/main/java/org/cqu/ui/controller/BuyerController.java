@@ -59,7 +59,7 @@ public class BuyerController {
     }
 
     @PostMapping(value = "/getUserInfo")
-    public String getUserInfo() {
+    public Map<String, String> getUserInfo() {
         return buyerService.getInfo("15998998970");
     }
 }
