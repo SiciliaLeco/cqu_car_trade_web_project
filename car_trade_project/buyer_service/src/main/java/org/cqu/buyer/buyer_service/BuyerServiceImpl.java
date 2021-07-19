@@ -85,7 +85,16 @@ public class BuyerServiceImpl implements BuyerService {
         return result;
     }
 
-
+    @Override
+    public ResultInfo<Buyer> update(String btel, String baddress, String bname){
+        Buyer userExist = buyerMapper.selectByPrimaryKey(btel);
+        userExist.setBaddress(baddress);
+        userExist.setBname(bname);
+        buyerMapper.updateByExampleSelective(userExist);
+        result.setMsg("update succeed!");
+        result.setSuccess(true);
+        return result;
+    }
 
 
 }

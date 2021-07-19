@@ -51,4 +51,9 @@ public class BuyerController {
         }
         return buyerService.register(buyer);
     }
+
+    @PostMapping(value = "/updateUserInfo")
+    public ResultInfo<Buyer> updateUserInfo(String btel, String baddress, String bname) {
+        return buyerService.update(btel, baddress, bname);
+    }
 }

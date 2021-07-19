@@ -9,4 +9,6 @@ public interface BuyerService {
     String getBuyerName(String BuyerTel);
     ResultInfo<Buyer> login(Buyer buyer);
     ResultInfo<Buyer> register(Buyer buyer);
+    ResultInfo<Buyer> update(String btel, String baddress, String bname);
+
 }
