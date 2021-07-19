@@ -229,13 +229,13 @@
 																	 // 		.catch(function (error) { // 请求失败处理,error后端返回
 																	 // 			console.log(error);
 																	 // 		}));
-																	 .post('/login_register-buyer/login',
+																	 .post('/BuyerAPI/login',
 																			 data,
 																			 {headers: { 'Content-Type': "multipart/form-data"  }})
 																	 .then(function (res) {
 																	 	if(res.data.code === 1) {
 																			alert("LOGIN SUCCESS!")
-																			window.location.herf="/index";
+																			window.location.herf="/index.html";
 																		}
 																	 	else {
 																	 		alert("FAILED!")
@@ -327,7 +327,7 @@
 																 	data.append("Tel", this.Tel);
 																 	data.append("Password", this.Password);
 																	 axios
-																		 .post('/login_register-buyer/register',
+																		 .post('/BuyerAPI/regist',
 																				 data,
 																				 {
 																					 headers: { 'Content-Type': "multipart/form-data"  }

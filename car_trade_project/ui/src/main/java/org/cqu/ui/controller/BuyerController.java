@@ -30,20 +30,25 @@ public class BuyerController {
         return buyerService.findBuyerByTel(Btel);
     }
     @PostMapping(value = "/login")
-    public ResultInfo<Buyer> login(String btel, String bpassword) {
+    public ResultInfo<Buyer> login(String Username, String Password) {
         Buyer buyer = new Buyer();
-        buyer.setBtel(btel);
-        buyer.setBpassword(bpassword);
+        buyer.setBtel(Username);
+        buyer.setBpassword(Password);
         return buyerService.login(buyer);
     }
 
     @PostMapping(value =  "/regist")
-    public ResultInfo<Buyer> regist(String btel, String bpassword, String baddress, String bname){
+    public ResultInfo<Buyer> regist(String Username, String Gender, String Address, String Tel, String Password) {
         Buyer buyer = new Buyer();
-        buyer.setBpassword(bpassword);
-        buyer.setBtel(btel);
-        buyer.setBaddress(baddress);
-        buyer.setBname(bname);
+        buyer.setBpassword(Password);
+        buyer.setBtel(Tel);
+        buyer.setBaddress(Address);
+        buyer.setBname(Username);
+        if(Gender == "Male"){
+            buyer.setBgender(1);   // 1 for male and 0 for female
+        } else {
+            buyer.setBgender(0);
+        }
         return buyerService.register(buyer);
     }
 }
