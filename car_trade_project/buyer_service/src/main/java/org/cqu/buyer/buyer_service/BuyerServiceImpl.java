@@ -7,10 +7,8 @@ import org.cqu.mapper.BuyerMapper;
 import org.cqu.pojo.Buyer;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 @Service
 public class BuyerServiceImpl implements BuyerService {
@@ -67,7 +65,17 @@ public class BuyerServiceImpl implements BuyerService {
     }
 
     @Override
-    public ResultInfo<Buyer> register(Buyer buyer) {
+    public ResultInfo<Buyer> register(String Username, String Gender, String Address, String Tel, String Password) {
+        Buyer buyer = new Buyer();
+        buyer.setBpassword(Password);
+        buyer.setBtel(Tel);
+        buyer.setBaddress(Address);
+        buyer.setBname(Username);
+        if(Gender.equals("Male")){
+            buyer.setBgender(1);   // 1 for male and 0 for female
+        } else {
+            buyer.setBgender(0);
+        }
         result.setToken("null");
         try {
             /**
@@ -109,7 +117,6 @@ public class BuyerServiceImpl implements BuyerService {
         buyer_info.put("address",buyer.getBaddress());
         buyer_info.put("gender",String.valueOf(buyer.getBgender()));
         buyer_info.put("vip", String.valueOf(buyer.getBvip()));
-
         return buyer_info;
     }
 

@@ -34,8 +34,8 @@ public class disController {
 //        return s;
 //    }
 
-    @RequestMapping(value = "/getUserInfo")
-    public Map<String, String> getUserInfo() {
-        return buyerService.getInfo("15998998970");
-    }
+//    @RequestMapping(value = "/getUserInfo")
+//    public Map<String, String> getUserInfo() {
+//        return buyerService.getInfo("15998998970");
+//    }
 }

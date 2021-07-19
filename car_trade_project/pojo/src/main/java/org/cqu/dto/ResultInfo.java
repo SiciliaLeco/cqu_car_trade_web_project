@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.HashMap;
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 
 import java.util.Date;
 
@@ -18,8 +20,6 @@ public class ResultInfo<T> implements Serializable {
     private String id;
     private Boolean is_buyer = true;
 
-
-    //todo: implement token function
     public String generate_token(String user_tel){
         Date date = new Date(System.currentTimeMillis() + EXPIRE_DATE); // set expire date
         Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
@@ -33,6 +33,17 @@ public class ResultInfo<T> implements Serializable {
                 .sign(algorithm);
     }
 
+    public static String verifyToken(String token){
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
+            JWTVerifier verifier = JWT.require(algorithm).build();
+            DecodedJWT jwt = verifier.verify(token);
+            String userId = jwt.getClaim("userId").asString();
+            return userId;
+        } catch (Exception e){
+            return null;
+        }
+    }
     public String getId() {return id;}
 
     public void setId(String id) {this.id = id;}

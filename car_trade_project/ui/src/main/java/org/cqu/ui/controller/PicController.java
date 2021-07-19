@@ -21,120 +21,120 @@ import java.io.InputStream;
 @RequestMapping({"/picupload"})
 public class PicController {
 
-    @Reference
-    private PicService picService;
-    @Reference
-    private BuyerService buyerService;
-
-    private final FileUtil fileUtil = new FileUtil();
-
-    @RequestMapping({"/buyer"})
-    public String upload(@RequestParam("local_img") MultipartFile uploadFile) throws IOException {
-//        String path = "/usr/local/lqp/pic/379-1FHQ62519.jpg";
-//        System.out.println("图片路径为：" + path);
+//    @Reference
+//    private PicService picService;
+//    @Reference
+//    private BuyerService buyerService;
+//
+//    private final FileUtil fileUtil = new FileUtil();
+//
+//    @RequestMapping({"/buyer"})
+//    public String upload(@RequestParam("local_img") MultipartFile uploadFile) throws IOException {
+////        String path = "/usr/local/lqp/pic/379-1FHQ62519.jpg";
+////        System.out.println("图片路径为：" + path);
+////        File file = new File(path);
+////        new FileInputStream(file);
+////        String file_name = file.getName();
+////        System.out.println("文件名为：" + file_name);
+////        MultipartFile uploadFile = fileUtil.fileToMultipartFile(file);
+//        System.out.println(uploadFile.getName());
+//        System.out.println(uploadFile.getSize());
+//        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
+//        long fileSize = uploadFile.getSize();
+//        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
+//        String filepath = picService.upload(bytes, fileSize, extension);
+//        String nginx_info = "http://116.63.170.243:8888/";
+//        System.out.println(nginx_info + filepath);
+//        return nginx_info + filepath;
+//    }
+//
+//    @RequestMapping({"/seller1"})
+//    public String uploads1(@RequestParam("local_img1") MultipartFile uploadFile) throws IOException {
+//        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
+//        long fileSize = uploadFile.getSize();
+//        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
+//        System.out.println(uploadFile.getName());
+//        System.out.println(fileSize);
+//        System.out.println(bytes);
+//        System.out.println(extension);
+//        String filepath = picService.upload(bytes, fileSize, extension);
+//        String nginx_info = "http://116.63.170.243:8888/";
+//        System.out.println(nginx_info + filepath);
+//        return nginx_info + filepath;
+//    }
+//    @RequestMapping({"/seller2"})
+//    public String uploads2(@RequestParam("local_img2") MultipartFile uploadFile) throws IOException {
+//        System.out.println(uploadFile.getName());
+//        System.out.println(uploadFile.getSize());
+//        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
+//        long fileSize = uploadFile.getSize();
+//        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
+//        String filepath = picService.upload(bytes, fileSize, extension);
+//        String nginx_info = "http://116.63.170.243:8888/";
+//        System.out.println(nginx_info + filepath);
+//        return nginx_info + filepath;
+//    }
+//    @RequestMapping({"/seller3"})
+//    public String uploads5(@RequestParam("local_img3") MultipartFile uploadFile) throws IOException {
+//        System.out.println(uploadFile.getName());
+//        System.out.println(uploadFile.getSize());
+//        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
+//        long fileSize = uploadFile.getSize();
+//        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
+//        String filepath = picService.upload(bytes, fileSize, extension);
+//        String nginx_info = "http://116.63.170.243:8888/";
+//        System.out.println(nginx_info + filepath);
+//        return nginx_info + filepath;
+//    }
+//    @RequestMapping({"/seller4"})
+//    public String uploads3(@RequestParam("local_img4") MultipartFile uploadFile) throws IOException {
+//        System.out.println(uploadFile.getName());
+//        System.out.println(uploadFile.getSize());
+//        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
+//        long fileSize = uploadFile.getSize();
+//        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
+//        String filepath = picService.upload(bytes, fileSize, extension);
+//        String nginx_info = "http://116.63.170.243:8888/";
+//        System.out.println(nginx_info + filepath);
+//        return nginx_info + filepath;
+//    }
+//    @RequestMapping({"/seller5"})
+//    public String uploads4(@RequestParam("local_img5") MultipartFile uploadFile) throws IOException {
+//        System.out.println(uploadFile.getName());
+//        System.out.println(uploadFile.getSize());
+//        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
+//        long fileSize = uploadFile.getSize();
+//        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
+//        String filepath = picService.upload(bytes, fileSize, extension);
+//        String nginx_info = "http://116.63.170.243:8888/";
+//        System.out.println(nginx_info + filepath);
+//        return nginx_info + filepath;
+//    }
+//    @RequestMapping({"/show1"})
+//    public String show1(@RequestParam("local_img1") MultipartFile uploadFile) throws IOException {
+//        System.out.println(uploadFile.getName());
+//        System.out.println(uploadFile.getSize());
+//        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
+//        long fileSize = uploadFile.getSize();
+//        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
+//        String filepath = picService.upload(bytes, fileSize, extension);
+//        String nginx_info = "http://116.63.170.243:8888/";
+//        System.out.println(nginx_info + filepath);
+//        return nginx_info + filepath;
+//    }
+//    @RequestMapping({"/testmultipart"})
+//    public void testmultipart(String id) throws IOException {
+//        System.out.println("接收到id为：" + id);
+//        String path = "/usr/local/lqp/pic/379-1FHQ62519-50.jpg";
 //        File file = new File(path);
 //        new FileInputStream(file);
 //        String file_name = file.getName();
 //        System.out.println("文件名为：" + file_name);
 //        MultipartFile uploadFile = fileUtil.fileToMultipartFile(file);
-        System.out.println(uploadFile.getName());
-        System.out.println(uploadFile.getSize());
-        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
-        long fileSize = uploadFile.getSize();
-        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
-        String filepath = picService.upload(bytes, fileSize, extension);
-        String nginx_info = "http://116.63.170.243:8888/";
-        System.out.println(nginx_info + filepath);
-        return nginx_info + filepath;
-    }
-
-    @RequestMapping({"/seller1"})
-    public String uploads1(@RequestParam("local_img1") MultipartFile uploadFile) throws IOException {
-        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
-        long fileSize = uploadFile.getSize();
-        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
-        System.out.println(uploadFile.getName());
-        System.out.println(fileSize);
-        System.out.println(bytes);
-        System.out.println(extension);
-        String filepath = picService.upload(bytes, fileSize, extension);
-        String nginx_info = "http://116.63.170.243:8888/";
-        System.out.println(nginx_info + filepath);
-        return nginx_info + filepath;
-    }
-    @RequestMapping({"/seller2"})
-    public String uploads2(@RequestParam("local_img2") MultipartFile uploadFile) throws IOException {
-        System.out.println(uploadFile.getName());
-        System.out.println(uploadFile.getSize());
-        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
-        long fileSize = uploadFile.getSize();
-        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
-        String filepath = picService.upload(bytes, fileSize, extension);
-        String nginx_info = "http://116.63.170.243:8888/";
-        System.out.println(nginx_info + filepath);
-        return nginx_info + filepath;
-    }
-    @RequestMapping({"/seller3"})
-    public String uploads5(@RequestParam("local_img3") MultipartFile uploadFile) throws IOException {
-        System.out.println(uploadFile.getName());
-        System.out.println(uploadFile.getSize());
-        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
-        long fileSize = uploadFile.getSize();
-        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
-        String filepath = picService.upload(bytes, fileSize, extension);
-        String nginx_info = "http://116.63.170.243:8888/";
-        System.out.println(nginx_info + filepath);
-        return nginx_info + filepath;
-    }
-    @RequestMapping({"/seller4"})
-    public String uploads3(@RequestParam("local_img4") MultipartFile uploadFile) throws IOException {
-        System.out.println(uploadFile.getName());
-        System.out.println(uploadFile.getSize());
-        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
-        long fileSize = uploadFile.getSize();
-        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
-        String filepath = picService.upload(bytes, fileSize, extension);
-        String nginx_info = "http://116.63.170.243:8888/";
-        System.out.println(nginx_info + filepath);
-        return nginx_info + filepath;
-    }
-    @RequestMapping({"/seller5"})
-    public String uploads4(@RequestParam("local_img5") MultipartFile uploadFile) throws IOException {
-        System.out.println(uploadFile.getName());
-        System.out.println(uploadFile.getSize());
-        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
-        long fileSize = uploadFile.getSize();
-        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
-        String filepath = picService.upload(bytes, fileSize, extension);
-        String nginx_info = "http://116.63.170.243:8888/";
-        System.out.println(nginx_info + filepath);
-        return nginx_info + filepath;
-    }
-    @RequestMapping({"/show1"})
-    public String show1(@RequestParam("local_img1") MultipartFile uploadFile) throws IOException {
-        System.out.println(uploadFile.getName());
-        System.out.println(uploadFile.getSize());
-        byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
-        long fileSize = uploadFile.getSize();
-        String extension = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
-        String filepath = picService.upload(bytes, fileSize, extension);
-        String nginx_info = "http://116.63.170.243:8888/";
-        System.out.println(nginx_info + filepath);
-        return nginx_info + filepath;
-    }
-    @RequestMapping({"/testmultipart"})
-    public void testmultipart(String id) throws IOException {
-        System.out.println("接收到id为：" + id);
-        String path = "/usr/local/lqp/pic/379-1FHQ62519-50.jpg";
-        File file = new File(path);
-        new FileInputStream(file);
-        String file_name = file.getName();
-        System.out.println("文件名为：" + file_name);
-        MultipartFile uploadFile = fileUtil.fileToMultipartFile(file);
-        long size = uploadFile.getSize();
-        InputStream is = uploadFile.getInputStream();
-        System.out.println(is.available());
-        System.out.println("文件大小为：" + size + "Bytes");
-    }
+//        long size = uploadFile.getSize();
+//        InputStream is = uploadFile.getInputStream();
+//        System.out.println(is.available());
+//        System.out.println("文件大小为：" + size + "Bytes");
+//    }
 
 }

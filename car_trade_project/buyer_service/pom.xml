@@ -17,7 +17,6 @@
     </properties>
 
     <dependencies>
-        <!--  local   -->
         <dependency>
             <groupId>org.cqu</groupId>
             <artifactId>pojo</artifactId>
