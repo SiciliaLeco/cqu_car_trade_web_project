@@ -12,5 +12,5 @@ public interface BuyerService {
     ResultInfo<Buyer> login(String btel, String bpassword);
     ResultInfo<Buyer> register(Buyer buyer);
     ResultInfo<Buyer> update(String btel, String baddress, String bname);
-    String getInfo(String btel);
+    Map<String, String> getInfo(String btel);
 }
