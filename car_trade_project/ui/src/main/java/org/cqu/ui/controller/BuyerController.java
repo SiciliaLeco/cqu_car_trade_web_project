@@ -45,7 +45,7 @@ public class BuyerController {
         buyer.setBtel(Tel);
         buyer.setBaddress(Address);
         buyer.setBname(Username);
-        if(Gender == "Male"){
+        if(Gender.equals("Male")){
             buyer.setBgender(1);   // 1 for male and 0 for female
         } else {
             buyer.setBgender(0);
@@ -59,7 +59,7 @@ public class BuyerController {
     }
 
     @PostMapping(value = "/getUserInfo")
-    public String getUserInfo() {
+    public Map<String, String> getUserInfo() {
         return buyerService.getInfo("15998998970");
     }
 }

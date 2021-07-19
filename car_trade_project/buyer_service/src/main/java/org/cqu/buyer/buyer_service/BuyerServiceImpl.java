@@ -101,7 +101,7 @@ public class BuyerServiceImpl implements BuyerService {
     }
 
     @Override
-    public String getInfo(String btel){
+    public Map<String, String> getInfo(String btel){
         Map<String, String> buyer_info = new HashMap<String, String>();
         Buyer buyer = buyerMapper.selectByPrimaryKey(btel);
         buyer_info.put("tel", buyer.getBtel());
@@ -110,9 +110,16 @@ public class BuyerServiceImpl implements BuyerService {
         buyer_info.put("gender",String.valueOf(buyer.getBgender()));
         buyer_info.put("vip", String.valueOf(buyer.getBvip()));
 
-        return buyer_info.toString();
+        return buyer_info;
     }
 
 
+
+    @Override
+    public void updateIcon(String btel, String pic_url) {
+        Buyer userExist = buyerMapper.selectByPrimaryKey(btel);
+        userExist.setBicon(pic_url);
+        buyerMapper.updateByPrimaryKey(userExist);
+    }
 
 }
