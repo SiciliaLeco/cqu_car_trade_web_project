@@ -85,9 +85,15 @@
 		$(document).ready(function() {
 			if($.cookie('Token') && $.cookie('UserID')){ // 已经登录了
 				$("#LoginAndCenter").empty();
-				$("#LoginAndCenter").html("<a href=\"buyer_user_center.html\">\n" +
+				if($.cookie('isBuyer') === "true"){
+					$("#LoginAndCenter").html("<a href=\"buyer_user_center.html\">\n" +
 						"\t\t\t\t\t\t\t\t<i class=\"icofont icofont-ui-user\"></i>\n" +
 						"\t\t\t\t\t\t\t</a>");
+				} else {
+					$("#LoginAndCenter").html("<a href=\"seller_user_center.html\">\n" +
+							"\t\t\t\t\t\t\t\t<i class=\"icofont icofont-ui-user\"></i>\n" +
+							"\t\t\t\t\t\t\t</a>");
+				}
 			}
 		})
 
