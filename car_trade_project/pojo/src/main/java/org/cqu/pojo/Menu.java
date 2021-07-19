@@ -1,8 +1,9 @@
 package org.cqu.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Menu {
+public class Menu implements Serializable {
     private Integer oid;
 
     private String stel;

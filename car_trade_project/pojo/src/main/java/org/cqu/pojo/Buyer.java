@@ -1,6 +1,8 @@
 package org.cqu.pojo;
 
-public class Buyer {
+import java.io.Serializable;
+
+public class Buyer implements Serializable {
     private String btel;
 
     private Integer bid;

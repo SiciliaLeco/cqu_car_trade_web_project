@@ -1,5 +1,6 @@
 package org.cqu.dto;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.HashMap;
 import com.auth0.jwt.JWT;
@@ -7,7 +8,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 
 import java.util.Date;
 
-public class ResultInfo<T> {
+public class ResultInfo<T> implements Serializable {
     private String msg;
     private Boolean success = false;
     private T detail = null;

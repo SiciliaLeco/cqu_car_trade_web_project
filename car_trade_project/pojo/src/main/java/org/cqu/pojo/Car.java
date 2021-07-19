@@ -1,6 +1,8 @@
 package org.cqu.pojo;
 
-public class Car {
+import java.io.Serializable;
+
+public class Car implements Serializable {
     private Integer cid;
 
     private String cname;

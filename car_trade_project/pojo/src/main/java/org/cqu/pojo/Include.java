@@ -1,7 +1,9 @@
 package org.cqu.pojo;
 
 
-public class Include extends IncludeKey {
+import java.io.Serializable;
+
+public class Include extends IncludeKey implements Serializable {
     private Integer mcount;
 
     public Integer getMcount() {

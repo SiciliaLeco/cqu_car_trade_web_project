@@ -90,7 +90,7 @@ public class BuyerServiceImpl implements BuyerService {
         Buyer userExist = buyerMapper.selectByPrimaryKey(btel);
         userExist.setBaddress(baddress);
         userExist.setBname(bname);
-        buyerMapper.updateByExampleSelective(userExist);
+        buyerMapper.updateByPrimaryKey(userExist);
         result.setMsg("update succeed!");
         result.setSuccess(true);
         return result;
