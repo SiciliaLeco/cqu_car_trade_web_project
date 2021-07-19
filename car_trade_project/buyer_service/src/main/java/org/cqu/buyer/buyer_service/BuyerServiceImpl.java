@@ -7,6 +7,11 @@ import org.cqu.mapper.BuyerMapper;
 import org.cqu.pojo.Buyer;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 @Service
 public class BuyerServiceImpl implements BuyerService {
     @Autowired
@@ -94,6 +99,20 @@ public class BuyerServiceImpl implements BuyerService {
         result.setSuccess(true);
         return result;
     }
+
+    @Override
+    public String getInfo(String btel){
+        Map<String, String> buyer_info = new HashMap<String, String>();
+        Buyer buyer = buyerMapper.selectByPrimaryKey(btel);
+        buyer_info.put("tel", buyer.getBtel());
+        buyer_info.put("name", buyer.getBname());
+        buyer_info.put("address",buyer.getBaddress());
+        buyer_info.put("gender",String.valueOf(buyer.getBgender()));
+        buyer_info.put("vip", String.valueOf(buyer.getBvip()));
+
+        return buyer_info.toString();
+    }
+
 
 
 }

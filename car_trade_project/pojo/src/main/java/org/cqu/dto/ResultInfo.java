@@ -16,13 +16,8 @@ public class ResultInfo<T> implements Serializable {
     private static final long EXPIRE_DATE=30*60*100000; // 3000分钟以后过期
     private static final String TOKEN_SECRET = "tanghuoguo";
     private String id;
-//    @Override
-//    public String toString() {
-//        return "ResultInfo{" +
-//                "msg='" + msg + '\'' +
-//                ", success=" + success +
-//                "}";
-//    }
+    private Boolean is_buyer = true;
+
 
     //todo: implement token function
     public String generate_token(String user_tel){
@@ -60,6 +55,14 @@ public class ResultInfo<T> implements Serializable {
 
     public void setSuccess(Boolean success) {
         this.success = success;
+    }
+
+    public Boolean getIs_buyer() {
+        return success;
+    }
+
+    public void setIs_buyer(Boolean success) {
+        this.is_buyer = success;
     }
 
     public T getDetail() {

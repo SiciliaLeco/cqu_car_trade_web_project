@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/BuyerAPI")
 public class BuyerController {
@@ -54,5 +56,10 @@ public class BuyerController {
     @PostMapping(value = "/updateUserInfo")
     public ResultInfo<Buyer> updateUserInfo(String btel, String baddress, String bname) {
         return buyerService.update(btel, baddress, bname);
+    }
+
+    @PostMapping(value = "/getUserInfo")
+    public String getUserInfo() {
+        return buyerService.getInfo("15998998970");
     }
 }

@@ -42,6 +42,8 @@
         <module>mappers</module>
         <module>buyer_api</module>
         <module>buyer_service</module>
+        <module>seller_api</module>
+        <module>seller_service</module>
     </modules>
 
     <!--声明全局依赖（子项目需要显示的引用才会继承依赖）-->
