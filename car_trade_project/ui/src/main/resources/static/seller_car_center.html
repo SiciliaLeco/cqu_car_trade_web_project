@@ -184,13 +184,13 @@
 						<div class="row" id="single_car_app">
 							<!--<div class="col-md-4" v-for="price in prices">-->
 							<div class="col-md-12">
-								<h5><em>LAST UPLOAD</em></h5>
+								<h4><em>ALL CARS</em></h4>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-4" v-for="car in cars">
 								<div class="car-item">
 									<div class="thumb-content">
 										<div class="car-banner">
-												<a href="single_car.html"><span id="price"> 36000$ </span></a>
+												<a href="single_car.html"><span id="price"> {{ car.price }} </span></a>
 										</div>
 										<div class="thumb-inner">
 											<a href="single_car.html"><img id="showimg" src="assets/images/car_item_1.jpg" alt=""></a>
@@ -214,255 +214,16 @@
 								const single_car_app = {
 									data() {
 										return {
-											prices: [
-												{text: "36000$"},
-												{text: "54600$"},
-												{text: "45100$"},
-												{text: "47800$"}
+											cars: [
+												{price: "36000$"},
+												{price: "54600$"},
+												{price: "45100$"},
+												{price: "47800$"}
 											]
 										}
 									}
 								}
 								Vue.createApp(single_car_app).mount("#single_car_app")
-							</script>
-								<!--	null	-->
-								<div class="col-md-12"></div>
-
-								<div class="col-md-12">
-									<h5><em>UPLOAD YOUR CAR</em></h5>
-								</div>
-
-							<div class="col-md-4">
-								<img id="tar_img1" src="assets/images/car_item_1.jpg">
-							</div>
-							<!--<br></br>-->
-							<form id="uploadForm1" method="post" enctype="multipart/form-data">
-								<input type="file" id="local_img1" name="local_img1" multiple class="attachment-upload">
-								<button class="col-md-7 btn" onclick="uploadfile1()">Upload Icon</button>
-							</form>
-							<script>
-								function uploadfile1() {
-									let file = document.getElementById('local_img1').files[0];
-
-									let formData = new FormData();
-									formData.append("local_img1",file,file.name);
-
-									const config = {
-										headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
-									};
-
-									axios
-											.post("http://116.63.170.243:8001/picupload/seller1",formData,config)
-											.then(function (response) {
-												console.log(response);
-												document.getElementById("tar_img1").setAttribute("src",response['data']);
-											})
-											.catch(function (error) {
-												console.log(error);
-											});
-								}
-							</script>
-								<div class="col-md-4">
-									<img id="tar_img2" src="assets/images/car_item_1.jpg">
-								</div>
-							<form id="uploadForm2" method="post" enctype="multipart/form-data">
-								<input type="file" id="local_img2" name="local_img2" multiple class="attachment-upload">
-								<button class="col-md-7 btn" onclick="uploadfile2()">Upload Icon</button>
-							</form>
-							<script>
-								function uploadfile2() {
-									let file = document.getElementById('local_img2').files[0];
-
-									let formData = new FormData();
-									formData.append("local_img2",file,file.name);
-
-									const config = {
-										headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
-									};
-
-									axios
-											.post("http://116.63.170.243:8001/picupload/seller2",formData,config)
-											.then(function (response) {
-												console.log(response);
-												document.getElementById("tar_img2").setAttribute("src",response['data']);
-											})
-											.catch(function (error) {
-												console.log(error);
-											});
-								}
-							</script>
-								<div class="col-md-4">
-									<img id="tar_img3" src="assets/images/car_item_1.jpg">
-								</div>
-							<form id="uploadForm3" method="post" enctype="multipart/form-data">
-								<input type="file" id="local_img3" name="local_img3" multiple class="attachment-upload">
-								<button class="col-md-7 btn" onclick="uploadfile3()">Upload Icon</button>
-							</form>
-							<script>
-								function uploadfile3() {
-									let file = document.getElementById('local_img3').files[0];
-
-									let formData = new FormData();
-									formData.append("local_img3",file,file.name);
-
-									const config = {
-										headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
-									};
-
-									axios
-											.post("http://116.63.170.243:8001/picupload/seller3",formData,config)
-											.then(function (response) {
-												console.log(response);
-												document.getElementById("tar_img3").setAttribute("src",response['data']);
-											})
-											.catch(function (error) {
-												console.log(error);
-											});
-								}
-							</script>
-								<div class="col-md-4">
-									<img id="tar_img4" src="assets/images/car_item_1.jpg">
-								</div>
-							<form id="uploadForm4" method="post" enctype="multipart/form-data">
-								<input type="file" id="local_img4" name="local_img4" multiple class="attachment-upload">
-								<button class="col-md-7 btn" onclick="uploadfile4()">Upload Icon</button>
-							</form>
-							<script>
-								function uploadfile4() {
-									let file = document.getElementById('local_img4').files[0];
-
-									let formData = new FormData();
-									formData.append("local_img4",file,file.name);
-
-									const config = {
-										headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
-									};
-
-									axios
-											.post("http://116.63.170.243:8001/picupload/seller4",formData,config)
-											.then(function (response) {
-												console.log(response);
-												document.getElementById("tar_img4").setAttribute("src",response['data']);
-											})
-											.catch(function (error) {
-												console.log(error);
-											});
-								}
-							</script>
-								<div class="col-md-4">
-									<img id="tar_img5" src="assets/images/car_item_1.jpg">
-								</div>
-							<form id="uploadForm5" method="post" enctype="multipart/form-data">
-								<input type="file" id="local_img5" name="local_img5" multiple class="attachment-upload">
-								<button class="col-md-7 btn" onclick="uploadfile5()">Upload Icon</button>
-							</form>
-							<script>
-								function uploadfile5() {
-									let file = document.getElementById('local_img5').files[0];
-
-									let formData = new FormData();
-									formData.append("local_img5",file,file.name);
-
-									const config = {
-										headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
-									};
-
-									axios
-											.post("http://116.63.170.243:8001/picupload/seller5",formData,config)
-											.then(function (response) {
-												console.log(response);
-												document.getElementById("tar_img5").setAttribute("src",response['data']);
-											})
-											.catch(function (error) {
-												console.log(error);
-											});
-								}
-							</script>
-								<!--	null	-->
-								<div class="col-md-12"><br></br></div>
-
-							<form class="col-md-12 car-item" style="width:100%;">
-								<div class="form-group col-md-4" style="width:33%;float:left;">
-									<label>Carname</label>
-									<input id="input_carname" type="text" class="form-control" v-model="">
-								</div>
-								<div class="form-group col-md-4" style="width:33%;float:left;">
-									<label>Price</label>
-									<input id="input_price" type="text" class="form-control" v-model="">
-								</div>
-								<div class="form-group col-md-4" style="width:33%;float:left;">
-									<label>Speed</label>
-									<input id="input_speed" type="text" class="form-control" v-model="">
-								</div>
-								<div class="form-group col-md-4" style="width:33%;float:left;">
-									<label>Fuel</label>
-									<input id="input_fuel" type="text" class="form-control" v-model="">
-								</div>
-								<div class="form-group col-md-4" style="width:33%;float:left;">
-									<label>Type</label>
-									<input id="input_type" type="text" class="form-control" v-model="">
-								</div>
-								<div class="form-group col-md-4" style="width:33%;float:left;">
-									<label>Gear</label>
-									<input class="form-control" v-model="">
-								</div>
-								<div class="form-group col-md-4" style="width:33%;float:left;">
-									<label>Warranty</label>
-									<input id="input_warranty" type="text" class="form-control" v-model="">
-								</div>
-								<div class="form-group col-md-4" style="width:33%;float:left;">
-									<label>Tank Capacity</label>
-									<input class="form-control" v-model="">
-								</div>
-								<div class="form-group col-md-4" style="width:33%;float:left;">
-									<label>Road</label>
-									<input id="input_road" type="text" class="form-control" v-model="">
-								</div>
-							</form>
-							<form id="show" method="post" enctype="multipart/form-data">
-								<div class="col-md-12">
-									<button class="btn" onclick="showinfom()">Upload Car</button>
-								</div>
-							</form>
-							<script>
-								function showinfom() {
-									var old_price = document.getElementById("price");
-									var new_price = document.getElementById("input_price").value;
-									old_price.innerHTML=new_price;
-									var old_carname = document.getElementById("carname");
-									var new_carname = document.getElementById("input_carname").value;
-									old_carname.innerHTML=new_carname;
-									var old_calendar = document.getElementById("calendar");
-									var new_warranty = document.getElementById("input_warranty").value;
-									old_calendar.innerHTML=new_warranty;
-									var old_speed = document.getElementById("speed");
-									var new_speed = document.getElementById("input_speed").value;
-									old_speed.innerHTML=new_speed;
-									var old_road = document.getElementById("road");
-									var new_road = document.getElementById("input_road").value;
-									old_road.innerHTML=new_road;
-									var old_fuel = document.getElementById("fuel");
-									var new_fuel = document.getElementById("input_fuel").value;
-									old_fuel.innerHTML=new_fuel;
-									let file = document.getElementById('local_img1').files[0];
-
-									let formData = new FormData();
-									formData.append("local_img1",file,file.name);
-
-									const config = {
-										headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
-									};
-
-									axios
-											.post("http://116.63.170.243:8001/picupload/show1",formData,config)
-											.then(function (response) {
-												console.log(response);
-												document.getElementById("showimg").setAttribute("src",response['data']);
-											})
-											.catch(function (error) {
-												console.log(error);
-											});
-								}
 							</script>
 						</div>
 					</div>
