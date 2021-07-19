@@ -3177,3 +3177,9 @@ a,
     margin-left: 50px;
     border-radius: 5px;
 }
+
+.testimonials .section-heading {
+    margin-top: 40px;
+    margin-bottom: 0px;
+    text-align: center;
+}
