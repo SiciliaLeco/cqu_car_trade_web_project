@@ -14,14 +14,14 @@ public class ResultInfo<T> {
     private String token = "null";
     private static final long EXPIRE_DATE=30*60*100000; // 3000分钟以后过期
     private static final String TOKEN_SECRET = "tanghuoguo";
-
-    @Override
-    public String toString() {
-        return "ResultInfo{" +
-                "msg='" + msg + '\'' +
-                ", success=" + success +
-                "}";
-    }
+    private String id;
+//    @Override
+//    public String toString() {
+//        return "ResultInfo{" +
+//                "msg='" + msg + '\'' +
+//                ", success=" + success +
+//                "}";
+//    }
 
     //todo: implement token function
     public String generate_token(String user_tel){
@@ -36,6 +36,10 @@ public class ResultInfo<T> {
                 .withExpiresAt(date)
                 .sign(algorithm);
     }
+
+    public String getId() {return id;}
+
+    public void setId(String id) {this.id = id;}
 
     public String getToken(){return token;}
 
