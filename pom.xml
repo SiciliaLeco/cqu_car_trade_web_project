@@ -17,6 +17,7 @@
         <module>ui</module>
         <module>picture-update</module>
         <module>Login</module>
+        <module>login_api</module>
     </modules>
 
     <name>car_trade</name>

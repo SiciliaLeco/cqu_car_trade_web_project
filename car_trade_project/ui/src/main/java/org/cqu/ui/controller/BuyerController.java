@@ -3,7 +3,9 @@ package org.cqu.ui.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.cqu.backend_result.ResultBean;
 import org.cqu.buyer_api.BuyerService;
+import org.cqu.dto.ResultInfo;
 import org.cqu.pojo.Buyer;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,5 +28,32 @@ public class BuyerController {
     @RequestMapping("/GetBuyer/")
     public Buyer getBuyer(String Btel){
         return buyerService.findBuyerByTel(Btel);
+    }
+    @PostMapping(value = "/login")
+    public ResultInfo<Buyer> login(String Username, String Password) {
+        Buyer buyer = new Buyer();
+        buyer.setBtel(Username);
+        buyer.setBpassword(Password);
+        return buyerService.login(buyer);
+    }
+
+    @PostMapping(value =  "/regist")
+    public ResultInfo<Buyer> regist(String Username, String Gender, String Address, String Tel, String Password) {
+        Buyer buyer = new Buyer();
+        buyer.setBpassword(Password);
+        buyer.setBtel(Tel);
+        buyer.setBaddress(Address);
+        buyer.setBname(Username);
+        if(Gender == "Male"){
+            buyer.setBgender(1);   // 1 for male and 0 for female
+        } else {
+            buyer.setBgender(0);
+        }
+        return buyerService.register(buyer);
+    }
+
+    @PostMapping(value = "/updateUserInfo")
+    public ResultInfo<Buyer> updateUserInfo(String btel, String baddress, String bname) {
+        return buyerService.update(btel, baddress, bname);
     }
 }
