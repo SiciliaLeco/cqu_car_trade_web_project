@@ -232,7 +232,16 @@
 																	 .post('/login_register-buyer/login',
 																			 data,
 																			 {headers: { 'Content-Type': "multipart/form-data"  }})
-																	 .then(response => (alert(response.data)))
+																	 .then(function (res) {
+																	 	if(res.data.code === 1) {
+																			alert("LOGIN SUCCESS!")
+																			window.location.herf="/index";
+																		}
+																	 	else {
+																	 		alert("FAILED!")
+																		}
+
+																	 })
 																	 .catch(function (error) { // 请求失败处理,error后端返回
 																		 console.log(error);
 																		 alert(error);
@@ -324,7 +333,16 @@
 																					 headers: { 'Content-Type': "multipart/form-data"  }
 																				 }
 																		 )
-																		 .then(response => (alert(response.data)))
+																		 .then(function (res) {
+																			 if(res.data.code === 1) {
+																				 alert("REGISTER SUCCESS!\nPLEASE LOGIN!")
+																				 window.location.herf="/login_register-buyer";
+																			 }
+																			 else {
+																				 alert("FAILED!")
+																			 }
+
+																		 })
 																		 .catch(function (error) { // 请求失败处理
 																			 console.log(error);
 																			 alert("error")

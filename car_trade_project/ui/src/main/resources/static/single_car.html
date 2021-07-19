@@ -185,53 +185,83 @@
 							<div class="sp-slides">
 
 								<div class="sp-slide" id="single_car_1">
-									<img class="sp-image" v-bind:src="message" alt="" />
+									<img  class="sp-image" v-bind:src="car_slide_1" alt="" />
 								</div>
 								<h5>haha</h5>
 								<script>
 									const app = {
 										data() {
 											return {
-												message: ""
+												//是否添加car_thumb
+												car_slide_1:"/assets/images/car_slide_1.jpg",
+												car_slide_2:"/assets/images/car_slide_2.jpg",
+												car_slide_3:"/assets/images/car_slide_3.jpg",
+												car_slide_4:"/assets/images/car_slide_4.jpg",
+												car_slide_5:"/assets/images/car_slide_5.jpg"
 											}
 										},
+
                                         mounted() {
+											let data = new FormData;
+											data.append("car_slide_1",this.car_slide_1);
+											data.append("car_slide_2",this.car_slide_2);
+											data.append("car_slide_3",this.car_slide_3);
+											data.append("car_slide_4",this.car_slide_4);
+											data.append("car_slide_5",this.car_slide_5);
+
+											//获取页面url
+											var sHref = window.location.href;
+											var args = sHref.split('?');
+											if(args[0]===sHref){
+												return "";
+											}
+
+											var arr = args[1].split("&");
+											var obj = {};
+											for(var i=0;i<arr.length;i++){
+												var arg = arr[i].split('=');
+												obj[arg[0]] = arg[1];
+											}
+
+											let temp_id=obj[id];
 										    axios
-                                                .get("http://127.0.0.1:8999")
-												.then(response => (this.message = response))
+                                                .get("http://127.0.0.1:8999?id="+temp_id)
+												.then(response => (
+														this.data = response.data
+												))
 												.catch(function (error) {
 										    		console.log(error);
 											});
                                         }
 									}
-									Vue.createApp(app).mount("#single_car_1")
+									Vue.createApp(app).mount("single_car")
 								</script>
 
-
 						        <div class="sp-slide">
-						        	<img class="sp-image" src="assets/images/car_slide_2.jpg" alt="" />
+						        	<img class="sp-image" v-bind:src="car_slide_2" alt="" />
 								</div>
 
 								<div class="sp-slide">
-									<img class="sp-image" src="assets/images/car_slide_3.jpg" alt="" />
+									<img class="sp-image" v-bind:src="car_slide_3" alt="" />
 								</div>
 
 								<div class="sp-slide">
-									<img class="sp-image" src="assets/images/car_slide_4.jpg" alt="" />
+									<img class="sp-image" v-bind:src="car_slide_4" alt="" />
 								</div>
 
 								<div class="sp-slide">
-									<img class="sp-image" src="assets/images/car_slide_5.jpg" alt="" />
+									<img class="sp-image" v-bind:src="car_slide_5" alt="" />
 								</div>
 
 							</div>
 
 							<div class="sp-thumbnails">
-								<img class="sp-thumbnail" src="assets/images/car_thumb_1.jpg" alt="" />
-								<img class="sp-thumbnail" src="assets/images/car_thumb_2.jpg" alt="" />
-								<img class="sp-thumbnail" src="assets/images/car_thumb_3.jpg" alt="" />
-								<img class="sp-thumbnail" src="assets/images/car_thumb_4.jpg" alt="" />
-								<img class="sp-thumbnail" src="assets/images/car_thumb_5.jpg" alt="" />
+<!--									5张缩小的图片，是前端处理还是后端也传回小图片地址呢???-->
+								<img class="sp-thumbnail" v-bind:src="car_thumb_1" alt="" />
+								<img class="sp-thumbnail" v-bind:src="car_thumb_2" alt="" />
+								<img class="sp-thumbnail" v-bind:src="car_thumb_3" alt="" />
+								<img class="sp-thumbnail" v-bind:src="car_thumb_4" alt="" />
+								<img class="sp-thumbnail" v-bind:src="car_thumb_5" alt="" />
 							</div>
 					    </div>
 					</div>
@@ -582,6 +612,9 @@
 	<!-- Custom Js -->
     <script src="assets/js/custom.js"></script>
 
+	<script>
+		console.alert(document.parentElement);
+	</script>
 
 
 <!--	<script src="assets/js/require.js"></script>-->
