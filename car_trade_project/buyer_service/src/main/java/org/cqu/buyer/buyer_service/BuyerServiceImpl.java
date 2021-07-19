@@ -28,10 +28,9 @@ public class BuyerServiceImpl implements BuyerService {
     }
 
     @Override
-    public ResultInfo<Buyer> login(Buyer buyer) {
+    public ResultInfo<Buyer> login(String btel, String bpassword) {
         String token = "";
-        String btel = buyer.getBtel();
-        String bpassword = buyer.getBpassword();
+        System.out.println(btel + " " + bpassword);
         try {
             Buyer userExist = buyerMapper.selectByPrimaryKey(btel);
 //            Buyer userExist = buyerMapper.seller_login(buyer);
@@ -45,7 +44,7 @@ public class BuyerServiceImpl implements BuyerService {
                 result.setId(btel);
 //                buyer.setSTel(buyer.getSTel());
                 result.setSuccess(true);
-                token = result.generate_token(buyer.getBtel());
+                token = result.generate_token(btel);
                 result.setToken(token);
             } else {
                 result.setMsg("password wrong! Please retry!");

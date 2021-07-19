@@ -58,6 +58,40 @@
 	<script src="assets/libs/respond.js/1.3.0/respond.min.js"></script>
 	<![endif]-->
 
+	<!-- 使用cookie插件需要先引入jquery 且jquery只能在这里引用 不能二次引用-->
+	<script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+	<!-- Slider Pro Js -->
+	<script src="assets/js/sliderpro.min.js"></script>
+
+	<!-- Slick Slider Js -->
+	<script src="assets/js/slick.js"></script>
+
+	<!-- Owl Carousel Js -->
+	<script src="assets/js/owl.carousel.min.js"></script>
+
+	<!-- Boostrap Js -->
+	<script src="assets/js/bootstrap.min.js"></script>
+
+	<!-- Boostrap Js -->
+	<script src="assets/js/wow.animation.js"></script>
+
+	<!-- Custom Js -->
+	<script src="assets/js/custom.js"></script>
+
+	<script>
+		<!--	jquery code	-->
+		$(document).ready(function() {
+			if($.cookie('Token') && $.cookie('UserID')){ // 已经登录了
+				$("#LoginAndCenter").empty();
+				$("#LoginAndCenter").html("<a href=\"buyer_user_center.html\">\n" +
+						"\t\t\t\t\t\t\t\t<i class=\"icofont icofont-ui-user\"></i>\n" +
+						"\t\t\t\t\t\t\t</a>");
+			}
+		})
+
+	</script>
 </head>
 <body>
 	
@@ -125,7 +159,10 @@
 					   <li>
 					   		<a href="#search"><i class="fa fa-search"></i></a>
 					   </li>
-						<li><a href="buyer_user_center.html"><i class="icofont icofont-ui-user"></i></a>
+						<li id="LoginAndCenter">
+							<a href="buyer_user_center.html">
+								<i class="icofont icofont-ui-user"></i>
+							</a>
 							<div class="addtocart-dropdown">
 								<img src="assets/images/cart-angle.png" alt="cart">
 								<div class="total-price d-flex justify-content-between">
@@ -903,25 +940,7 @@
 	</footer>
 	
 
-	<script src="assets/js/jquery-1.11.0.min.js"></script>
 
-	<!-- Slider Pro Js -->
-	<script src="assets/js/sliderpro.min.js"></script>
-
-	<!-- Slick Slider Js -->
-	<script src="assets/js/slick.js"></script>
-
-	<!-- Owl Carousel Js -->
-    <script src="assets/js/owl.carousel.min.js"></script>
-
-	<!-- Boostrap Js -->
-    <script src="assets/js/bootstrap.min.js"></script>
-
-    <!-- Boostrap Js -->
-    <script src="assets/js/wow.animation.js"></script>
-
-	<!-- Custom Js -->
-    <script src="assets/js/custom.js"></script>
 
 
 </body>

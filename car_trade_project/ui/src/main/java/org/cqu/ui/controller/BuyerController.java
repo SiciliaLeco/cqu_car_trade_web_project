@@ -31,10 +31,9 @@ public class BuyerController {
     }
     @PostMapping(value = "/login")
     public ResultInfo<Buyer> login(String Username, String Password) {
-        Buyer buyer = new Buyer();
-        buyer.setBtel(Username);
-        buyer.setBpassword(Password);
-        return buyerService.login(buyer);
+        System.out.println("LOGIN ON BUYER TEL " + Username);
+        System.out.println("LOGIN ON BUYER PASSWORD " + Password);
+        return buyerService.login(Username, Password);
     }
 
     @PostMapping(value =  "/regist")
