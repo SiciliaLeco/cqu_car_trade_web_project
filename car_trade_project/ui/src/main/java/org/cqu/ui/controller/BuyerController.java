@@ -14,43 +14,44 @@ import java.util.Map;
 @RestController
 @RequestMapping("/BuyerAPI")
 public class BuyerController {
-//    @Reference
-//    private BuyerService buyerService;
-//
-//    @RequestMapping("/GetBuyerName/")
-//    public String getBuyerName(String Btel){
-//        return buyerService.getBuyerName(Btel);
-//    }
-//
-//    @RequestMapping("/nGetBuyer/")
-//    public ResultBean<String> nGetBuyer(String Btel){
-//        return new ResultBean<String>(buyerService.getBuyerName(Btel));
-//    }
-//
-//    @RequestMapping("/GetBuyer/")
-//    public Buyer getBuyer(String Btel){
-//        return buyerService.findBuyerByTel(Btel);
-//    }
-//    @PostMapping(value = "/login")
-//    public ResultInfo<Buyer> login(String Username, String Password) {
-//        System.out.println("LOGIN ON BUYER TEL " + Username);
-//        System.out.println("LOGIN ON BUYER PASSWORD " + Password);
-//        return buyerService.login(Username, Password);
-//    }
-//
-//    @PostMapping(value =  "/regist")
-//    public ResultInfo<Buyer> regist(String Username, String Gender, String Address, String Tel, String Password) {
-//        return buyerService.register(Username, Gender, Address, Tel, Password);
-//    }
-//
-//    @PostMapping(value = "/updateUserInfo")
-//    public ResultInfo<Buyer> updateUserInfo(String btel, String baddress, String bname) {
-//        return buyerService.update(btel, baddress, bname);
-//    }
-//
-//
-//    @RequestMapping(value = "/getUserInfo")
-//    public Map<String, String> getUserInfo() {
-//        return buyerService.getInfo("15998998970");
-//    }
+    @Reference
+    private BuyerService buyerService;
+
+    @RequestMapping("/GetBuyerName/")
+    public String getBuyerName(String Btel){
+        return buyerService.getBuyerName(Btel);
+    }
+
+    @RequestMapping("/nGetBuyer/")
+    public ResultBean<String> nGetBuyer(String Btel){
+        return new ResultBean<String>(buyerService.getBuyerName(Btel));
+    }
+
+    @RequestMapping("/GetBuyer/")
+    public Buyer getBuyer(String Btel){
+        return buyerService.findBuyerByTel(Btel);
+    }
+    @PostMapping(value = "/login")
+    public ResultInfo<Buyer> login(String Username, String Password) {
+        System.out.println("LOGIN ON BUYER TEL " + Username);
+        System.out.println("LOGIN ON BUYER PASSWORD " + Password);
+        return buyerService.login(Username, Password);
+    }
+
+    @PostMapping(value =  "/regist")
+    public ResultInfo<Buyer> regist(String Username, String Gender, String Address, String Tel, String Password) {
+        return buyerService.register(Username, Gender, Address, Tel, Password);
+    }
+
+    @PostMapping(value = "/updateUserInfo")
+    //todo: resolve the reference to buyer_user_center.html
+    public ResultInfo<Buyer> updateUserInfo(String Username, String Address, String Gender) {
+        return buyerService.update(Username, Address, Gender);
+    }
+
+
+    @RequestMapping(value = "/getUserInfo")
+    public Map<String, String> getUserInfo() {
+        return buyerService.getInfo("15998998970");
+    }
 }

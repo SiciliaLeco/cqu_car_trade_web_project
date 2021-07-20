@@ -36,7 +36,6 @@ public class BuyerServiceImpl implements BuyerService {
         System.out.println(btel + " " + bpassword);
         try {
             Buyer userExist = buyerMapper.selectByPrimaryKey(btel);
-//            Buyer userExist = buyerMapper.seller_login(buyer);
             if (userExist == null) {
                 result.setMsg("Buyer doesn't exist! Please retry!");
                 result.setSuccess(false);
@@ -45,7 +44,6 @@ public class BuyerServiceImpl implements BuyerService {
             } else if (userExist.getBpassword().equals(bpassword)){
                 result.setMsg("Log in succeed!");
                 result.setId(btel);
-//                buyer.setSTel(buyer.getSTel());
                 result.setSuccess(true);
                 token = result.generate_token(btel);
                 result.setToken(token);
@@ -85,6 +83,7 @@ public class BuyerServiceImpl implements BuyerService {
             Buyer name = buyerMapper.selectByPrimaryKey(buyer.getBtel());
             if (name != null) {
                 result.setMsg("This phone number is used, please try another. ");
+                result.setSuccess(false);
             } else {
                 buyerMapper.insert(buyer);
                 result.setMsg("Register success!");
@@ -92,6 +91,7 @@ public class BuyerServiceImpl implements BuyerService {
             }
         } catch (Exception e) {
             result.setMsg(e.getMessage());
+            result.setSuccess(false);
             e.printStackTrace();
         }
         return result;
