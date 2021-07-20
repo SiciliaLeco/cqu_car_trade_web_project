@@ -1,14 +1,18 @@
 package org.cqu.seller.seller_service;
 
+import org.apache.dubbo.config.annotation.Service;
 import org.cqu.dto.ResultInfo;
 import org.cqu.mapper.SellerMapper;
 import org.cqu.pojo.Seller;
 import org.cqu.seller_api.SellerService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Service
 public class SellerServiceImpl implements SellerService {
+    @Autowired
     SellerMapper sellerMapper;
     private ResultInfo<Seller> result = new ResultInfo<>();
     @Override
