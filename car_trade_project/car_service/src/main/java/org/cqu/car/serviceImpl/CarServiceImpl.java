@@ -1,8 +1,8 @@
 package org.cqu.car.serviceImpl;
 
 import org.apache.dubbo.config.annotation.Service;
-import org.cqu.car.mapper.CarMapper;
-import org.cqu.car.pojo.Car;
+import org.cqu.mapper.CarMapper;
+import org.cqu.pojo.Car;
 import org.cqu.car.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,4 +32,10 @@ public class CarServiceImpl implements CarService {
 //        carMapper.selectByPrimaryKey(CarID);
         return "Success";
     }
+
+    @Override
+    public Car getCarInfo(int CarID) {
+        return carMapper.selectByPrimaryKey(CarID);
+    }
+
 }
