@@ -29,14 +29,15 @@ public class IncludeServiceImpl implements IncludeService {
         return cid_distinct;
     }
     @Override
-    public List<Integer> findMCountByCID(Integer cid){
+    public Integer findMCountByCID(Integer cid){
         IncludeExample ie = new IncludeExample();
         ie.createCriteria().andCidEqualTo(cid);
         List<Include> res = includeMapper.selectByExample(ie);
-        List<Integer> mcount_list = new ArrayList<>();
+
+        Integer totalAmount = 0;
         for (Include i: res) {
-            mcount_list.add(i.getMcount());
+            totalAmount += i.getMcount();
         }
-        return mcount_list;
+        return totalAmount;
     }
 }

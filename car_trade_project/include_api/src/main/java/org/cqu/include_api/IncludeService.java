@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IncludeService {
     List<Integer> findDistinctCID();
-    List<Integer> findMCountByCID(Integer cid);
+    Integer findMCountByCID(Integer cid);
 
 }

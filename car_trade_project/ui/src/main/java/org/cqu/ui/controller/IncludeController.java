@@ -4,6 +4,7 @@ package org.cqu.ui.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.cqu.include_api.IncludeService;
 import org.cqu.pojo.Include;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +20,8 @@ public class IncludeController {
         return includeService.findDistinctCID();
     }
 
-    @RequestMapping(value = "/findMCountByCID")
-    public List<Integer> findMCountByCID() {
-        return includeService.findMCountByCID(3591);
+    @PostMapping(value = "/findMCountByCID")
+    public Integer findMCountByCID(Integer cid) {
+        return includeService.findMCountByCID(cid);
     }
 }
