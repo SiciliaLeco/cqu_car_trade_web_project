@@ -76,12 +76,65 @@
 	<!-- Custom Js -->
 	<script src="assets/js/custom.js"></script>
 
+	<!-- 使用cookie插件需要先引入jquery 且jquery只能在这里引用 不能二次引用-->
+	<script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 	<!--[if lt IE 9]>
 	<script src="assets/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	<script src="assets/libs/respond.js/1.3.0/respond.min.js"></script
 	<![endif]-->
 
+	<script>
+		<!--	jquery code	-->
+		function get_id() {
+			//获取页面url_id
+			var sHref = window.location.href;
+			var args = sHref.split('?');
+			if (args[0] === sHref) {
+				return "";
+			}
+			var arr = args[1].split("&");
+			var obj = {};
+			for (var i = 0; i < arr.length; i++) {
+				var arg = arr[i].split('=');
+				obj[arg[0]] = arg[1];
+			}
+			return obj["id"]
+		}
+
+		$(document).ready(function() {
+			$("#add_into_cart_btn").click(function(){
+				if(!$.cookie("cart_len") || $.cookie("cart_len") === "0") {
+					$.cookie("cart_len", 1);
+					$.cookie("cart0", 100);
+					alert("加入购物车成功！");
+				}
+				else {
+					var cart_len = parseInt($.cookie("cart_len"));
+					var flag = "false";
+					var cid = 300;
+					for(var i = 0; i < cart_len; i++) {
+						cart_seq = "cart" + i;
+						// alert(cart_seq + "---" + cid.toString());
+						if($.cookie(cart_seq) === cid.toString()) {
+							flag = "true";
+						}
+					}
+					if(flag === "false") {
+						$.cookie("cart" + cart_len, cid);
+						cart_len += 1;
+						$.cookie("cart_len", cart_len);
+						alert("加入购物车成功！");
+					}
+					else{
+						alert("请勿重复将同一辆车加入购物车！");
+					}
+
+				}
+			})
+		})
+	</script>
 </head>
 <body>
 
@@ -210,11 +263,9 @@
 								<div class="sp-slide" id="single_car_1">
 									<img  id="car_slide_big_1" class="sp-image" src="car_slide_1" alt="" />
 								</div>
-								<h5>haha</h5>
-
 
 						        <div class="sp-slide">
-						        	<img id=id="car_slide_big_2" class="sp-image" src="car_slide_2" alt="" />
+						        	<img id="car_slide_big_2" class="sp-image" src="car_slide_2" alt="" />
 								</div>
 
 								<div class="sp-slide">
@@ -240,82 +291,6 @@
 							</div>
 					    </div>
 
-						<script>
-
-							function get_id() {
-								//获取页面url_id
-								var sHref = window.location.href;
-								var args = sHref.split('?');
-								if (args[0] === sHref) {
-									return "";
-								}
-								var arr = args[1].split("&");
-								var obj = {};
-								for (var i = 0; i < arr.length; i++) {
-									var arg = arr[i].split('=');
-									obj[arg[0]] = arg[1];
-								}
-								return obj["id"]
-							}
-
-							// const app = {
-							// 	data() {
-							// 		return {
-							// 			 car_slide_1:"./assets/images/car_slide_1.jpg",
-							// 			 car_slide_2:"./assets/images/car_slide_2.jpg",
-							// 			 car_slide_3:"./assets/images/car_slide_3.jpg",
-							// 			 car_slide_4:"./assets/images/car_slide_4.jpg",
-							// 			 car_slide_5:"./assets/images/car_slide_5.jpg"
-							// 		}
-							// 	},
-
-
-									// let data = new FormData;
-									// data.append("car_slide_1",this.car_slide_1);
-									// data.append("car_slide_2",this.car_slide_2);
-									// data.append("car_slide_3",this.car_slide_3);
-									// data.append("car_slide_4",this.car_slide_4);
-									// data.append("car_slide_5",this.car_slide_5);
-
-									$(document).ready(function() {
-										let temp_id=get_id();
-										axios
-												.get("http://localhost:8000/CarAPI/ttt?id=" + temp_id
-												)
-												.then(function (response) {
-													console.log(response.data);
-													console.log(response.data["msg"]);
-													console.log(response.data["data"][0]);
-													document.getElementById("car_slide_1").setAttribute("src",response.data["data"][0]);
-													document.getElementById("car_slide_2").setAttribute("src",response.data["data"][1]);
-													document.getElementById("car_slide_3").setAttribute("src",response.data["data"][2]);
-													document.getElementById("car_slide_4").setAttribute("src",response.data["data"][3]);
-													document.getElementById("car_slide_5").setAttribute("src",response.data["data"][4]);
-
-													document.getElementById("car_slide_big_1").setAttribute("src",response.data["data"][0]);
-													document.getElementById("car_slide_big_2").setAttribute("src",response.data["data"][1]);
-													document.getElementById("car_slide_big_3").setAttribute("src",response.data["data"][2]);
-													document.getElementById("car_slide_big_4").setAttribute("src",response.data["data"][3]);
-													document.getElementById("car_slide_big_5").setAttribute("src",response.data["data"][4]);
-													document.getElementById("CName").innerHTML=;
-													document.getElementById("CPrice").innerHTML=;
-													document.getElementById("CSpeed").innerHTML=;
-													document.getElementById("CFuel").innerHTML=;
-													document.getElementById("CType").innerHTML=;
-													document.getElementById("CGear").innerHTML=;
-													document.getElenmetById("Cwarranty").innerHTML=;
-													document.getElenmetById("Ctank_capacity").innerHTML=;
-													document.getElenmetById("CAcceleration").innerHTML=;
-
-
-														}
-												)
-												.catch(function (error) {
-													console.log(error);
-												});
-									})
-							// Vue.createApp(app).mount("#single-car")
-						</script>
 
 					</div>
 					<div class="col-md-6">
@@ -339,8 +314,8 @@
 								</div>
 							</div>
 							<div class="similar-info">
-								<div class="primary-button">
-									<a href="#">Add Offer <i class="fa fa-dollar"></i></a>
+								<div class="primary-button" id="add_into_cart_btn">
+									<a href="#">Add Into Cart <i class="fa fa-dollar"></i></a>
 								</div>
 							</div>
 						</div>
@@ -349,6 +324,64 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+
+		// const app = {
+		// 	data() {
+		// 		return {
+		// 			 car_slide_1:"./assets/images/car_slide_1.jpg",
+		// 			 car_slide_2:"./assets/images/car_slide_2.jpg",
+		// 			 car_slide_3:"./assets/images/car_slide_3.jpg",
+		// 			 car_slide_4:"./assets/images/car_slide_4.jpg",
+		// 			 car_slide_5:"./assets/images/car_slide_5.jpg"
+		// 		}
+		// 	},
+
+
+		// let data = new FormData;
+		// data.append("car_slide_1",this.car_slide_1);
+		// data.append("car_slide_2",this.car_slide_2);
+		// data.append("car_slide_3",this.car_slide_3);
+		// data.append("car_slide_4",this.car_slide_4);
+		// data.append("car_slide_5",this.car_slide_5);
+
+		$(document).ready(function() {
+			let temp_id=get_id();
+			axios
+					.get("http://localhost:8000/CarAPI/GetCarInfo?id=" + temp_id
+					)
+					.then(function (response) {
+								console.log(response.data);
+								document.getElementById("car_slide_1").setAttribute("src",response.data.detail.cpic1);
+								document.getElementById("car_slide_2").setAttribute("src",response.data.detail.cpic2);
+								document.getElementById("car_slide_3").setAttribute("src",response.data.detail.cpic3);
+								document.getElementById("car_slide_4").setAttribute("src",response.data.detail.cpic4);
+								document.getElementById("car_slide_5").setAttribute("src",response.data.detail.cpic5);
+								document.getElementById("car_slide_big_1").setAttribute("src",response.data.detail.cpic1);
+								document.getElementById("car_slide_big_2").setAttribute("src",response.data.detail.cpic2);
+								document.getElementById("car_slide_big_3").setAttribute("src",response.data.detail.cpic3);
+								document.getElementById("car_slide_big_4").setAttribute("src",response.data.detail.cpic4);
+								document.getElementById("car_slide_big_5").setAttribute("src",response.data.detail.cpic5);
+								document.getElementById("CName").innerHTML=response.data.detail.cname;
+								document.getElementById("CPrice").innerHTML=response.data.detail.cprice;
+								document.getElementById("CSpeed").innerHTML=response.data.detail.cspeed;
+								document.getElementById("CFuel").innerHTML=response.data.detail.cfuel;
+								document.getElementById("CType").innerHTML=response.data.detail.ctype;
+								document.getElementById("CGear").innerHTML=response.data.detail.cgear;
+								document.getElementById("Cwarranty").innerHTML=response.data.detail.cwarranty;
+								document.getElementById("Ctank_capacity").innerHTML=response.data.detail.ctankCapacity;
+								document.getElementById("CAcceleration").innerHTML=response.data.detail.cacceleration;
+
+
+							}
+					)
+					.catch(function (error) {
+						console.log(error);
+					});
+		})
+		// Vue.createApp(app).mount("#single-car")
+	</script>
 
 	<section>
 		<div class="more-details">
