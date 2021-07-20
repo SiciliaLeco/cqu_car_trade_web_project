@@ -44,6 +44,12 @@
         <module>buyer_service</module>
         <module>seller_api</module>
         <module>seller_service</module>
+        <module>cache_api</module>
+        <module>cache_service</module>
+        <module>menu_api</module>
+        <module>menu_api</module>
+        <module>include_api</module>
+        <module>include_service</module>
     </modules>
 
     <!--声明全局依赖（子项目需要显示的引用才会继承依赖）-->
@@ -151,6 +157,13 @@
             <artifactId>lombok</artifactId>
             <version>1.18.20</version>
         </dependency>
+
+        <!--redis 部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

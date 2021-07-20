@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.cqu.include.mapper.IncludeMapper">
+    <select id="findDistinctCID" resultMap="BaseResultMap">
+        select distinct CID from Include
+    </select>
+    <select id="findMCountByCID" resultMap="BaseResultMap">
+        select MCount from Include where CID = #{cid}
+    </select>
+</mapper>
