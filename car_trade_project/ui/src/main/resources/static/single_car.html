@@ -297,10 +297,16 @@
 													document.getElementById("car_slide_big_3").setAttribute("src",response.data["data"][2]);
 													document.getElementById("car_slide_big_4").setAttribute("src",response.data["data"][3]);
 													document.getElementById("car_slide_big_5").setAttribute("src",response.data["data"][4]);
-															// this.car_slide_2 = response.data["data"][1];
-															// this.car_slide_3 = response.data["data"][2];
-															// this.car_slide_4 = response.data["data"][3];
-															// this.car_slide_5 = response.data["data"][4];
+													document.getElementById("CName").innerHTML=;
+													document.getElementById("CPrice").innerHTML=;
+													document.getElementById("CSpeed").innerHTML=;
+													document.getElementById("CFuel").innerHTML=;
+													document.getElementById("CType").innerHTML=;
+													document.getElementById("CGear").innerHTML=;
+													document.getElenmetById("Cwarranty").innerHTML=;
+													document.getElenmetById("Ctank_capacity").innerHTML=;
+													document.getElenmetById("CAcceleration").innerHTML=;
+
 
 														}
 												)
@@ -314,20 +320,21 @@
 					</div>
 					<div class="col-md-6">
 						<div class="car-details">
-							<h4>Perfect Sport Car</h4>
-							<span>$45.000</span>
+							<h4 id="CName">Perfect Sport Car</h4>
+							<span id="CType">东风日产</span>
+							<span id="CPrice">$45.000</span>
 							<p>Tattooed fashion axe Blue Bottle butcher tilde. Pitchfork leggings meh Odd Future.Drinking vinegar hoodie street art, selvage you probably haven't heard of them put a bird on it semiotis heirloom four loko roof.</p>
 							<div class="container">
 								<div class="row">
 									<ul class="car-info col-md-6">
-										<li><i class="flaticon flaticon-calendar"></i><p>2016/2017</p></li>
-										<li><i class="flaticon flaticon-speed"></i><p>240p/h</p></li>
-										<li><i class="flaticon flaticon-fuel"></i><p>Diesel</p></li>
+										<li><i class="flaticon flaticon-calendar"></i><p id="Cwarranty">2016/2017</p></li>
+										<li><i class="flaticon flaticon-speed"></i><p id="CSpeed">240p/h</p></li>
+										<li><i class="flaticon flaticon-fuel"></i><p id="CFuel">Diesel</p></li>
 									</ul>
 									<ul class="car-info col-md-6">
-										<li><i class="flaticon flaticon-shift"></i><p>Automatic</p></li>
-										<li><i class="flaticon flaticon-road"></i><p>20.000km - 40.000km</p></li>
-										<li><i class="flaticon flaticon-motor"></i><p>3000cm3</p></li>
+										<li><i class="flaticon flaticon-shift"></i><p id="CGear">Automatic</p></li>
+										<li><i class="flaticon flaticon-road"></i><p id="CAcceleration">20.000km - 40.000km</p></li>
+										<li><i class="flaticon flaticon-motor"></i><p id="Ctank_capacity">3000cm3</p></li>
 									</ul>
 								</div>
 							</div>
