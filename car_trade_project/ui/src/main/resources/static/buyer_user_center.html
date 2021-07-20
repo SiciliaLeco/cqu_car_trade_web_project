@@ -223,7 +223,7 @@
 											<b>VIP </b><input value="2016/2017" readonly="readonly" style="border: none;"/>
 										</div>
 										<div class="form-group">
-											<b>Name </b><input id="input1" value="2016/2017" readonly="readonly" style="border: none;"/>
+											<b>Name </b><input id="input1" value="2016/2017"  style="border: none;"/>
 											<button class="col-md-4 btn" onclick="update_info(1)" style="float:right;">Update</button>
 										</div>
 										<div class="form-group">
@@ -231,7 +231,7 @@
 											<button class="col-md-4 btn" onclick="update_info(2)" style="float:right;">Update</button>
 										</div>
 										<div class="form-group">
-											<b>Address </b><input id="input3" value="2016/2017" readonly="readonly" style="border: none;"/>
+											<b>Address </b><input id="input3" value="2016/2017"  style="border: none;"/>
 											<button class="col-md-4 btn" onclick="update_info(3)" style="float:right;">Update</button>
 										</div>
 
@@ -242,17 +242,18 @@
 											}
 											function submit_update_user_info() {
 												let data = new FormData();
-												data.append("Username", document.getElementById("input1").value)
-												data.append("Gender", document.getElementById("input2").value)
-												data.append("Address", document.getElementById("input3").value)
+												data.append("btel", document.getElementById("TEL").value)
+												data.append("bname", document.getElementById("input1").value)
+												// data.append("Gender", document.getElementById("input2").value)
+												data.append("baddress", document.getElementById("input3").value)
 												axios
-													.post("/buyer_user_center/update_buyer_info", data, {
+													.post("/BuyerAPI/updateUserInfo", data, {
 														headers: { 'Content-Type': "multipart/form-data"  }
 													})
 													.then(function (res) {
-														if(res.data.code === 1) {
+														if(res.data.success === true) {
 															alert("UPDATE SUCCESS!")
-															window.location="/buyer_user-center";
+															window.location="/buyer_user-center.html";
 														}
 														else {
 															alert("FAILED!")
