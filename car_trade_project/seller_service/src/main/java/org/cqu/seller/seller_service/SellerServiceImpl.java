@@ -17,6 +17,7 @@ public class SellerServiceImpl implements SellerService {
     private ResultInfo<Seller> result = new ResultInfo<>();
     @Override
     public ResultInfo<Seller> login(String stel, String spassword){
+        result.setIs_buyer(false);
         String token = "";
         try {
             Seller userExist = sellerMapper.selectByPrimaryKey(stel);
@@ -48,6 +49,7 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public ResultInfo<Seller> register(String stel, String sname, String spassword, String saddress){
         result.setToken("null");
+        result.setIs_buyer(false);
         try {
             Seller name = sellerMapper.selectByPrimaryKey(stel);
             if (name != null) {
@@ -70,6 +72,7 @@ public class SellerServiceImpl implements SellerService {
     }
     @Override
     public ResultInfo<Seller> update(String stel, String sname, String saddress){
+        result.setIs_buyer(false);
         Seller userExist = sellerMapper.selectByPrimaryKey(stel);
         userExist.setSaddress(saddress);
         userExist.setSname(sname);
@@ -80,6 +83,7 @@ public class SellerServiceImpl implements SellerService {
     }
     @Override
     public Map<String, String> getInfo(String stel){
+        result.setIs_buyer(false);
         Map<String, String> seller_info = new HashMap<String, String>();
         Seller seller = sellerMapper.selectByPrimaryKey(stel);
         seller_info.put("tel", seller.getStel());
