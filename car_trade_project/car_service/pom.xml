@@ -17,20 +17,30 @@
     </properties>
 
     <dependencies>
-
+        <!--本地依赖-->
+        <dependency>
+            <groupId>org.cqu</groupId>
+            <artifactId>pojo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cqu</groupId>
+            <artifactId>mappers</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <!--数据库相关依赖-->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.26</version>
-            <scope>runtime</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.mybatis.spring.boot</groupId>-->
+<!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
+<!--            <version>2.1.1</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>mysql</groupId>-->
+<!--            <artifactId>mysql-connector-java</artifactId>-->
+<!--            <version>5.1.26</version>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
 
         <!--添加springboot web 启动器,注意在spring boot顶层依
         赖管理模块中已经声明了依赖以及相关的版本,此处不用再声明版本-->
@@ -95,6 +105,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -2,8 +2,8 @@ server:
   port: 9093
 
 mybatis:
-  mapper-locations: classpath:mappers/*.xml  #配置映射文件
-  type-aliases-package: org.cqu.car.mapper
+  mapper-locations: classpath:org/cqu/mapper/*.xml  #配置映射文件
+  type-aliases-package: org.cqu.pojo
 
 dubbo:
   application:
