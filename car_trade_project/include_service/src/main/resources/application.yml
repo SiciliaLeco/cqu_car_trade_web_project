@@ -1,0 +1,46 @@
+server:
+  port: 9096
+
+mybatis:
+  mapper-locations: classpath:org/cqu/mapper/*.xml  #配置映射文件
+  type-aliases-package: org.cqu.pojo #配置实体类
+
+dubbo:
+  application:
+    name: buyer_service_provider
+  registry:
+    #注册中心地址
+    #制定超时时间,单位毫秒
+    timeout: 5000
+    address: zookeeper://192.168.2.31:2181?
+    #    address: zookeeper://127.0.0.1:2181 #zookeeper集群
+    #配置元数据中心 --> 用于存储服务的元数据,消费者在消费服务的时候只需要注册中心提供某个服务的关键数据即可,
+    #将服务本身必须要但是消费者不需要的数据存放到元数据中心,这样可以提供性能和服务调度的效率
+    simplified: true #注册到注册中心的URL是否采用精简模式的 （与低版本兼容）
+    register: true
+  metadata-report:
+    address: zookeeper://192.168.2.31:2181?
+  #    address: zookeeper://127.0.0.1:2181
+  #协议
+  protocol:
+    name: dubbo
+    port: 20884
+  #制定扫描的基础包
+  scan:
+    base-packages: org.cqu.buyer_service.BuyerServceImple
+  provider:
+    timeout: 50000
+    register: true
+
+
+spring:
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+  datasource:
+    name: car_manage_system
+    url: jdbc:mysql://116.63.170.243:3306/car_manage_system #url
+    username: root  #用户名
+    password: TangHuoGuo1@3  #密码
+    driver-class-name: com.mysql.jdbc.Driver  #数据库链接驱动
