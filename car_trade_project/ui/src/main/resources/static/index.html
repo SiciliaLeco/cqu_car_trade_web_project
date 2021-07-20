@@ -96,6 +96,30 @@
 				}
 			}
 		})
+		$(document).ready(function() {
+			if($.cookie('Token') && $.cookie('UserID')){ // 已经登录了
+				document.getElementById("CartOrOrder").style.visibility="visible";
+				if($.cookie('isBuyer') === "true"){
+					$("#CartOrOrder").html("<a href=\"buyer_cart.html\"><i class=\"icofont icofont-shopping-cart\"></i></a>\n + " +
+							"<div class=\"addtocart-dropdown\">\n" +
+							"\t\t\t\t\t\t\t\t<img src=\"assets/images/cart-angle.png\" alt=\"cart\">\n" +
+							"\t\t\t\t\t\t\t\t<div class=\"total-price d-flex justify-content-between\">\n" +
+							"\t\t\t\t\t\t\t\t\t<span>Subtotal:</span>\n" +
+							"\t\t\t\t\t\t\t\t\t<span>$259.00</span>\n" +
+							"\t\t\t\t\t\t\t\t</div>\n" +
+							"\t\t\t\t\t\t\t\t<div class=\"cart-botton\">\n" +
+							"\t\t\t\t\t\t\t\t\t<a href=\"cart.html\" class=\"btn\">view cart</a>\n" +
+							"\t\t\t\t\t\t\t\t</div>\n" +
+							"\t\t\t\t\t\t\t</div>")
+
+				} else {
+					$("#CartOrOrder").html("<a href=\"seller_cart.html\"><i class=\"fa fa-calendar\"></i></a>");
+				}
+			}
+		})
+
+
+
 
 	</script>
 </head>
@@ -180,7 +204,8 @@
 								</div>
 							</div>
 						</li>
-						<li><a href="#"><i class="icofont icofont-shopping-cart"></i></a>
+						<li id="CartOrOrder" style="visibility:hidden;">
+							<a href="#"><i class="icofont icofont-shopping-cart"></i></a>
 							<div class="addtocart-dropdown">
 								<img src="assets/images/cart-angle.png" alt="cart">
 								<div class="total-price d-flex justify-content-between">
