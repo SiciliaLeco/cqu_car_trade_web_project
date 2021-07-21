@@ -285,7 +285,7 @@
 						<div id="owl-top-features" class="owl-carousel owl-theme">
 							<div class="item car-item" v-for="top_car in top_car_list" v-model="top_car_list">
 								<div class="thumb-content">
-									<a href="single_car.html"><img src="top_car.cpic1" alt=""></a>
+									<a href="single_car.html"><img v-bind:src="top_car.cpic1" alt=""></a>
 								</div>
 								<div class="down-content">
 									<a href="single_car.html"><h4>{{ top_car.cname }}</h4></a>
@@ -306,7 +306,7 @@
 							},
 							mounted() {
 								axios
-										.get("/index/findTop6Car")
+										.get("/Index/findTop6Car")
 										// .get("#")
 										.then(response => {
 												for(let i=0; i<response.data.result_list.length; i++){
