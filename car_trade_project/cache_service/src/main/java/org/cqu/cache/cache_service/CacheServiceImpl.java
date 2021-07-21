@@ -1,9 +1,11 @@
 package org.cqu.cache.cache_service;
 
+import org.apache.dubbo.config.annotation.Service;
 import org.cqu.cache_api.CacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
+@Service
 public class CacheServiceImpl implements CacheService {
     // 自动装配redisTemplate模板对象
     @Autowired

@@ -11,6 +11,7 @@ import org.cqu.pojo.Car;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -38,7 +39,7 @@ public class IndexController {
             }
         };
 
-        List<Car> top6Car = null;
+        List<Car> top6Car = new ArrayList<>();
         String data = cacheService.getDataByKey("top6Car");
         if (data == null) {
             synchronized (this) {
