@@ -1,21 +1,18 @@
 package org.cqu.dto;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
-import java.util.Date;
-
 public class ResultInfo<T> implements Serializable {
     private String msg;
     private Boolean success = false;
     private T detail = null;
-    private List<T> result_list = null;
+    private List<T> result_list = new ArrayList<>();
     private String token = "null";
     private static final long EXPIRE_DATE=30*60*100000; // 3000分钟以后过期
     private static final String TOKEN_SECRET = "tanghuoguo";

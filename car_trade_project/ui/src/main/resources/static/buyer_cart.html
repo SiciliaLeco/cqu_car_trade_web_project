@@ -193,7 +193,7 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="row" id="buyer_cart_list">
-						<div class="col-md-12" v-for="(car, index) in cars">
+						<div class="col-md-12" v-for="car in cars" v-model="cars">
 							<div class="car-item">
 								<div class="row">
 									<div class="col-md-5">
@@ -203,21 +203,21 @@
 												<a href="#">REMOVE</a>
 											</div>
 											<div class="thumb-inner">
-												<a href="single_car.html"><img src="assets/images/car_listing_6.jpg" alt=""></a>
+												<a href="single_car.html"><img v-bind:src="car.CPic1" alt=""></a>
 											</div>
 										</div>
 									</div>
 									<div class="col-md-7">
 										<div class="down-content">
-											<a href="single_car.html"><h4>{{ car.cid }}</h4></a>
-											<span>$36.000</span>
+											<a href="single_car.html"><h4>{{ car.CName }}</h4></a>
+											<span>{{car.CPrice}}</span>
 											<div class="line-dec"></div>
 											<p>Drinking vinegar hoodie street art, selvage you probably haven't heard of them put a bird on it semiotics heirloom.</p>
 											<ul class="car-info">
-												<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>2013</p></div></li>
-												<li><div class="item"><i class="flaticon flaticon-speed"></i><p>160p/h</p></div></li>
-												<li><div class="item"><i class="flaticon flaticon-road"></i><p>26.00km</p></div></li>
-												<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>Petrol</p></div></li>
+												<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>{{car.CWarranty}}</p></div></li>
+												<li><div class="item"><i class="flaticon flaticon-speed"></i><p>{{car.CSpeed}}</p></div></li>
+												<li><div class="item"><i class="flaticon flaticon-road"></i><p>{{car.CAcceleration}}</p></div></li>
+												<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>{{car.CFuel}}</p></div></li>
 											</ul>
 										</div>
 									</div>
@@ -229,19 +229,58 @@
 						const buyer_cart_list_app = {
 							data() {
 								var cart_len = parseInt($.cookie("cart_len"));
-								$arr = Array();
+								var arr = [];
 								for(var i = 0; i < cart_len; i++) {
 									cart_seq = "cart" + i;
 									dic = {cid: ""};
 									dic["cid"] = parseInt($.cookie(cart_seq));
-									$arr.push(dic);
+									dic["CName"]="hhh";
+									dic["CPrice"]="jjj";
+									dic["CWarranty"]="kkk";
+									dic["CSpeed"]="lll";
+									dic["CAcceleration"]="www";
+									dic["CFuel"]="eee";
+									dic["CPic1"]="assets/images/car_listing_6.jpg";
+									arr.push(dic);
 								}
 								return {
-									cars: $arr
+									cart_len:cart_len,
+									cars: arr
 								}
+							},
+
+							mounted(){
+
+									// cid_string = "?"
+									// for(var i = 0; i < cart_len; i++) {
+									// 	cart_seq = "cart" + i;
+									// 	cid_i="CID"+i;
+									// 	cid_each=cid_i+"="+parseInt($.cookie(cart_seq));
+									// 	cid_string=cid_string+cid_each+"&";
+									// 	console.log(cid_string);
+									// }
+									for(let i=0;i<this.cart_len;i++) {
+										axios
+												.get("http://localhost:8000/CarAPI/GetCarInfo?id="+this.cars[i].cid
+												)
+												.then(response => {
+													this.cars[i].CName = response.data.detail.cname;
+													this.cars[i].CPrice= response.data.detail.cprice;
+													this.cars[i].CSpeed = response.data.detail.cspeed;
+													this.cars[i].CAcceleration = response.data.detail.cacceleration;
+													this.cars[i].CFuel = response.data.detail.cfuel;
+													this.cars[i].CPic1 = response.data.detail.cpic1;
+													this.cars[i].CWarranty = response.data.detail.cwarranty;
+												})
+												.catch(function (error) { // 请求失败处理
+													console.log(error);
+													alert("error")
+												});
+									}
+
 							}
 						}
-						Vue.createApp(buyer_cart_list_app).mount("#buyer_cart_list")
+						Vue.createApp(buyer_cart_list_app).mount("#buyer_cart_list");
 					</script>
 
 				</div>
