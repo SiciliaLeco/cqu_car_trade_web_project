@@ -1,8 +1,17 @@
 package org.cqu.cache;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@MapperScan("org.cqu.mapper")
+@SpringBootApplication
+@EnableDubbo
 public class CacheApplication {
-    //todo: implement this
+    public static void main(String[] args) {
+        SpringApplication.run(CacheApplication.class, args);
+        System.out.println("START_cache_SERVICE");
+    }
 }
+
