@@ -44,7 +44,6 @@ public class SellerController {
 
     @RequestMapping(value = "/getAll")
     public ResultInfo<Seller> getAll(){
-        List<Seller> list = sellerService.getAll();
-
+        return sellerService.getAll();
     }
 }
