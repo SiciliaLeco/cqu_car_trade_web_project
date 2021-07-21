@@ -3,11 +3,14 @@ package org.cqu.seller.seller_service;
 import org.apache.dubbo.config.annotation.Service;
 import org.cqu.dto.ResultInfo;
 import org.cqu.mapper.SellerMapper;
+import org.cqu.pojo.IncludeExample;
 import org.cqu.pojo.Seller;
+import org.cqu.pojo.SellerExample;
 import org.cqu.seller_api.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -92,6 +95,12 @@ public class SellerServiceImpl implements SellerService {
         seller_info.put("grade", String.valueOf(seller.getSgrade()));
         return seller_info;
 
+    }
+    @Override
+    public List<Seller> getAll(){
+        SellerExample ie = new SellerExample();
+        ie.setDistinct(true);
+        return sellerMapper.selectByExample(ie); // 获取无重复的seller，后续可获得
     }
 
 }
