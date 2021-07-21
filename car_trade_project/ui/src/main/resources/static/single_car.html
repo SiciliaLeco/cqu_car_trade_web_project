@@ -108,6 +108,12 @@
 		}
 
 		$(document).ready(function() {
+			if($.cookie('Token') && $.cookie('UserID')){ // 已经登录了
+				if($.cookie('isBuyer') === "false"){
+					$("#add_into_cart_btn").hide();
+				}
+			}
+
 			$("#add_into_cart_btn").click(function(){
 				var cid = 200;
 				if(!$.cookie("cart_len") || $.cookie("cart_len") === "0") {
