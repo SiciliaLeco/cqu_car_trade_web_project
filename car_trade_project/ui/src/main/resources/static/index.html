@@ -217,18 +217,6 @@
 <!--								</div>-->
 <!--							</div>-->
 						</li>
-<!-- 						<li><a href="#"><i class="fa fa-calendar"></i></a>
-							<div class="addtocart-dropdown">
-								<img src="assets/images/cart-angle.png" alt="cart">
-								<div class="total-price d-flex justify-content-between">
-									<span>Subtotal:</span>
-									<span>$259.00</span>
-								</div>
-								<div class="cart-botton">
-									<a href="cart.html" class="btn">view cart</a>
-								</div>
-							</div>
-						</li> -->
 					</ul>
 				</div>
 				
@@ -714,36 +702,7 @@
 				</div>
 			</div>
 			<script>
-				// $(document).ready(function() {
-				//
-				// 		$("#owl-testimonials").html("<div id=seller_list class=\"item wow fadeIn\" data-wow-duration=\"0.75s\">\n" +
-				// 				"\t\t\t\t\t\t<ul class=\"star-rating\">\n" +
-				// 				"\t\t\t\t\t\t\t<li><i class=\"fa fa-star\"></i></li>\n" +
-				// 				"\t\t\t\t\t\t\t<li><i class=\"fa fa-star\"></i></li>\n" +
-				// 				"\t\t\t\t\t\t\t<li><i class=\"fa fa-star\"></i></li>\n" +
-				// 				"\t\t\t\t\t\t\t<li><i class=\"fa fa-star\"></i></li>\n" +
-				// 				"\t\t\t\t\t\t\t<li><i class=\"fa fa-star\"></i></li>\n" +
-				// 				"\t\t\t\t\t\t</ul>\n" +
-				// 				"\t\t\t\t\t\t<div class=\"line-dec\"></div>\n" +
-				// 				"\t\t\t\t\t\t<p><em>\"</em> Integer sed ornare lacus, at convallis velit. Curabitur hendrerit congue convallis. Nunc vel tellus ut metus tincidunt facilisis sit amet et dolor <em>\"</em></p>\n" +
-				// 				"\t\t\t\t\t\t<div class=\"author-rate\">\n" +
-				// 				"\t\t\t\t\t\t\t<img src=\"assets/images/user_female.jpg\" alt=\"\">\n" +
-				// 				"\t\t\t\t\t\t\t<h4>Antonio Andreas</h4>\n" +
-				// 				"\t\t\t\t\t\t\t<div class=\"line-dec2\"></div>\n" +
-				// 				"\t\t\t\t\t\t\t<span>{{ seller.name }}</span>\n" +
-				// 				"\t\t\t\t\t\t</div>\n" +
-				// 				"\t\t\t\t\t</div>")
-				//
-				// })
-
-
-				sellers = [
-					{name: "zhangsan"},
-					{name: "lisi"},
-					{name: "hahaha"},
-					{name: "wangwu"},
-					{name: "haha"}
-				]
+				sellers = []
 
 				const sellers_show_app = {
 					data() {
@@ -757,7 +716,10 @@
 							.get("#")
 							.then(response => {
 
-								this.sellers[0].name = "123123123";
+								this.sellers.push({name: "lisi"});
+								this.sellers.push({name: "dsa"});
+								this.sellers.push({name: "456"});
+								this.sellers.push({name: "sdadas"});
 
 							})
 							.catch(function (error){
