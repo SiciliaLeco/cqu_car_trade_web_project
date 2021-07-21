@@ -6,6 +6,7 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.cqu.cache_api.CacheService;
 import org.cqu.car.service.CarService;
 import org.cqu.dto.Node;
+import org.cqu.dto.ResultInfo;
 import org.cqu.include_api.IncludeService;
 import org.cqu.pojo.Car;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,9 @@ public class IndexController {
     private CarService carService;
 
     @RequestMapping("/findTop6Car")
-    public List<Car> findTop6Car() {
+    public ResultInfo<Car> findTop6Car() {
+
+        ResultInfo<Car> result = new ResultInfo<>();
 
         Comparator<Node> CarComparator = new Comparator<Node>() {
             // 自定义Node类型的compare
@@ -71,6 +74,7 @@ public class IndexController {
         for (Car car : top6Car) {
             System.out.println(car.getCname());
         }
-        return top6Car;
+        result.setResult_list(top6Car);
+        return result;
     }
 }
