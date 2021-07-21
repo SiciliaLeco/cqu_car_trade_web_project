@@ -109,15 +109,15 @@
 
 		$(document).ready(function() {
 			$("#add_into_cart_btn").click(function(){
+				var cid = 200;
 				if(!$.cookie("cart_len") || $.cookie("cart_len") === "0") {
 					$.cookie("cart_len", 1);
-					$.cookie("cart0", 100);
+					$.cookie("cart0", cid);
 					alert("加入购物车成功！");
 				}
 				else {
 					var cart_len = parseInt($.cookie("cart_len"));
 					var flag = "false";
-					var cid = 300;
 					for(var i = 0; i < cart_len; i++) {
 						cart_seq = "cart" + i;
 						// alert(cart_seq + "---" + cid.toString());

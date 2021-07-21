@@ -62,7 +62,14 @@
 	<!-- 使用cookie插件需要先引入jquery 且jquery只能在这里引用 不能二次引用-->
 	<script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
 	<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("#delete_car_btn").click(function (event) {
+				alert("remove未实现");
 
+			})
+		})
+	</script>
 </head>
 <body>
 
@@ -186,13 +193,14 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="row" id="buyer_cart_list">
-						<div class="col-md-12" v-for="car in cars">
+						<div class="col-md-12" v-for="(car, index) in cars">
 							<div class="car-item">
 								<div class="row">
 									<div class="col-md-5">
 										<div class="thumb-content">
-											<div class="car-banner">
-												<a href="single_car.html">For Rent</a>
+											<div class="car-banner delete_car_btn">
+												<h5 hidden>{{ car.cid }}</h5>
+												<a href="#">REMOVE</a>
 											</div>
 											<div class="thumb-inner">
 												<a href="single_car.html"><img src="assets/images/car_listing_6.jpg" alt=""></a>
