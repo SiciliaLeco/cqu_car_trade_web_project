@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqu.mapper.CarincludeMapper" >
+  <resultMap id="BaseResultMap" type="org.cqu.pojo.Carinclude" >
+    <id column="CartID" property="cartid" jdbcType="INTEGER" />
+    <id column="CID" property="cid" jdbcType="INTEGER" />
+    <result column="Count" property="count" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CartID, CID, Count
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.cqu.pojo.CarincludeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CarInclude
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="org.cqu.pojo.CarincludeKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from CarInclude
+    where CartID = #{cartid,jdbcType=INTEGER}
+      and CID = #{cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.cqu.pojo.CarincludeKey" >
+    delete from CarInclude
+    where CartID = #{cartid,jdbcType=INTEGER}
+      and CID = #{cid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.cqu.pojo.CarincludeExample" >
+    delete from CarInclude
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.cqu.pojo.Carinclude" >
+    insert into CarInclude (CartID, CID, Count
+      )
+    values (#{cartid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.cqu.pojo.Carinclude" >
+    insert into CarInclude
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cartid != null" >
+        CartID,
+      </if>
+      <if test="cid != null" >
+        CID,
+      </if>
+      <if test="count != null" >
+        Count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cartid != null" >
+        #{cartid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.cqu.pojo.CarincludeExample" resultType="java.lang.Integer" >
+    select count(*) from CarInclude
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update CarInclude
+    <set >
+      <if test="record.cartid != null" >
+        CartID = #{record.cartid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cid != null" >
+        CID = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.count != null" >
+        Count = #{record.count,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update CarInclude
+    set CartID = #{record.cartid,jdbcType=INTEGER},
+      CID = #{record.cid,jdbcType=INTEGER},
+      Count = #{record.count,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cqu.pojo.Carinclude" >
+    update CarInclude
+    <set >
+      <if test="count != null" >
+        Count = #{count,jdbcType=INTEGER},
+      </if>
+    </set>
+    where CartID = #{cartid,jdbcType=INTEGER}
+      and CID = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cqu.pojo.Carinclude" >
+    update CarInclude
+    set Count = #{count,jdbcType=INTEGER}
+    where CartID = #{cartid,jdbcType=INTEGER}
+      and CID = #{cid,jdbcType=INTEGER}
+  </update>
+</mapper>
