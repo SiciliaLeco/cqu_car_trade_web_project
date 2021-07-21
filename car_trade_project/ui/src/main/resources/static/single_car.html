@@ -115,7 +115,7 @@
 			}
 
 			$("#add_into_cart_btn").click(function(){
-				var cid = 200;
+				var cid = get_id();
 				if(!$.cookie("cart_len") || $.cookie("cart_len") === "0") {
 					$.cookie("cart_len", 1);
 					$.cookie("cart0", cid);
