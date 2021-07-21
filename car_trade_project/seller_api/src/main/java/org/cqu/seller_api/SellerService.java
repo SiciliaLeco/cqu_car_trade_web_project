@@ -3,7 +3,6 @@ package org.cqu.seller_api;
 import org.cqu.dto.ResultInfo;
 import org.cqu.pojo.Seller;
 
-import java.util.List;
 import java.util.Map;
 
 public interface SellerService {
@@ -11,5 +10,5 @@ public interface SellerService {
     ResultInfo<Seller> register(String stel, String sname, String spassword, String saddress);
     ResultInfo<Seller> update(String stel, String sname, String saddress);
     Map<String, String> getInfo(String stel);
-    List<Seller> getAll();
+    ResultInfo<Seller> getAll();
 }

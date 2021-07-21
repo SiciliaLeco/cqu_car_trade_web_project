@@ -43,9 +43,8 @@ public class SellerController {
     }
 
     @RequestMapping(value = "/getAll")
-    public JSONArray getAll(){
+    public ResultInfo<Seller> getAll(){
         List<Seller> list = sellerService.getAll();
-        JSONArray array= JSONArray.parseArray(JSON.toJSONString(list));
-        return array;
-        }
+
+    }
 }

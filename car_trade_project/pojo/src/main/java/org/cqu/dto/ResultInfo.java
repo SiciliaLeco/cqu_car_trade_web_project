@@ -1,6 +1,7 @@
 package org.cqu.dto;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import com.auth0.jwt.JWT;
@@ -14,6 +15,7 @@ public class ResultInfo<T> implements Serializable {
     private String msg;
     private Boolean success = false;
     private T detail = null;
+    private List<T> result_list = null;
     private String token = "null";
     private static final long EXPIRE_DATE=30*60*100000; // 3000分钟以后过期
     private static final String TOKEN_SECRET = "tanghuoguo";
@@ -83,4 +85,8 @@ public class ResultInfo<T> implements Serializable {
     public void setDetail(T detail) {
         this.detail = detail;
     }
+
+    public void setResult_list(List<T> list) {this.result_list = list;}
+
+    public List<T> getResult_list() {return result_list;}
 }
