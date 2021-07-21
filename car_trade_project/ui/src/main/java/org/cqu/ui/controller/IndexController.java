@@ -74,6 +74,11 @@ public class IndexController {
         for (Car car : top6Car) {
             System.out.println(car.getCname());
         }
+        String nginx_info = "http://116.63.170.243:8888/";
+        for(int i=0; i<6; i++) {
+            Car car = top6Car.get(i);
+            car.setCpic1(nginx_info+car.getCpic1());
+        }
         result.setResult_list(top6Car);
         return result;
     }
