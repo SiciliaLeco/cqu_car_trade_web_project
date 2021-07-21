@@ -1,6 +1,7 @@
 package org.cqu.ui.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.cqu.backend_result.ResultBean;
 import org.cqu.car.service.CarService;
 import org.cqu.car_include_api.CarIncludeService;
 import org.cqu.cart_api.CartService;
@@ -30,9 +31,9 @@ public class ShopCartController {
     private CarIncludeService carIncludeService;
 
     @RequestMapping(value = "/shopping")
-    public float sendBuyingRecord(HttpServletRequest request){
+    public ResultBean<String> sendBuyingRecord(HttpServletRequest request){
 
-        float totalCost = 0;
+        Integer totalCost = 0;  // 使用整数
         String btel = request.getParameter("btel");
         String len = request.getParameter("cart_len");
 
@@ -65,11 +66,12 @@ public class ShopCartController {
             Car cur_car = carService.getCarInfo(cur_cid);
             Integer cur_price = round(cur_car.getCprice());
 
-            cartService.insert(cart_id, goodsC_date, cur_price, btel);
-            carIncludeService.insert(cart_id, cur_cid, cur_count);
-
+//            carIncludeService.insert(cart_id, cur_cid, cur_count);
+            totalCost += cur_price; // 看到貌似没有累计 所以这里加一句
         }
+//        cartService.insert(cart_id, goodsC_date, totalCost, btel); // 将这一句提到外面 只计算总价格
+        System.out.println(totalCost);
 
-        return totalCost;
+        return new ResultBean<String>(totalCost.toString());
     }
 }
