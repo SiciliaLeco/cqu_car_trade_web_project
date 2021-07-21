@@ -691,12 +691,12 @@
 							<li><i class="fa fa-star"></i></li>
 						</ul>
 						<div class="line-dec"></div>
-						<p><em>"</em> Integer sed ornare lacus, at convallis velit. Curabitur hendrerit congue convallis. Nunc vel tellus ut metus tincidunt facilisis sit amet et dolor <em>"</em></p>
+						<p> Address: {{ seller.saddress }}</p>
+						<p> Tel: {{ seller.stel }}</p>
 						<div class="author-rate">
 							<img src="assets/images/user_female.jpg" alt="">
-							<h4>Antonio Andreas</h4>
-							<div class="line-dec2"></div>
-							<span>{{ seller.name }}</span>
+							<h4><a href="#"> {{ seller.sname }} </a></h4>
+
 						</div>
 					</div>
 				</div>
@@ -711,21 +711,25 @@
 						}
 					},
 					mounted() {
-
 						axios
-							.get("#")
+							.get("/SellerAPI/getAll")
+							// .get("#")
 							.then(response => {
-
-								this.sellers.push({name: "lisi"});
-								this.sellers.push({name: "dsa"});
-								this.sellers.push({name: "456"});
-								this.sellers.push({name: "sdadas"});
+								for(let i=0; i<response.data.result_list.size(); i++){
+									this.sellers.push({sname: response.data.result_list[i].sname,
+												       sid: response.data.result_list[i].sid,
+													   saddress: response.data.result_list[i].saddress,
+													   stel: response.data.result_list[i].stel})
+								}
+								// this.sellers.push({sname: "lisi", saddress: "虎溪", stel:2018});
+								// this.sellers.push({sname: "dsa", saddress: "猫溪", stel:2019});
+								// this.sellers.push({sname: "456", saddress: "狗溪", stel:2020});
+								// this.sellers.push({sname: "sdadas", saddress: "兔溪", stel:2021});
 
 							})
 							.catch(function (error){
 								alert(error);
 							})
-
 					}
 				}
 				Vue.createApp(sellers_show_app).mount("#owl-testimonials")
