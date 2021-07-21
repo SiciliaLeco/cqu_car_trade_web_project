@@ -1,5 +1,7 @@
 package org.cqu.ui.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import org.apache.dubbo.config.annotation.Reference;
 import org.cqu.dto.ResultInfo;
 import org.cqu.pojo.Seller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -39,4 +42,10 @@ public class SellerController {
         return sellerService.getInfo("023-89081126");
     }
 
+    @RequestMapping(value = "/getAll")
+    public JSONArray getAll(){
+        List<Seller> list = sellerService.getAll();
+        JSONArray array= JSONArray.parseArray(JSON.toJSONString(list));
+        return array;
+        }
 }
