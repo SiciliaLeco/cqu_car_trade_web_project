@@ -84,6 +84,23 @@
 	<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 	<script>
+
+		function get_sname() {
+			//获取页面url_id
+			var sHref = window.location.href;
+			var args = sHref.split('?');
+			if (args[0] === sHref) {
+				return "";
+			}
+			var arr = args[1].split("&");
+			var obj = {};
+			for (var i = 0; i < arr.length; i++) {
+				var arg = arr[i].split('=');
+				obj[arg[0]] = arg[1];
+			}
+			return obj["sname"]
+		}
+
 		<!--	jquery code	-->
 		$(document).ready(function() {
 			if($.cookie('Token') && $.cookie('UserID')){ // 已经登录了
@@ -254,41 +271,62 @@
 							<div class="col-md-12">
 								<h4><em>ALL CARS</em></h4>
 							</div>
-							<div class="col-md-4" v-for="car in cars">
+							<div class="col-md-4" v-for="seller in sellers" v-model="sellers">
 								<div class="car-item">
 									<div class="thumb-content">
 										<div class="car-banner">
-												<a href="single_car.html"><span id="price"> {{ car.price }} </span></a>
+												<a href="single_car.html"><span id="price"> {{ seller.sprice }} </span></a>
 										</div>
 										<div class="thumb-inner">
-											<a href="single_car.html"><img id="showimg" src="assets/images/car_item_1.jpg" alt=""></a>
+											<a href="single_car.html"><img id="showimg" v-bind:src="seller.spic" alt=""></a>
 										</div>
 									</div>
 									<div class="down-content">
-										<a href="single_car.html"><h4 id="carname">Perfect Sport Car</h4></a>
+										<a href="single_car.html"><h4 id="carname">{{seller.sname}}</h4></a>
 
 										<div class="line-dec"></div>
 
 										<ul class="car-info">
-											<li><div class="item"><i class="flaticon flaticon-calendar"></i><p id="calendar">2013</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-speed"></i><p id="speed">160p/h</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-road"></i><p id="road">26.00km</p></div></li>
-											<li><div class="item"><i class="flaticon flaticon-fuel"></i><p id="fuel">Petrol</p></div></li>
+											<li><div class="item"><i class="flaticon flaticon-calendar"></i><p id="calendar">{{seller.swarranty}}</p></div></li>
+											<li><div class="item"><i class="flaticon flaticon-speed"></i><p id="speed">{{seller.speed}}</p></div></li>
+											<li><div class="item"><i class="flaticon flaticon-road"></i><p id="road">{{seller.sacceleration}}</p></div></li>
+											<li><div class="item"><i class="flaticon flaticon-fuel"></i><p id="fuel">{{seller.sfuel}}</p></div></li>
 										</ul>
 									</div>
 								</div>
 							</div>
 							<script>
+								sellers = []
 								const single_car_app = {
 									data() {
 										return {
-											cars: [
-												{price: "36000$"},
-												{price: "54600$"},
-												{price: "45100$"},
-												{price: "47800$"}
-											]
+											sellers: sellers
 										}
+									},
+									mounted() {
+										let sname=get_sname();
+										axios
+												// .get("/SellerAPI/getAll")
+												.get("http://localhost:8000/CarAPI/GetSellersCars?sname="+sname)
+												.then(response => {
+														for(let i=0; i<response.data.result_list.length; i++){
+															this.sellers.push({sname: response.data.result_list[i].cname,
+																		       sprice: response.data.result_list[i].cprice,
+																			   swarranty: response.data.result_list[i].cwarranty,
+																			   speed: response.data.result_list[i].cspeed,
+																               sacceleration:response.data.result_list[i].cacceleration,
+																               sfuel:response.data.result_list[i].cfuel,
+																               spic:response.data.result_list[i].cpic1
+															})
+														}
+													// this.sellers.push({sname: "lisi", sprice: "虎溪", swarranty:2018,speed:"1000",sacceleration:"200",sfuel:"disel",spic:"assets/images/car_item_1.jpg"});
+													// this.sellers.push({sname: "john", sprice: "A区", swarranty:2019,speed:"2000",sacceleration:"300",sfuel:"xxx",spic:"assets/images/car_item_2.jpg"});
+													// this.sellers.push({sname: "luxi", sprice: "B区", swarranty:2020,speed:"3000",sacceleration:"400",sfuel:"yyy",spic:"assets/images/car_item_3.jpg"});
+													// this.sellers.push({sname: "anni", sprice: "C区", swarranty:2021,speed:"4000",sacceleration:"500",sfuel:"zzz",spic:"assets/images/car_item_4.jpg"});
+												})
+												.catch(function (error){
+													alert(error);
+												})
 									}
 								}
 								Vue.createApp(single_car_app).mount("#single_car_app")
