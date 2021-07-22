@@ -153,8 +153,7 @@ public class BuyerServiceImpl implements BuyerService {
         }
 
         CartExample ce = new CartExample();
-        CartExample.Criteria criteria = new CartExample.Criteria();
-        criteria.andBtelEqualTo(btel);
+        ce.createCriteria().andBtelEqualTo(btel);
         List<Cart> history_info = cartMapper.selectByExample(ce); // 返回指定用户所有订单
 
         // 即将存入HistoryOrder的两张表
@@ -167,12 +166,13 @@ public class BuyerServiceImpl implements BuyerService {
             Integer cur_cartID = info.getCartid();
             date_list.add(info.getCartdate().toString());
             CarincludeExample cie = new CarincludeExample();
-            CarincludeExample.Criteria criteria2 = new CarincludeExample.Criteria();
-            criteria2.andCartidEqualTo(cur_cartID); // 获取CarInclude表中的所有CartID为某一值的所有信息
+            cie.createCriteria().andCartidEqualTo(cur_cartID);
             List<Carinclude> cur_car_list = carincludeMapper.selectByExample(cie);
             for(Carinclude item : cur_car_list) {
                 Integer cid = item.getCid();
-                cars.add(carMapper.selectByPrimaryKey(cid)); // 订单中的表添加到cars列表中
+                Car cur_car = carMapper.selectByPrimaryKey(cid);
+                cur_car.setCpic1("http://116.63.170.243:8888/"+cur_car.getCpic1());
+                cars.add(cur_car); // 订单中的表添加到cars列表中
             }
             car_list.add(cars);
         }

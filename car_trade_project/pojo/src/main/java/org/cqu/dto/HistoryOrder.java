@@ -3,10 +3,11 @@ package org.cqu.dto;
 import org.cqu.pojo.Car;
 import org.cqu.pojo.Cart;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class HistoryOrder {
+public class HistoryOrder implements Serializable {
     List<String> date_list;
     List<List<Car>> cars_list;
 
