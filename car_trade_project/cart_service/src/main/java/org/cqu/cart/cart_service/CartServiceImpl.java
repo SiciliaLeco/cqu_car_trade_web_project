@@ -6,10 +6,12 @@ import org.cqu.dto.ResultInfo;
 import org.cqu.mapper.CartMapper;
 
 import org.cqu.pojo.Cart;
+import org.cqu.pojo.CartExample;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -27,5 +29,16 @@ public class CartServiceImpl implements CartService {
         cartMapper.insert(new_cart);
         result.setDetail(new_cart);
         return result;
+    }
+
+    public Cart updatePrice(Integer CartID, Integer price) {
+        CartExample ce = new CartExample();
+        CartExample.Criteria criteria = ce.createCriteria();
+        criteria.andCartidEqualTo(CartID);// 获取CartID等于当前值的订单
+        List<Cart> curr_cart_list = cartMapper.selectByExample(ce);
+        Cart cur_cart = curr_cart_list.get(0); // 38行返回的是列表，但是因为CartID是主码，所以列表只有一个数据，也就是我们需要找的数据
+        cur_cart.setCartprice(price);
+        cartMapper.updateByExample(cur_cart, ce);
+        return cur_cart;
     }
 }

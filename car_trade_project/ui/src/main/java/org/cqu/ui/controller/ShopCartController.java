@@ -48,6 +48,8 @@ public class ShopCartController {
         if(len != null){
             size = Integer.valueOf(len); // 获取订单内数据的个数
         }
+
+        cartService.insert(cart_id, goodsC_date, totalCost, btel);
         for(int i = 0;i < size; i++){
             String cid = request.getParameter("cart_"+String.valueOf(i));
             String count = request.getParameter("count_"+String.valueOf(i));
@@ -67,8 +69,9 @@ public class ShopCartController {
             carIncludeService.insert(cart_id, cur_cid, cur_count);
             totalCost += cur_price; // 看到貌似没有累计 所以这里加一句
         }
-        cartService.insert(cart_id, goodsC_date, totalCost, btel); // 将这一句提到外面 只计算总价格
-        System.out.println(totalCost);
+        cartService.updatePrice(cart_id, totalCost);
+//        cartService.insert(cart_id, goodsC_date, totalCost, btel); // 将这一句提到外面 只计算总价格
+//        System.out.println(totalCost);
 
         return new ResultBean<String>(totalCost.toString());
     }

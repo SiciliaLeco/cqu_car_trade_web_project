@@ -6,4 +6,5 @@ import java.sql.Timestamp;
 
 public interface CartService {
     ResultInfo<Cart> insert(Integer CartID, Timestamp date, Integer price, String btel);
+    Cart updatePrice(Integer CartID, Integer price);
 }
