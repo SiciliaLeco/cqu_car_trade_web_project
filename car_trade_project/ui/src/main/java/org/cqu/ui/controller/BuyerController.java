@@ -56,8 +56,8 @@ public class BuyerController {
     }
 
     @RequestMapping(value = "/getUserOrder")
-    public ResultInfo<Cart> getUserOrder(String btel){
-        return buyerService.getHistoryOrder(btel);
+    public ResultInfo<Cart> getUserOrder(String token){
+        return buyerService.getHistoryOrder(token);
     }
 
 }

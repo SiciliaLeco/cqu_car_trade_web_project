@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.cqu.dto.ResultInfo.verifyToken;
+
 @Service
 public class BuyerServiceImpl implements BuyerService {
     @Autowired
@@ -137,7 +139,8 @@ public class BuyerServiceImpl implements BuyerService {
     }
 
     @Override
-    public ResultInfo<Cart> getHistoryOrder(String btel) {
+    public ResultInfo<Cart> getHistoryOrder(String token) {
+        String btel = verifyToken(token);
         ResultInfo<Cart> cart_res = new ResultInfo<>();
         CartExample ce = new CartExample();
         CartExample.Criteria criteria = new CartExample.Criteria();
