@@ -4,16 +4,23 @@ import org.apache.dubbo.config.annotation.Service;
 import org.cqu.buyer_api.BuyerService;
 import org.cqu.dto.ResultInfo;
 import org.cqu.mapper.BuyerMapper;
+import org.cqu.mapper.CartMapper;
 import org.cqu.pojo.Buyer;
+import org.cqu.pojo.Cart;
+import org.cqu.pojo.CartExample;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class BuyerServiceImpl implements BuyerService {
     @Autowired
     private BuyerMapper buyerMapper;
+    @Autowired
+    private CartMapper cartMapper;
+
     private ResultInfo<Buyer> result = new ResultInfo<>();
 
     @Override
@@ -129,4 +136,14 @@ public class BuyerServiceImpl implements BuyerService {
         buyerMapper.updateByPrimaryKey(userExist);
     }
 
+    @Override
+    public ResultInfo<Cart> getHistoryOrder(String btel) {
+        ResultInfo<Cart> cart_res = new ResultInfo<>();
+        CartExample ce = new CartExample();
+        CartExample.Criteria criteria = new CartExample.Criteria();
+        criteria.andBtelEqualTo(btel);
+        List<Cart> history_info = cartMapper.selectByExample(ce);
+        cart_res.setResult_list(history_info);
+        return cart_res;
+    }
 }

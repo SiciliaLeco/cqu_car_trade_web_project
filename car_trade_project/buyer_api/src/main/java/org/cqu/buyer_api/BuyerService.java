@@ -3,6 +3,7 @@ package org.cqu.buyer_api;
 
 import org.cqu.dto.ResultInfo;
 import org.cqu.pojo.Buyer;
+import org.cqu.pojo.Cart;
 
 import java.util.Map;
 
@@ -14,4 +15,5 @@ public interface BuyerService {
     ResultInfo<Buyer> update(String btel, String baddress, String bname);
     Map<String, String> getInfo(String btel);
     void updateIcon(String btel, String pic_url);
+    ResultInfo<Cart> getHistoryOrder(String btel);
 }
