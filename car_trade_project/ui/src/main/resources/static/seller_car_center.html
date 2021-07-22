@@ -275,14 +275,14 @@
 								<div class="car-item">
 									<div class="thumb-content">
 										<div class="car-banner">
-												<a href="single_car.html"><span id="price"> {{ seller.sprice }} </span></a>
+												<a v-bind:href="['single_car.html?cid='] + seller.scid"><span id="price"> {{ seller.sprice }} </span></a>
 										</div>
 										<div class="thumb-inner">
-											<a href="single_car.html"><img id="showimg" v-bind:src="seller.spic" alt=""></a>
+											<a v-bind:href="['single_car.html?cid='] + seller.scid"><img id="showimg" v-bind:src="seller.spic" alt=""></a>
 										</div>
 									</div>
 									<div class="down-content">
-										<a href="single_car.html"><h4 id="carname">{{seller.sname}}</h4></a>
+										<a v-bind:href="['single_car.html?cid='] + seller.scid"><h4 id="carname">{{seller.sname}}</h4></a>
 
 										<div class="line-dec"></div>
 
@@ -315,8 +315,9 @@
 																			   swarranty: response.data.result_list[i].cwarranty,
 																			   speed: response.data.result_list[i].cspeed,
 																               sacceleration:response.data.result_list[i].cacceleration,
-																               sfuel:response.data.result_list[i].cfuel,
-																               spic:response.data.result_list[i].cpic1
+																               sfuel: response.data.result_list[i].cfuel,
+																               spic: response.data.result_list[i].cpic1,
+																			   scid: response.data.result_list[i].cid
 															})
 														}
 													// this.sellers.push({sname: "lisi", sprice: "虎溪", swarranty:2018,speed:"1000",sacceleration:"200",sfuel:"disel",spic:"assets/images/car_item_1.jpg"});
