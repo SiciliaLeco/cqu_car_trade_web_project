@@ -62,6 +62,24 @@
     <!-- 使用cookie插件需要先引入jquery 且jquery只能在这里引用 不能二次引用-->
     <script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <!-- Slider Pro Js -->
+    <script src="assets/js/sliderpro.min.js"></script>
+
+    <!-- Slick Slider Js -->
+    <script src="assets/js/slick.js"></script>
+
+    <!-- Owl Carousel Js -->
+    <script src="assets/js/owl.carousel.min.js"></script>
+
+    <!-- Boostrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- Boostrap Js -->
+    <script src="assets/js/wow.animation.js"></script>
+
+    <!-- Custom Js -->
+    <script src="assets/js/custom.js"></script>
     <script>
         $(document).ready(function () {
             $("#delete_car_btn").click(function (event) {
@@ -186,20 +204,128 @@
     </div>
 </div>
 
-<div class="on-listing wow fadeIn" data-wow-delay="0.5s" data-wow-duration="1s" id="buyer_cart_list">
+<script>
+    const buyer_cart_list_app = {
+        data() {
+            var cart_len = parseInt($.cookie("cart_len"));
+            arr = [];
+
+            for (var i = 0; i < cart_len; i++) {
+                cart_seq = "cart" + i;
+                dic = {cid: ""};
+                dic["cid"] = parseInt($.cookie(cart_seq));
+                dic["CName"] = "hhh";
+                dic["CPrice"] = "100";
+                dic["CWarranty"] = "kkk";
+                dic["CSpeed"] = "lll";
+                dic["CAcceleration"] = "www";
+                dic["CFuel"] = "eee";
+                dic["CPic1"] = "assets/images/car_listing_6.jpg";
+                dic["Count"] = 1;
+                arr.push(dic);
+            }
+            return {
+                cart_len: cart_len,
+                cars: arr
+            }
+        },
+        computed: {
+            pay_value: function () {
+                var price_total = 0;
+                var cart_len = parseInt($.cookie("cart_len"));
+                for (let i = 0; i < cart_len; i++) {
+                    var cnt = parseInt(arr[i].Count);
+                    if (cnt > 0) {
+                        price_total += parseInt(arr[i].CPrice) * cnt;
+                    }
+                }
+                return price_total;
+            }
+        },
+        methods: {
+            delete_car(index) {
+                alert(index);
+            },
+            submit_all_record() {
+                var post_data = new FormData();
+                post_data.append("btel", $.cookie("UserID"));
+                post_data.append("cart_len", $.cookie("cart_len"));
+                var cart_len = parseInt($.cookie("cart_len"));
+                for (let i = 0; i < cart_len; i++) {
+                    post_data.append("cart_" + i, arr[i].cid);
+                    var cnt = parseInt(arr[i].Count);
+                    if (cnt > 0) {
+                        post_data.append("count_" + i, cnt);
+                    } else {
+                        alert("易忽略数量不正常的车 " + arr[i].Cname + " " + arr[i].Count);
+                    }
+                }
+                axios.post("/ShopCart/shopping", post_data, {headers: {'Content-Type': "multipart/form-data"}})
+                    .then(function (res) {
+                        if (res.data.success || res.data.code) {
+                            alert("支付成功 价格$" + res.data.data);
+                            $.cookie("cart_len", 0);
+                            // window.location = "/index.html";
+                        } else {
+                            alert("FAILED!");
+                        }
+                    })
+                    .catch(function (error) { // 请求失败处理,error后端返回
+                        console.log(error);
+                        alert(error);
+                    });
+            }
+        },
+
+        mounted() {
+
+            // cid_string = "?"
+            // for(var i = 0; i < cart_len; i++) {
+            // 	cart_seq = "cart" + i;
+            // 	cid_i="CID"+i;
+            // 	cid_each=cid_i+"="+parseInt($.cookie(cart_seq));
+            // 	cid_string=cid_string+cid_each+"&";
+            // 	console.log(cid_string);
+            // }
+            for (let i = 0; i < this.cart_len; i++) {
+                axios
+                    .get("/CarAPI/GetCarInfo?id=" + this.cars[i].cid
+                    )
+                    .then(response => {
+                        this.cars[i].CName = response.data.detail.cname;
+                        this.cars[i].CPrice = response.data.detail.cprice;
+                        this.cars[i].CSpeed = response.data.detail.cspeed;
+                        this.cars[i].CAcceleration = response.data.detail.cacceleration;
+                        this.cars[i].CFuel = response.data.detail.cfuel;
+                        this.cars[i].CPic1 = response.data.detail.cpic1;
+                        this.cars[i].CWarranty = response.data.detail.cwarranty;
+                        this.cars[i].Count = 1;
+                    })
+                    .catch(function (error) { // 请求失败处理
+                        console.log(error);
+                        alert("error")
+                    });
+            }
+
+        }
+    }
+    Vue.createApp(buyer_cart_list_app).mount("#buyer_cart_list");
+</script>
+
+<div class="on-listing wow fadeIn" data-wow-delay="0.5s" data-wow-duration="1s">
     <div class="container">
         <div class="recent-car-content">
-            <div class="row">
+            <div class="row" id="buyer_cart_list">
                 <div class="col-md-8">
                     <div class="row">
-                        <div class="col-md-12" v-for="car in cars" v-model="cars">
+                        <div class="col-md-12" v-for="(car, index) in cars" v-model="cars">
                             <div class="car-item">
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="thumb-content">
                                             <div class="car-banner delete_car_btn">
                                                 <h5 hidden>{{ car.cid }}</h5>
-                                                <a href="#">REMOVE</a>
+                                                <a @click="delete_car(index)">REMOVE</a>
                                             </div>
                                             <div class="thumb-inner">
                                                 <a href="single_car.html"><img v-bind:src="car.CPic1" alt=""></a>
@@ -238,112 +364,6 @@
                             </div>
                         </div>
                     </div>
-                    <script>
-                        const buyer_cart_list_app = {
-                            data() {
-                                var cart_len = parseInt($.cookie("cart_len"));
-                                arr = [];
-
-                                for (var i = 0; i < cart_len; i++) {
-                                    cart_seq = "cart" + i;
-                                    dic = {cid: ""};
-                                    dic["cid"] = parseInt($.cookie(cart_seq));
-                                    dic["CName"] = "hhh";
-                                    dic["CPrice"] = "100";
-                                    dic["CWarranty"] = "kkk";
-                                    dic["CSpeed"] = "lll";
-                                    dic["CAcceleration"] = "www";
-                                    dic["CFuel"] = "eee";
-                                    dic["CPic1"] = "assets/images/car_listing_6.jpg";
-                                    dic["Count"] = 1;
-                                    arr.push(dic);
-                                }
-                                return {
-                                    cart_len: cart_len,
-                                    cars: arr,
-                                    pay_value: price_total
-                                }
-                            },
-                            computed: {
-                                pay_value: function () {
-                                    var price_total = 0;
-                                    var cart_len = parseInt($.cookie("cart_len"));
-                                    for (let i = 0; i < cart_len; i++) {
-                                        var cnt = parseInt(arr[i].Count);
-                                        if (cnt > 0) {
-                                            price_total += parseInt(arr[i].CPrice) * cnt;
-                                        }
-                                    }
-                                    return price_total;
-                                }
-                            },
-                            methods: {
-                                submit_all_record() {
-                                    var post_data = new FormData();
-                                    post_data.append("btel", $.cookie("UserID"));
-                                    post_data.append("cart_len", $.cookie("cart_len"));
-                                    var cart_len = parseInt($.cookie("cart_len"));
-                                    for (let i = 0; i < cart_len; i++) {
-                                        post_data.append("cart_" + i, arr[i].cid);
-                                        var cnt = parseInt(arr[i].Count);
-                                        if (cnt > 0) {
-                                            post_data.append("count_" + i, cnt);
-                                        } else {
-                                            alert("易忽略数量不正常的车 " + arr[i].Cname + " " + arr[i].Count);
-                                        }
-                                    }
-                                    axios.post("/ShopCart/shopping", post_data, {headers: {'Content-Type': "multipart/form-data"}})
-                                        .then(function (res) {
-                                            if (res.data.success || res.data.code) {
-                                                alert("支付成功 价格$"+res.data.data);
-                                                $.cookie("cart_len", 0);
-                                                // window.location = "/index.html";
-                                            } else {
-                                                alert("FAILED!");
-                                            }
-                                        })
-                                        .catch(function (error) { // 请求失败处理,error后端返回
-                                            console.log(error);
-                                            alert(error);
-                                        });
-                                }
-                            },
-
-                            mounted() {
-
-                                // cid_string = "?"
-                                // for(var i = 0; i < cart_len; i++) {
-                                // 	cart_seq = "cart" + i;
-                                // 	cid_i="CID"+i;
-                                // 	cid_each=cid_i+"="+parseInt($.cookie(cart_seq));
-                                // 	cid_string=cid_string+cid_each+"&";
-                                // 	console.log(cid_string);
-                                // }
-                                for (let i = 0; i < this.cart_len; i++) {
-                                    axios
-                                        .get("http://localhost:8000/CarAPI/GetCarInfo?id=" + this.cars[i].cid
-                                        )
-                                        .then(response => {
-                                            this.cars[i].CName = response.data.detail.cname;
-                                            this.cars[i].CPrice = response.data.detail.cprice;
-                                            this.cars[i].CSpeed = response.data.detail.cspeed;
-                                            this.cars[i].CAcceleration = response.data.detail.cacceleration;
-                                            this.cars[i].CFuel = response.data.detail.cfuel;
-                                            this.cars[i].CPic1 = response.data.detail.cpic1;
-                                            this.cars[i].CWarranty = response.data.detail.cwarranty;
-                                            this.cars[i].Count = 1;
-                                        })
-                                        .catch(function (error) { // 请求失败处理
-                                            console.log(error);
-                                            alert("error")
-                                        });
-                                }
-
-                            }
-                        }
-                        Vue.createApp(buyer_cart_list_app).mount("#buyer_cart_list");
-                    </script>
-
                 </div>
                 <div class="col-md-4" id="for_submit">
                     <div class="sidebar-widgets">
@@ -357,8 +377,7 @@
                                             </div>
                                             <div class="text-content">
                                                 <h2>TOTOL PRICE：</h2>
-                                                <p>{{ pay_value }}
-                                                <p>
+                                                <p>{{ pay_value }}</p>
                                             </div>
                                             <script>
 
@@ -459,28 +478,5 @@
         </div>
     </div>
 </footer>
-
-
-<script src="assets/js/jquery-1.11.0.min.js"></script>
-
-<!-- Slider Pro Js -->
-<script src="assets/js/sliderpro.min.js"></script>
-
-<!-- Slick Slider Js -->
-<script src="assets/js/slick.js"></script>
-
-<!-- Owl Carousel Js -->
-<script src="assets/js/owl.carousel.min.js"></script>
-
-<!-- Boostrap Js -->
-<script src="assets/js/bootstrap.min.js"></script>
-
-<!-- Boostrap Js -->
-<script src="assets/js/wow.animation.js"></script>
-
-<!-- Custom Js -->
-<script src="assets/js/custom.js"></script>
-
-
 </body>
 </html>

@@ -306,19 +306,19 @@
 							},
 							mounted() {
 								axios
-										// .get("/Index/findTop6Car")
-										.get("#")
+										.get("/Index/findTop6Car")
+										// .get("#")
 										.then(response => {
-												// for(let i=0; i<response.data.result_list.length; i++){
-												// 	this.top_car_list.push({cid: response.data.result_list[i].cid,
-												// 				       cname: response.data.result_list[i].cname,
-												// 					   cprice: response.data.result_list[i].cprice,
-												// 					   cpic1: response.data.result_list[i].cpic1})
-												// }
-											this.top_car_list.push({cid: "123", cname: "猫", cprice:100, cpic1:"assets/images/car_item_6.jpg"});
-											this.top_car_list.push({cid: "124", cname: "虎", cprice:200, cpic1:"assets/images/car_item_6.jpg"});
-											this.top_car_list.push({cid: "125", cname: "兔", cprice:300, cpic1:"assets/images/car_item_6.jpg"});
-											this.top_car_list.push({cid: "126", cname: "虎", cprice:400, cpic1:"assets/images/car_item_6.jpg"});
+												for(let i=0; i<response.data.result_list.length; i++){
+													this.top_car_list.push({cid: response.data.result_list[i].cid,
+																       cname: response.data.result_list[i].cname,
+																	   cprice: response.data.result_list[i].cprice,
+																	   cpic1: response.data.result_list[i].cpic1})
+												}
+											// this.top_car_list.push({cid: "123", cname: "猫", cprice:100, cpic1:"assets/images/car_item_6.jpg"});
+											// this.top_car_list.push({cid: "124", cname: "虎", cprice:200, cpic1:"assets/images/car_item_6.jpg"});
+											// this.top_car_list.push({cid: "125", cname: "兔", cprice:300, cpic1:"assets/images/car_item_6.jpg"});
+											// this.top_car_list.push({cid: "126", cname: "虎", cprice:400, cpic1:"assets/images/car_item_6.jpg"});
 
 										})
 										.catch(function (error){
@@ -528,7 +528,7 @@
 										// .get("#")
 										.then(response => {
 											for(let i=0; i<response.data.result_list.length; i++){
-												this.random_car_app.push({cid: response.data.result_list[i].cid,
+												this.random_car_list.push({cid: response.data.result_list[i].cid,
 															       cname: response.data.result_list[i].cname,
 																   cprice: response.data.result_list[i].cprice,
 																   cpic1: response.data.result_list[i].cpic1,
@@ -606,19 +606,19 @@
 					},
 					mounted() {
 						axios
-							// .get("/SellerAPI/getAll")
-							.get("#")
+							.get("/SellerAPI/getAll")
+							// .get("#")
 							.then(response => {
-							// 	for(let i=0; i<response.data.result_list.length; i++){
-							// 		this.sellers.push({sname: response.data.result_list[i].sname,
-							// 					       sid: response.data.result_list[i].sid,
-							// 						   saddress: response.data.result_list[i].saddress,
-							// 						   stel: response.data.result_list[i].stel})
-							// 	}
-								this.sellers.push({sname: "lisi", sid: 111, saddress: "虎溪", stel:2018});
-								this.sellers.push({sname: "dsa", sid: 112, saddress: "猫溪", stel:2019});
-								this.sellers.push({sname: "456", sid: 113, saddress: "狗溪", stel:2020});
-								this.sellers.push({sname: "sdadas", sid: 114, saddress: "兔溪", stel:2021});
+								for(let i=0; i<response.data.result_list.length; i++){
+									this.sellers.push({sname: response.data.result_list[i].sname,
+												       sid: response.data.result_list[i].sid,
+													   saddress: response.data.result_list[i].saddress,
+													   stel: response.data.result_list[i].stel})
+								}
+							// 	this.sellers.push({sname: "lisi", sid: 111, saddress: "虎溪", stel:2018});
+							// 	this.sellers.push({sname: "dsa", sid: 112, saddress: "猫溪", stel:2019});
+							// 	this.sellers.push({sname: "456", sid: 113, saddress: "狗溪", stel:2020});
+							// 	this.sellers.push({sname: "sdadas", sid: 114, saddress: "兔溪", stel:2021});
 
 							})
 							.catch(function (error){
