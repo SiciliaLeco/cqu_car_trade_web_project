@@ -8,6 +8,8 @@ import org.cqu.pojo.Car;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/CarAPI")
 public class CarController {
@@ -30,6 +32,14 @@ public class CarController {
         car.setCpic4(nginx_info+car.getCpic4());
         car.setCpic5(nginx_info+car.getCpic5());
         res.setDetail(car);
+        return res;
+    }
+
+    @RequestMapping("/GetRandomCar")
+    public ResultInfo<Car> getRandomCar(){
+        ResultInfo<Car> res = new ResultInfo<>();
+        List<Car> random_cars = carService.getRandomCar();
+        res.setResult_list(random_cars);
         return res;
     }
 }
