@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import static java.lang.Math.round;
 
@@ -66,10 +64,10 @@ public class ShopCartController {
             Car cur_car = carService.getCarInfo(cur_cid);
             Integer cur_price = round(cur_car.getCprice());
 
-//            carIncludeService.insert(cart_id, cur_cid, cur_count);
+            carIncludeService.insert(cart_id, cur_cid, cur_count);
             totalCost += cur_price; // 看到貌似没有累计 所以这里加一句
         }
-//        cartService.insert(cart_id, goodsC_date, totalCost, btel); // 将这一句提到外面 只计算总价格
+        cartService.insert(cart_id, goodsC_date, totalCost, btel); // 将这一句提到外面 只计算总价格
         System.out.println(totalCost);
 
         return new ResultBean<String>(totalCost.toString());

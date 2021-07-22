@@ -56,6 +56,7 @@
         <module>cart_service</module>
         <module>car_include_api</module>
         <module>car_include_service</module>
+        <module>car_include_service</module>
     </modules>
 
     <!--声明全局依赖（子项目需要显示的引用才会继承依赖）-->
