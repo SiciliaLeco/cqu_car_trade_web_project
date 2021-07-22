@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import static java.lang.Math.round;
 
@@ -49,6 +51,10 @@ public class ShopCartController {
             size = Integer.valueOf(len); // 获取订单内数据的个数
         }
 
+        // DEBUG
+        List<String> record = new LinkedList<String>();
+        // DEBUG
+
         cartService.insert(cart_id, goodsC_date, totalCost, btel);
         for(int i = 0;i < size; i++){
             String cid = request.getParameter("cart_"+String.valueOf(i));
@@ -66,9 +72,25 @@ public class ShopCartController {
             Car cur_car = carService.getCarInfo(cur_cid);
             Integer cur_price = round(cur_car.getCprice());
 
+            record.add(cart_id.toString());
+            record.add(cur_cid.toString());
+            record.add(cur_count.toString());
+            record.add("\n");
+
             carIncludeService.insert(cart_id, cur_cid, cur_count);
             totalCost += cur_price; // 看到貌似没有累计 所以这里加一句
         }
+        record.add(cart_id.toString());
+        record.add(goodsC_date.toString());
+        record.add(totalCost.toString());
+        record.add(btel);
+        record.add("\n");
+
+        for(String s : record){
+            System.out.print(s);
+            System.out.print(" ");
+        }
+
         cartService.updatePrice(cart_id, totalCost);
 //        cartService.insert(cart_id, goodsC_date, totalCost, btel); // 将这一句提到外面 只计算总价格
 //        System.out.println(totalCost);
