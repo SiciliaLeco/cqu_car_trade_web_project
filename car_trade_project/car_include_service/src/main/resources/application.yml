@@ -24,7 +24,7 @@ dubbo:
   #协议
   protocol:
     name: dubbo
-    port: 20884
+    port: 20889
   #制定扫描的基础包
   scan:
     base-packages: org.cqu.buyer_service.BuyerServceImple

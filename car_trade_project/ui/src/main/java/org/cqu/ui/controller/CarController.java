@@ -42,4 +42,26 @@ public class CarController {
         res.setResult_list(random_cars);
         return res;
     }
+
+    @RequestMapping("GetSellersCars")
+    public ResultInfo<Car> getSellersCars(String sname) {
+        ResultInfo<Car> res = new ResultInfo<>();
+        List<Car> cars= carService.getCarsByType(sname);
+        String nginx_info = "http://116.63.170.243:8888/";
+        for (Car car : cars) {
+            car.setCpic1(nginx_info + car.getCpic1());
+        }
+        res.setResult_list(cars);
+        return res;
+    }
+
+//    @RequestMapping("/UploadNewCar")
+//    public int uploadNewCar(String CName, float CPrice, int CSpeed, String CFuel, String CType,
+//                            String CGear, int Cwarranty, int Ctank_capacity, float CAcceleration,
+//                            String CPic1, String CPic2, String CPic3, String CPic4, String CPic5) {
+//        return carService.uploadNewCar(CName, CPrice, CSpeed, CFuel, CType,
+//                CGear, Cwarranty, Ctank_capacity, CAcceleration,
+//                CPic1, CPic2, CPic3, CPic4, CPic5);
+//    }
+
 }
