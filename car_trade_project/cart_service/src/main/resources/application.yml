@@ -1,5 +1,5 @@
 server:
-  port: 9097
+  port: 9099
 
 mybatis:
   mapper-locations: classpath:org/cqu/mapper/*.xml  #配置映射文件
@@ -24,7 +24,7 @@ dubbo:
   #协议
   protocol:
     name: dubbo
-    port: 20887
+    port: 20889
   #制定扫描的基础包
   scan:
     base-packages: org.cqu.buyer_service.BuyerServceImple
