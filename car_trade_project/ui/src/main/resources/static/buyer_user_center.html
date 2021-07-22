@@ -251,7 +251,7 @@
 							<div class="container">
 								<div class="row">
 									<ul class="car-info col-md-5">
-										<img id="tar_img" class="car-info col-md-7" src="assets/images/user_male.jpg"/>
+										<img id="tar_img" class="car-info col-md-7" v-bind:src="detail.bicon"/>
 										<br></br>
 										<form id="uploadForm" method="post" enctype="multipart/form-data">
 											<input type="file" id="local_img" name="local_img" multiple class="attachment-upload">
@@ -270,7 +270,7 @@
 												};
 
 												axios
-														.post("http://116.63.170.243:8000/picupload/buyer",formData,config)
+														.post("http://localhost:8000/picupload/buyer",formData,config)
 														.then(function (response) {
 															console.log(response);
 															document.getElementById("tar_img").setAttribute("src",response['data']);
@@ -283,21 +283,21 @@
 									</ul>
 									<form class="car-info col-md-5">
 										<div class="form-group">
-											<b>Tel </b><input id="TEL" value="detail.btel" readonly="readonly" style="border: none;"/>
+											<b>Tel </b><input id="TEL" v-bind:value="detail.btel" readonly="readonly" style="border: none;"/>
 										</div>
 										<div class="form-group">
-											<b>VIP </b><input value="detail.bvip" readonly="readonly" style="border: none;"/>
+											<b>VIP </b><input v-bind:value="detail.bvip" readonly="readonly" style="border: none;"/>
 										</div>
 										<div class="form-group">
-											<b>Name </b><input id="input1" value="detail.bname"  style="border: none;"/>
+											<b>Name </b><input id="input1" v-bind:value="detail.bname"  style="border: none;"/>
 											<button class="col-md-4 btn" onclick="update_info(1)" style="float:right;">Update</button>
 										</div>
 										<div class="form-group">
-											<b>Gender </b><input id="input2" value="detail.bgender" readonly="readonly" style="border: none;"/>
+											<b>Gender </b><input id="input2" v-bind:value="detail.bgender" readonly="readonly" style="border: none;"/>
 											<button class="col-md-4 btn" onclick="update_info(2)" style="float:right;">Update</button>
 										</div>
 										<div class="form-group">
-											<b>Address </b><input id="input3" value="detail.baddress"  style="border: none;"/>
+											<b>Address </b><input id="input3" v-bind:value="detail.baddress"  style="border: none;"/>
 											<button class="col-md-4 btn" onclick="update_info(3)" style="float:right;">Update</button>
 										</div>
 
@@ -319,7 +319,7 @@
 													.then(function (res) {
 														if(res.data.success === true) {
 															alert("UPDATE SUCCESS!")
-															window.location="/buyer_user-center.html";
+															window.location="/buyer_user_center.html";
 														}
 														else {
 															alert("FAILED!")
@@ -328,7 +328,7 @@
 													.catch(function (error) { // 请求失败处理
 														alert("ERROR")
 														console.log(error);
-														window.location="/buyer_user-center";
+														window.location="/buyer_user_center";
 
 													});
 											}
@@ -350,11 +350,13 @@
 											.get("/BuyerAPI/getUserInfo?token=" + $.cookie("Token"))
 											// .get("#")
 											.then(response => {
+												console.log(response);
 													this.detail={btel: response.data.detail.btel,
 														bvip: response.data.detail.bvip,
 														bname: response.data.detail.bname,
 														bgender: response.data.detail.bgender,
 														baddress: response.data.detail.baddress,
+														bicon: response.data.detail.bicon
 												}
 												// this.random_car_list.push({cid: "123", cname: "猫", cprice:100, cpic1:"assets/images/car_item_6.jpg", cwarranty: 2018, cspeed: 100, cacceleration:7.1, cfuel: "petrol"});
 												// this.random_car_list.push({cid: "124", cname: "虎", cprice:200, cpic1:"assets/images/car_item_6.jpg", cwarranty: 2019, cspeed: 110, cacceleration:7.2, cfuel: "petrol"});

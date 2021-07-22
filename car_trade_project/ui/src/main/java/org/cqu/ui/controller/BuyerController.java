@@ -46,14 +46,17 @@ public class BuyerController {
     }
 
     @PostMapping(value = "/updateUserInfo")
-    public ResultInfo<Buyer> updateUserInfo(String Username, String Address, String Gender) {
-        return buyerService.update(Username, Address, Gender);
+    public ResultInfo<Buyer> updateUserInfo(String btel, String bname, Integer Gender, String baddress) {
+        return buyerService.update(btel, bname, Gender, baddress);
     }
 
 
     @RequestMapping(value = "/getUserInfo")
-    public Map<String, String> getUserInfo(String btel) {
-        return buyerService.getInfo(btel);
+    public ResultInfo<Buyer> getUserInfo(String token) {
+        String btel = ResultInfo.verifyToken(token);
+        ResultInfo<Buyer> user = new ResultInfo<>();
+        user.setDetail(buyerService.findBuyerByTel(btel));
+        return user;
     }
 
     @RequestMapping(value = "/getUserOrder")
