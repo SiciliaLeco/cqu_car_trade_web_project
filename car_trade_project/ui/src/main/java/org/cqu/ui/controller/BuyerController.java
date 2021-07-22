@@ -3,6 +3,7 @@ package org.cqu.ui.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.cqu.backend_result.ResultBean;
 import org.cqu.buyer_api.BuyerService;
+import org.cqu.dto.HistoryOrder;
 import org.cqu.dto.ResultInfo;
 import org.cqu.pojo.Buyer;
 import org.cqu.pojo.Cart;
@@ -56,7 +57,7 @@ public class BuyerController {
     }
 
     @RequestMapping(value = "/getUserOrder")
-    public ResultInfo<Cart> getUserOrder(String token){
+    public HistoryOrder getUserOrder(String token){
         return buyerService.getHistoryOrder(token);
     }
 
