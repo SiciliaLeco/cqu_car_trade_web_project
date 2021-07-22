@@ -285,10 +285,10 @@
 						<div id="owl-top-features" class="owl-carousel owl-theme">
 							<div class="item car-item" v-for="top_car in top_car_list" v-model="top_car_list">
 								<div class="thumb-content">
-									<a href="single_car.html"><img v-bind:src="top_car.cpic1" alt=""></a>
+									<a v-bind:href="['single_car.html?cid=' + top_car.cid]"><img v-bind:src="top_car.cpic1" alt=""></a>
 								</div>
 								<div class="down-content">
-									<a href="single_car.html"><h4>{{ top_car.cname }}</h4></a>
+									<a v-bind:href="['single_car.html?cid=' + top_car.cid]"><h4>{{ top_car.cname }}</h4></a>
 									<span>{{ top_car.cprice }}</span>
                                     <span hidden>{{ top_car.cid }}</span>
 								</div>
@@ -306,19 +306,19 @@
 							},
 							mounted() {
 								axios
-										.get("/Index/findTop6Car")
-										// .get("#")
+										// .get("/Index/findTop6Car")
+										.get("#")
 										.then(response => {
-												for(let i=0; i<response.data.result_list.length; i++){
-													this.top_car_list.push({cid: response.data.result_list[i].cid,
-																       cname: response.data.result_list[i].cname,
-																	   cprice: response.data.result_list[i].cprice,
-																	   cpic1: response.data.result_list[i].cpic1})
-												}
-											// this.top_car_list.push({cid: "123", cname: "猫", cprice:100, cpic1:""});
-											// this.top_car_list.push({cid: "124", cname: "虎", cprice:200, cpic1:""});
-											// this.top_car_list.push({cid: "125", cname: "兔", cprice:300, cpic1:""});
-											// this.top_car_list.push({cid: "126", cname: "虎", cprice:400, cpic1:""});
+												// for(let i=0; i<response.data.result_list.length; i++){
+												// 	this.top_car_list.push({cid: response.data.result_list[i].cid,
+												// 				       cname: response.data.result_list[i].cname,
+												// 					   cprice: response.data.result_list[i].cprice,
+												// 					   cpic1: response.data.result_list[i].cpic1})
+												// }
+											this.top_car_list.push({cid: "123", cname: "猫", cprice:100, cpic1:"assets/images/car_item_6.jpg"});
+											this.top_car_list.push({cid: "124", cname: "虎", cprice:200, cpic1:"assets/images/car_item_6.jpg"});
+											this.top_car_list.push({cid: "125", cname: "兔", cprice:300, cpic1:"assets/images/car_item_6.jpg"});
+											this.top_car_list.push({cid: "126", cname: "虎", cprice:400, cpic1:"assets/images/car_item_6.jpg"});
 
 										})
 										.catch(function (error){
@@ -489,146 +489,69 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-4 col-sm-6">
+					<div class="row" id="random_car">
+						<div class="col-md-4 col-sm-6" v-for="random_car in random_car_list" v-model="random_car_list">
 							<div class="car-item wow fadeIn" data-wow-duration="0.75s">
 								<div class="thumb-content">
 									<div class="car-banner">
-										<a href="single_car.html">For Rent</a>
+										<a v-bind:href="['single_car.html?cid=' + random_car.cid]">HOT!</a>
 									</div>
 									<div class="thumb-inner">
-										<a href="single_car.html"><img src="assets/images/car_item_1.jpg" alt=""></a>
+										<a v-bind:href="['single_car.html?cid=' + random_car.cid]"><img v-bind:src="random_car.cpic1" alt=""></a>
 									</div>
 								</div>
 								<div class="down-content">
-									<a href="single_car.html"><h4>Perfect Sport Car</h4></a>
-									<span>$1.200</span>
-									<p>Leggings edison bulb hexagon, hashtag coloring book ethical echo park austin fam succulents.</p>
+									<a v-bind:href="['single_car.html?cid=' + random_car.cid]"><h4>{{ random_car.cname }}</h4></a>
+									<span> <i class="fa fa-dollar"></i>{{ random_car.cprice }}</span>
 									<ul class="car-info">
-										<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>2018</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-speed"></i><p>160p/h</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-road"></i><p>26.00km</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>Petrol</p></div></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<div class="car-item wow fadeIn" data-wow-duration="0.75s">
-								<div class="thumb-content">
-									<div class="car-banner">
-										<a href="single_car.html">For Sale</a>
-									</div>
-									<div class="thumb-inner">
-										<a href="single_car.html"><img src="assets/images/car_item_2.jpg" alt=""></a>
-									</div>
-								</div>
-								<div class="down-content">
-									<a href="single_car.html"><h4>Perfect Sport Car</h4></a>
-									<span>$49.950</span>
-									<p>Leggings edison bulb hexagon, hashtag coloring book ethical echo park austin fam succulents.</p>
-									<ul class="car-info">
-										<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>2018</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-speed"></i><p>160p/h</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-road"></i><p>26.00km</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>Petrol</p></div></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<div class="car-item wow fadeIn" data-wow-duration="0.75s">
-								<div class="thumb-content">
-									<div class="car-banner">
-										<a href="single_car.html">For Rent</a>
-									</div>
-									<div class="thumb-inner">
-										<a href="single_car.html"><img src="assets/images/car_item_3.jpg" alt=""></a>
-									</div>
-								</div>
-								<div class="down-content">
-									<a href="single_car.html"><h4>Perfect Sport Car</h4></a>
-									<span>$1.500</span>
-									<p>Leggings edison bulb hexagon, hashtag coloring book ethical echo park austin fam succulents.</p>
-									<ul class="car-info">
-										<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>2018</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-speed"></i><p>160p/h</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-road"></i><p>26.00km</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>Petrol</p></div></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<div class="car-item wow fadeIn" data-wow-duration="0.75s">
-								<div class="thumb-content">
-									<div class="car-banner">
-										<a href="single_car.html">For Rent</a>
-									</div>
-									<div class="thumb-inner">
-										<a href="single_car.html"><img src="assets/images/car_item_4.jpg" alt=""></a>
-									</div>
-								</div>
-								<div class="down-content">
-									<a href="single_car.html"><h4>Perfect Sport Car</h4></a>
-									<span>$1.550</span>
-									<p>Leggings edison bulb hexagon, hashtag coloring book ethical echo park austin fam succulents.</p>
-									<ul class="car-info">
-										<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>2018</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-speed"></i><p>160p/h</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-road"></i><p>26.00km</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>Petrol</p></div></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<div class="car-item wow fadeIn" data-wow-duration="0.75s">
-								<div class="thumb-content">
-									<div class="car-banner">
-										<a href="single_car.html">For Sale</a>
-									</div>
-									<div class="thumb-inner">
-										<a href="single_car.html"><img src="assets/images/car_item_5.jpg" alt=""></a>
-									</div>
-								</div>
-								<div class="down-content">
-									<a href="single_car.html"><h4>Perfect Sport Car</h4></a>
-									<span>$30.000</span>
-									<p>Leggings edison bulb hexagon, hashtag coloring book ethical echo park austin fam succulents.</p>
-									<ul class="car-info">
-										<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>2018</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-speed"></i><p>160p/h</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-road"></i><p>26.00km</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>Petrol</p></div></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<div class="car-item wow fadeIn" data-wow-duration="0.75s">
-								<div class="thumb-content">
-									<div class="car-banner">
-										<a href="single_car.html">For Rent</a>
-									</div>
-									<div class="thumb-inner">
-										<a href="single_car.html"><img src="assets/images/car_item_6.jpg" alt=""></a>
-									</div>
-								</div>
-								<div class="down-content">
-									<a href="single_car.html"><h4>Perfect Sport Car</h4></a>
-									<span>$1.500</span>
-									<p>Leggings edison bulb hexagon, hashtag coloring book ethical echo park austin fam succulents.</p>
-									<ul class="car-info">
-										<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>2018</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-speed"></i><p>160p/h</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-road"></i><p>26.00km</p></div></li>
-										<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>Petrol</p></div></li>
+										<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>{{ random_car.cwarranty }}年</p></div></li>
+										<li><div class="item"><i class="flaticon flaticon-speed"></i><p>{{ random_car.cspeed }}/h</p></div></li>
+										<li><div class="item"><i class="flaticon flaticon-road"></i><p>{{ random_car.cacceleration }}s</p></div></li>
+										<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>{{ random_car.cfuel }}</p></div></li>
 									</ul>
 								</div>
 							</div>
 						</div>
 					</div>
+					<script>
+						random_car_list = []
+
+						const random_car_app = {
+							data() {
+								return {
+									random_car_list: random_car_list
+								}
+							},
+							mounted() {
+								axios
+										.get("/CarAPI/GetRandomCar")
+										// .get("#")
+										.then(response => {
+											for(let i=0; i<response.data.result_list.length; i++){
+												this.top_car_list.push({cid: response.data.result_list[i].cid,
+															       cname: response.data.result_list[i].cname,
+																   cprice: response.data.result_list[i].cprice,
+																   cpic1: response.data.result_list[i].cpic1,
+																   cwarranty: response.data.result_list[i].cwarranty,
+																   cspeed: response.data.result_list[i].cspeed,
+																   cacceleration: response.data.result_list[i].cacceleration,
+																   cfuel: response.data.result_list[i].cfuel,
+
+												})
+											}
+											// this.random_car_list.push({cid: "123", cname: "猫", cprice:100, cpic1:"assets/images/car_item_6.jpg", cwarranty: 2018, cspeed: 100, cacceleration:7.1, cfuel: "petrol"});
+											// this.random_car_list.push({cid: "124", cname: "虎", cprice:200, cpic1:"assets/images/car_item_6.jpg", cwarranty: 2019, cspeed: 110, cacceleration:7.2, cfuel: "petrol"});
+											// this.random_car_list.push({cid: "125", cname: "兔", cprice:300, cpic1:"assets/images/car_item_6.jpg", cwarranty: 2020, cspeed: 120, cacceleration:7.3, cfuel: "petrol"});
+											// this.random_car_list.push({cid: "126", cname: "虎", cprice:400, cpic1:"assets/images/car_item_6.jpg", cwarranty: 2021, cspeed: 130, cacceleration:7.4, cfuel: "petrol"});
+
+										})
+										.catch(function (error){
+											alert(error);
+										})
+							}
+						}
+						Vue.createApp(random_car_app).mount("#random_car")
+					</script>
 				</div>
 			</div>
 		</div>
@@ -665,8 +588,8 @@
 						<p> Address: {{ seller.saddress }}</p>
 						<p> Tel: {{ seller.stel }}</p>
 						<div class="author-rate">
-							<img src="assets/images/user_female.jpg" alt="">
-							<h4><a href="#">{{ seller.sname }}</a></h4>
+							<img src="assets/images/user_male.jpg" alt="">
+							<h4><a v-bind:href="['seller_car_center.html?sname=' + seller.sname]">{{ seller.sname }}</a></h4>
 							<div class="line-dec2"></div>
 						</div>
 					</div>
@@ -692,10 +615,10 @@
 							// 						   saddress: response.data.result_list[i].saddress,
 							// 						   stel: response.data.result_list[i].stel})
 							// 	}
-								this.sellers.push({sname: "lisi", saddress: "虎溪", stel:2018});
-								this.sellers.push({sname: "dsa", saddress: "猫溪", stel:2019});
-								this.sellers.push({sname: "456", saddress: "狗溪", stel:2020});
-								this.sellers.push({sname: "sdadas", saddress: "兔溪", stel:2021});
+								this.sellers.push({sname: "lisi", sid: 111, saddress: "虎溪", stel:2018});
+								this.sellers.push({sname: "dsa", sid: 112, saddress: "猫溪", stel:2019});
+								this.sellers.push({sname: "456", sid: 113, saddress: "狗溪", stel:2020});
+								this.sellers.push({sname: "sdadas", sid: 114, saddress: "兔溪", stel:2021});
 
 							})
 							.catch(function (error){
