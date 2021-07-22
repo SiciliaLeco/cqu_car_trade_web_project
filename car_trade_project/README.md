@@ -39,6 +39,15 @@ maven可以相互依赖,环境整理完毕,务必看完本文档
 - 在application.yml中, 映射文件应该这样写, mapper-locations: classpath:org/cqu/mapper/*.xml 后面的路径代表你在resources中mapper.xml的相对路径, 
 - 由于mapper层独立成module, 因此需要在你运行的application.java上面加上@MapperScan("org.cqu.mapper") 解决无法调用mapper问题
 - 建议前后端直接交互使用org.cqu.backend_result.ResultBean类来交互, 这个类会自动返回一个json{'msg','success','data'}
-
-## TODO
 - 搭建vpn, 将远程服务映射到本地, 加快开发进度
+
+## dubbo端口
+- buyer_service 9094 -- 20884
+- cache_service 9097 -- 20887
+- car_include_service 9098 -- 20888
+- car_service 9093 -- 20883
+- cart_service 9099 -- 20889
+- include_service 9096 -- 20886
+- picture_service 9091 -- 20881
+- seller_service 9092 -- 20882
+- ui 8000

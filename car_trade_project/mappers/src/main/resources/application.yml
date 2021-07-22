@@ -1,5 +1,5 @@
 server:
-  port: 9099
+  port: 9000
 
 mybatis:
   mapper-locations: classpath:org/cqu/mapper/*.xml  #配置映射文件
