@@ -37,7 +37,7 @@ public class ResultInfo<T> implements Serializable {
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT jwt = verifier.verify(token);
-            String userId = jwt.getClaim("userId").asString();
+            String userId = jwt.getClaim("user_tel").asString();
             return userId;
         } catch (Exception e){
             return null;
