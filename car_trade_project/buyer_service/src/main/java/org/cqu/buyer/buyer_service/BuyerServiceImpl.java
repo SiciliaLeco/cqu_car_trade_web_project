@@ -83,6 +83,8 @@ public class BuyerServiceImpl implements BuyerService {
         buyer.setBtel(Tel);
         buyer.setBaddress(Address);
         buyer.setBname(Username);
+        String defaultAvatar = "http://116.63.170.243:8888/group2/M00/00/01/wKgCzWD5OM2AeKWMAAAPR6rnCVA389.jpg";
+        buyer.setBicon(defaultAvatar);
         if(Gender.equals("Male")){
             buyer.setBgender(1);   // 1 for male and 0 for female
         } else {
@@ -121,20 +123,6 @@ public class BuyerServiceImpl implements BuyerService {
         result.setSuccess(true);
         return result;
     }
-
-    @Override
-    public Map<String, String> getInfo(String btel){
-        Map<String, String> buyer_info = new HashMap<String, String>();
-        Buyer buyer = buyerMapper.selectByPrimaryKey(btel);
-        buyer_info.put("tel", buyer.getBtel());
-        buyer_info.put("name", buyer.getBname());
-        buyer_info.put("address",buyer.getBaddress());
-        buyer_info.put("gender",String.valueOf(buyer.getBgender()));
-        buyer_info.put("vip", String.valueOf(buyer.getBvip()));
-        return buyer_info;
-    }
-
-
 
     @Override
     public void updateIcon(String btel, String pic_url) {

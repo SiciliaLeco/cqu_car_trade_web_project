@@ -270,7 +270,7 @@
 												};
 
 												axios
-														.post("http://116.63.170.243:8000/picupload/buyer",formData,config)
+														.post("http://localhost:8000/picupload/buyer",formData,config)
 														.then(function (response) {
 															console.log(response);
 															document.getElementById("tar_img").setAttribute("src",response['data']);
