@@ -293,7 +293,7 @@
 									let bToken = $.cookie('Token');
 									axios
 											// .get("/SellerAPI/getAll")
-											.get("http://localhost:8000/CarAPI/GetSellersCars?bToken="+bToken)
+											.get("/BuyerAPI/getUserOrder?token="+bToken)
 											.then(response => {
 												for(let i=0; i<response.data.result_list.length; i++){
 													this.cars.push({cname: response.data.result_list[i].cname,
