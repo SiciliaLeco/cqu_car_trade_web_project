@@ -85,6 +85,8 @@ public class BuyerServiceImpl implements BuyerService {
         buyer.setBname(Username);
         String defaultAvatar = "http://116.63.170.243:8888/group2/M00/00/01/wKgCzWD5OM2AeKWMAAAPR6rnCVA389.jpg";
         buyer.setBicon(defaultAvatar);
+        Integer defaultVIP = 0;
+        buyer.setBvip(defaultVIP); // 默认值
         if(Gender.equals("Male")){
             buyer.setBgender(1);   // 1 for male and 0 for female
         } else {
@@ -114,10 +116,11 @@ public class BuyerServiceImpl implements BuyerService {
     }
 
     @Override
-    public ResultInfo<Buyer> update(String btel, String baddress, String bname){
+    public ResultInfo<Buyer> update(String btel, String bname, Integer Gender, String baddress){
         Buyer userExist = buyerMapper.selectByPrimaryKey(btel);
-        userExist.setBaddress(baddress);
         userExist.setBname(bname);
+        userExist.setBgender(Gender);
+        userExist.setBaddress(baddress);
         buyerMapper.updateByPrimaryKey(userExist);
         result.setMsg("update succeed!");
         result.setSuccess(true);

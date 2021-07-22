@@ -13,7 +13,7 @@ public interface BuyerService {
     String getBuyerName(String BuyerTel);
     ResultInfo<Buyer> login(String btel, String bpassword);
     ResultInfo<Buyer> register(String Username, String Gender, String Address, String Tel, String Password);
-    ResultInfo<Buyer> update(String btel, String baddress, String bname);
+    ResultInfo<Buyer> update(String btel, String bname, Integer Gender, String baddress);
     void updateIcon(String btel, String pic_url);
     HistoryOrder getHistoryOrder(String btel);
 }
