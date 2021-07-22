@@ -247,33 +247,32 @@
 			<div class="recent-car-content">
 				<div class="row">
 					<div class="col-md-10 offset-md-1">
-						<div class="row">
-
-							<div class="col-md-12">
+						<div class="row" id="bought_cars">
+							<div class="col-md-12" v-for="car in bought_cars_list">
 								<div class="car-item">
 									<div class="row">
 										<div class="col-md-5">
 											<div class="thumb-content">
 												<div class="car-banner">
-													<a href="single_car.html">For Rent</a>
+													<a v-bind:href="['single_car.html?cid=' + car.cid]">For Rent</a>
 												</div>
 												<div class="thumb-inner">
-													<a href="single_car.html"><img src="assets/images/car_listing_6.jpg" alt=""></a>
+													<a v-bind:href="['single_car.html?cid=' + car.cid]"><img :src="car.cpic1" alt=""></a>
 												</div>
 											</div>
 										</div>
 										<div class="col-md-7">
 											<div class="down-content">
-												<a href="single_car.html"><h4>Perfect Sport Car</h4></a>
-												<span>$36.000</span>
-												<span style="color:#31a50b;float:right;">2018-12-13 12:31</span>
+												<a v-bind:href="['single_car.html?cid=' + car.cid]"><h4>{{car.cname}}</h4></a>
+												<span>{{car.cprice}}</span>
+												<span style="color:#31a50b;float:right;">Order Date： {{car.cdate}}</span>
 												<div class="line-dec"></div>
 												<p>Man braid helvetica bushwick, tilde cliche locavore beard master cleanse vaporware lyft biodiesel fixie. Waistcoat quinoa four dollar toast, you probably haven't heard of them vinyl art party tumeric lumbersexual raclette lyft coloring book poke man bun.</p>
 												<ul class="car-info">
-													<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>2013</p></div></li>
-													<li><div class="item"><i class="flaticon flaticon-speed"></i><p>160p/h</p></div></li>
-													<li><div class="item"><i class="flaticon flaticon-road"></i><p>26.00km</p></div></li>
-													<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>Petrol</p></div></li>
+													<li><div class="item"><i class="flaticon flaticon-calendar"></i><p>{{car.cwarranty}}</p></div></li>
+													<li><div class="item"><i class="flaticon flaticon-speed"></i><p>{{car.cspeed}}</p></div></li>
+													<li><div class="item"><i class="flaticon flaticon-road"></i><p>{{car.cacceleration}}</p></div></li>
+													<li><div class="item"><i class="flaticon flaticon-fuel"></i><p>{{car.cfuel}}</p></div></li>
 												</ul>
 											</div>
 										</div>
@@ -281,6 +280,45 @@
 								</div>
 							</div>
 						</div>
+						<script>
+							bought_cars_list = []
+
+							const bought_cars_app = {
+								data() {
+									return {
+										bought_cars_list: bought_cars_list
+									}
+								},
+								mounted() {
+									let bToken = $.cookie('Token');
+									axios
+											// .get("/SellerAPI/getAll")
+											.get("http://localhost:8000/CarAPI/GetSellersCars?bToken="+bToken)
+											.then(response => {
+												for(let i=0; i<response.data.result_list.length; i++){
+													this.cars.push({cname: response.data.result_list[i].cname,
+														cdate:response.data.result_list[i].cdate.toLocaleDateString(),
+														cprice: response.data.result_list[i].cprice,
+														cwarranty: response.data.result_list[i].cwarranty,
+														cspeed: response.data.result_list[i].cspeed,
+														cacceleration:response.data.result_list[i].cacceleration,
+														cfuel:response.data.result_list[i].cfuel,
+														cpic1:response.data.result_list[i].cpic1,
+														cid:response.data.result_list[i].cid,
+													})
+												}
+												// this.sellers.push({sname: "lisi", sprice: "虎溪", swarranty:2018,speed:"1000",sacceleration:"200",sfuel:"disel",spic:"assets/images/car_item_1.jpg"});
+												// this.sellers.push({sname: "john", sprice: "A区", swarranty:2019,speed:"2000",sacceleration:"300",sfuel:"xxx",spic:"assets/images/car_item_2.jpg"});
+												// this.sellers.push({sname: "luxi", sprice: "B区", swarranty:2020,speed:"3000",sacceleration:"400",sfuel:"yyy",spic:"assets/images/car_item_3.jpg"});
+												// this.sellers.push({sname: "anni", sprice: "C区", swarranty:2021,speed:"4000",sacceleration:"500",sfuel:"zzz",spic:"assets/images/car_item_4.jpg"});
+											})
+											.catch(function (error){
+												alert(error);
+											})
+								}
+							}
+							Vue.createApp(bought_cars_app).mount("#bought_cars")
+						</script>
 					</div>
 				</div>
 			</div>
