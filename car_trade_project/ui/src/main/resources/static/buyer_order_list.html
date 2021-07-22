@@ -295,17 +295,23 @@
 											// .get("/SellerAPI/getAll")
 											.get("/BuyerAPI/getUserOrder?token="+bToken)
 											.then(response => {
-												for(let i=0; i<response.data.result_list.length; i++){
-													this.cars.push({cname: response.data.result_list[i].cname,
-														cdate:response.data.result_list[i].cdate.toLocaleDateString(),
-														cprice: response.data.result_list[i].cprice,
-														cwarranty: response.data.result_list[i].cwarranty,
-														cspeed: response.data.result_list[i].cspeed,
-														cacceleration:response.data.result_list[i].cacceleration,
-														cfuel:response.data.result_list[i].cfuel,
-														cpic1:response.data.result_list[i].cpic1,
-														cid:response.data.result_list[i].cid,
-													})
+												console.log(response);
+												let date_list = response.data.date_list;
+												let car_list = response.data.cars_list;
+
+												for(let i=0; i<date_list.length; i++){
+													for(let j=0; j<car_list[i].length; j++){
+														this.bought_cars_list.push({cname: car_list[i][j].cname,
+															cprice: car_list[i][j].cprice,
+															cwarranty: car_list[i][j].cwarranty,
+															cspeed: car_list[i][j].cspeed,
+															cacceleration:car_list[i][j].cacceleration,
+															cfuel:car_list[i][j].cfuel,
+															cpic1:car_list[i][j].cpic1,
+															cid:car_list[i][j].cid,
+															cdate:date_list[i],
+														})
+													}
 												}
 												// this.sellers.push({sname: "lisi", sprice: "虎溪", swarranty:2018,speed:"1000",sacceleration:"200",sfuel:"disel",spic:"assets/images/car_item_1.jpg"});
 												// this.sellers.push({sname: "john", sprice: "A区", swarranty:2019,speed:"2000",sacceleration:"300",sfuel:"xxx",spic:"assets/images/car_item_2.jpg"});

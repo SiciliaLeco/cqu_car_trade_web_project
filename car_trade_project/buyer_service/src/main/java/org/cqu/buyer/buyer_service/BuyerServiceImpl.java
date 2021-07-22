@@ -2,14 +2,15 @@ package org.cqu.buyer.buyer_service;
 
 import org.apache.dubbo.config.annotation.Service;
 import org.cqu.buyer_api.BuyerService;
+import org.cqu.dto.HistoryOrder;
 import org.cqu.dto.ResultInfo;
 import org.cqu.mapper.BuyerMapper;
+import org.cqu.mapper.CarMapper;
+import org.cqu.mapper.CarincludeMapper;
 import org.cqu.mapper.CartMapper;
-import org.cqu.pojo.Buyer;
-import org.cqu.pojo.Cart;
-import org.cqu.pojo.CartExample;
+import org.cqu.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,10 @@ public class BuyerServiceImpl implements BuyerService {
     private BuyerMapper buyerMapper;
     @Autowired
     private CartMapper cartMapper;
+    @Autowired
+    private CarincludeMapper carincludeMapper;
+    @Autowired
+    private CarMapper carMapper;
 
     private ResultInfo<Buyer> result = new ResultInfo<>();
 
@@ -139,14 +144,41 @@ public class BuyerServiceImpl implements BuyerService {
     }
 
     @Override
-    public ResultInfo<Cart> getHistoryOrder(String token) {
+    public HistoryOrder getHistoryOrder(String token) {
+        HistoryOrder historyOrder = new HistoryOrder();
+
         String btel = verifyToken(token);
-        ResultInfo<Cart> cart_res = new ResultInfo<>();
+        if(btel == null) { // 如果token 验证失败了
+            return null;
+        }
+
         CartExample ce = new CartExample();
-        CartExample.Criteria criteria = new CartExample.Criteria();
-        criteria.andBtelEqualTo(btel);
-        List<Cart> history_info = cartMapper.selectByExample(ce);
-        cart_res.setResult_list(history_info);
-        return cart_res;
+        ce.createCriteria().andBtelEqualTo(btel);
+        List<Cart> history_info = cartMapper.selectByExample(ce); // 返回指定用户所有订单
+
+        // 即将存入HistoryOrder的两张表
+        List<List<Car>> car_list = new ArrayList<>();
+        List<String> date_list = new ArrayList<>();
+
+        for(Cart info : history_info) {
+            List<Car> cars = new ArrayList<>();
+
+            Integer cur_cartID = info.getCartid();
+            date_list.add(info.getCartdate().toString());
+            CarincludeExample cie = new CarincludeExample();
+            cie.createCriteria().andCartidEqualTo(cur_cartID);
+            List<Carinclude> cur_car_list = carincludeMapper.selectByExample(cie);
+            for(Carinclude item : cur_car_list) {
+                Integer cid = item.getCid();
+                Car cur_car = carMapper.selectByPrimaryKey(cid);
+                cur_car.setCpic1("http://116.63.170.243:8888/"+cur_car.getCpic1());
+                cars.add(cur_car); // 订单中的表添加到cars列表中
+            }
+            car_list.add(cars);
+        }
+
+        historyOrder.setDate_list(date_list);
+        historyOrder.setCars_list(car_list);
+        return historyOrder;
     }
 }
