@@ -56,6 +56,7 @@ public class ShopCartController {
         // DEBUG
 
         cartService.insert(cart_id, goodsC_date, totalCost, btel);
+
         for(int i = 0;i < size; i++){
             String cid = request.getParameter("cart_"+String.valueOf(i));
             String count = request.getParameter("count_"+String.valueOf(i));

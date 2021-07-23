@@ -153,7 +153,6 @@ public class BuyerServiceImpl implements BuyerService {
 
         for(Cart info : history_info) {
             List<Car> cars = new ArrayList<>();
-
             Integer cur_cartID = info.getCartid();
             date_list.add(info.getCartdate().toString());
             CarincludeExample cie = new CarincludeExample();
